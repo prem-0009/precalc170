@@ -23,7 +23,7 @@ input{width:100%;padding:12px;font-size:1.05rem;border:2px solid #dde;border-rad
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.remove()"></script>
 <script>window.SB_CONFIG={url:"https://wtzwsvlxbryrvttlkysn.supabase.co",key:"sb_publishable_3qwXb5QQ671_xUEsGNUU2w_x0-4-ZsQ"};</script>
 </head><body>
-<header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><span><button onclick="openIO()">Export / Import</button> <button onclick="resetAll()">Reset progress</button></span></header>
+<header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><span><button onclick="resetAll()">Reset progress</button></span></header>
 <div class="wrap"><nav id="map"></nav><main class="panel"><section class="io" id="auth"><b>☁️ Sync across devices</b>
 <div id="authOut"><input id="authEmail" class="big" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" autocapitalize="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')sendCode()">
 <button id="codeBtn" class="mlbtn" onclick="sendCode()">Email me a code</button>
@@ -35,11 +35,7 @@ input{width:100%;padding:12px;font-size:1.05rem;border:2px solid #dde;border-rad
 <div><button class="go sm" onclick="authDo('in')">Sign in</button> <button class="go sm" style="background:#495057" onclick="authDo('up')">Create account</button> <button class="go sm" style="background:none;color:#3b5bdb" onclick="authDo('reset')">Forgot password</button></div></details></div>
 <div id="authIn" hidden>Signed in as <b id="authWho"></b> <button class="go" style="background:#495057" onclick="signOutCloud()">Sign out</button></div>
 <div id="syncMsg" class="small" role="status"></div></section>
-<section id="io" hidden class="io"><b>Save or move your progress</b>
-<div><button class="go" onclick="exportProgress()">Export progress</button></div>
-<textarea id="expBox" readonly hidden rows="3" onclick="this.select()" aria-label="Progress code"></textarea>
-<textarea id="impBox" rows="3" placeholder="Paste a progress code here" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Paste progress code"></textarea>
-<div><button class="go" onclick="importProgress()">Import progress</button></div><div id="ioMsg" class="small" role="status"></div></section><details id="recap" open></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
+<details id="recap" open></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
 <script>
 // ===== CORE (shared with node tests) =====
 const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
@@ -305,17 +301,6 @@ function submit(i){if(answered)return;const ans=curQ.type==="mc"?i:$("ans").valu
  $("fb").innerHTML=`<div class="${ok?"okb":"nob"}">${ok?"✅ Correct!":"❌ Not quite. Correct answer: <b>"+right+"</b>"}</div><div class="steps"><b>Worked solution</b><ol>${curQ.steps.map(s=>"<li>"+s+"</li>").join("")}</ol></div>${msg}<button class="go" onclick="${msg&&SECTIONS.findIndex(s=>s.id===S.cur)<6?`go(SECTIONS[SECTIONS.findIndex(s=>s.id===S.cur)+1].id)`:"next()"}">Next →</button>`;
  save();renderMap();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{})}
 function resetAll(){if(confirm("Reset all progress?")){localStorage.removeItem(KEY);S={hist:{},mastered:{},cur:"1.1",count:0};go("1.1")}}
-function openIO(){$("io").hidden=!$("io").hidden;$("ioMsg").textContent=""}
-function copyText(t){ // Clipboard API, then execCommand fallback (older iOS Safari)
-  if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).then(()=>true,()=>legacyCopy(t));return Promise.resolve(legacyCopy(t))}
-function legacyCopy(t){const ta=$("expBox");ta.removeAttribute("readonly");ta.focus();ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand("copy")}catch(e){}ta.setAttribute("readonly","");return ok}
-function exportProgress(){const code=encodeProgress(S);const ta=$("expBox");ta.value=code;ta.hidden=false;
-  copyText(code).then(ok=>{$("ioMsg").textContent=ok?"✅ Code copied to clipboard (also shown below).":"⚠️ Couldn't copy automatically. Select the code below and copy it.";ta.focus();ta.select();ta.setSelectionRange(0,code.length)})}
-function importProgress(){const st=decodeProgress($("impBox").value);
-  if(!st){$("ioMsg").textContent="❌ Invalid progress code. Check that you pasted the whole code.";return}
-  const n=Object.keys(st.mastered).filter(k=>st.mastered[k]).length;
-  if(!confirm(`Replace your current progress with this code (${n} section(s) mastered, current ${st.cur})? This cannot be undone.`))return;
-  S=st;save(true);$("impBox").value="";$("ioMsg").textContent="✅ Progress imported.";go(S.cur)}
 go(S.cur);
 
 // ===== Cloud sync (Supabase Auth + Postgres), optional =====
