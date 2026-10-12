@@ -28,7 +28,7 @@ body:not(.manage) .mini{display:none}</style>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.remove()"></script>
 <script>window.SB_CONFIG={url:"https://wtzwsvlxbryrvttlkysn.supabase.co",key:"sb_publishable_3qwXb5QQ671_xUEsGNUU2w_x0-4-ZsQ"};</script>
-</head><body>
+<style>#recap{margin:10px 0;border:2px solid #3b82f6;border-radius:10px;background:#eff6ff}#recap>summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:16px;color:#1e40af;list-style:none}#recap>summary::-webkit-details-marker{display:none}#recap>summary .hint{float:right;font-weight:600}#recap[open]>summary .show{display:none}#recap:not([open])>summary .hide{display:none}#recap ul{margin:0;padding:0 18px 14px 34px}</style></head><body>
 <header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▾</span></button></header><div id="menuBack" hidden onclick="toggleMenu(false)"></div>
 <div id="menu" hidden role="dialog" aria-label="Account menu"><div class="mhead"><b>☁️ Account &amp; sync</b><button class="mclose" onclick="toggleMenu(false)" aria-label="Close">✕</button></div>
 
@@ -48,7 +48,7 @@ body:not(.manage) .mini{display:none}</style>
 <hr><label class="tog"><input type="checkbox" id="manageTog" onchange="setManage(this.checked)"> Manage sections <span class="small">(show Mark as mastered / Undo on the map)</span></label>
 <hr><button class="go sm danger" onclick="toggleMenu(false);resetAll()">Reset progress</button></div>
 <div class="wrap"><nav id="map"></nav><main class="panel">
-<details id="recap" open></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
+<details id="recap"></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
 <script>
 // ===== CORE (shared with node tests) =====
 const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
@@ -312,7 +312,7 @@ function undoMaster(id){const later=SECTIONS.slice(SECTIONS.findIndex(s=>s.id===
  if(!confirm(`Unmark ${id} as mastered${later.length?" (later sections "+later.join(", ")+" will be unmarked too, to keep the order)":""}?`))return;
  S=unmarkMastered(S,id);save();go(S.cur)}
 function go(id){S.cur=id;save();renderMap();showRecap();next()}
-function showRecap(){const s=SECTIONS.find(x=>x.id===S.cur);$("recap").innerHTML=`<summary>📘 Concept recap: ${s.id} ${s.title}</summary><ul>${s.recap.map(r=>"<li>"+r+"</li>").join("")}</ul>`}
+function showRecap(){const s=SECTIONS.find(x=>x.id===S.cur);$("recap").open=false;$("recap").innerHTML=`<summary>📘 Concept recap: ${s.id} ${s.title} <span class="hint"><span class="show">tap to show ▸</span><span class="hide">tap to hide ▾</span></span></summary><ul>${s.recap.map(r=>"<li>"+r+"</li>").join("")}</ul>`}
 function pickQ(sec){const n=sec.gens.length;let i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===lastIdx[sec.id]);lastIdx[sec.id]=i;return sec.gens[i]()}
 function next(){answered=false;S.count++;const done=SECTIONS.filter(s=>S.mastered[s.id]&&s.id!==S.cur);
  isReview=done.length>0&&Math.random()<0.25;curSec=isReview?pick(done):SECTIONS.find(x=>x.id===S.cur);curQ=pickQ(curSec);
