@@ -18,14 +18,15 @@ input{width:100%;padding:12px;font-size:1.05rem;border:2px solid #dde;border-rad
 .small{font-size:.8rem;color:#667;margin-top:4px}.tag{background:#e7f5ff;color:var(--b);padding:3px 8px;border-radius:6px;font-weight:600;font-size:.85rem}.tag.rv{background:#fff3bf;color:#a15c00}
 .okb{color:var(--g);font-weight:700;margin-top:12px}.nob{color:var(--r);margin-top:12px}.steps{background:#f8f9fa;border-left:4px solid var(--b);padding:8px 12px;margin-top:10px;border-radius:6px}
 .win{background:#fff9db;padding:10px;border-radius:8px;margin-top:10px;font-weight:700}
-.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}</style>
+.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;margin:10px 0 4px;font-size:1.05rem;font-weight:600;background:#fff;color:#1f1f1f;border:2px solid #c4c7c5;border-radius:12px;cursor:pointer}.gbtn:hover{background:#f8f9fa}.or{text-align:center;color:#667;font-size:.8rem;margin:8px 0}</style>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.remove()"></script>
 <script>window.SB_CONFIG={url:"https://wtzwsvlxbryrvttlkysn.supabase.co",key:"sb_publishable_3qwXb5QQ671_xUEsGNUU2w_x0-4-ZsQ"};</script>
 </head><body>
 <header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><span><button onclick="openIO()">Export / Import</button> <button onclick="resetAll()">Reset progress</button></span></header>
 <div class="wrap"><nav id="map"></nav><main class="panel"><section class="io" id="auth"><b>☁️ Sync across devices</b>
-<div id="authOut"><input id="authEmail" type="email" autocomplete="username" placeholder="Email" autocapitalize="off">
+<div id="authOut"><button class="gbtn" onclick="googleSignIn()"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Continue with Google</button>
+<div class="or">or use email</div><input id="authEmail" type="email" autocomplete="username" placeholder="Email" autocapitalize="off">
 <input id="authPass" type="password" autocomplete="current-password" placeholder="Password (6+ characters)" style="margin-top:6px">
 <div><button class="go" onclick="authDo('in')">Sign in</button> <button class="go" style="background:#495057" onclick="authDo('up')">Create account</button> <button class="go" style="background:none;color:#3b5bdb" onclick="authDo('reset')">Forgot password</button></div></div>
 <div id="authIn" hidden>Signed in as <b id="authWho"></b> <button class="go" style="background:#495057" onclick="signOutCloud()">Sign out</button></div>
@@ -327,12 +328,24 @@ async function initCloud(){const cfg=window.SB_CONFIG;if(!cfg||!cfg.url){setSync
       if(!data)return null;const s=data.state;if(s&&typeof s==="object")s.updatedAt=+data.updated_at||s.updatedAt||0;return s}};
   let lastUid=null;
   sb.auth.onAuthStateChange((ev,session)=>{const u=session&&session.user||null;CLOUD.user=u;renderAuth();
+    if(u)cleanAuthUrl();
     if(ev==="PASSWORD_RECOVERY")setTimeout(async()=>{const p=prompt("Enter a new password (6+ characters):");if(p){const{error}=await sb.auth.updateUser({password:p});setSyncMsg(error?"❌ "+error.message:"✅ Password updated.")}},0);
     if(!u){lastUid=null;return}if(u.id===lastUid)return;lastUid=u.id;setTimeout(syncOnLogin,0)});
+  authErrorFromUrl();
   // Retry pending upload when connection returns / app regains focus (iOS)
   window.addEventListener("online",()=>CLOUD.user&&CLOUD.push(S));
   document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&CLOUD.user)syncOnLogin()});
 }
+function cleanAuthUrl(){ // remove OAuth/confirm tokens (#access_token=… or ?code=…) from the address bar
+  const h=location.hash,qs=new URLSearchParams(location.search);
+  if(/access_token|refresh_token|error_description|type=/.test(h)||qs.has("code")||qs.has("error")){
+    ["code","error","error_code","error_description"].forEach(k=>qs.delete(k));const q=qs.toString();
+    history.replaceState(null,"",location.pathname+(q?"?"+q:""))}}
+function authErrorFromUrl(){const p=new URLSearchParams(location.hash.slice(1)+"&"+location.search.slice(1));const d=p.get("error_description");
+  if(d){setSyncMsg("❌ Sign-in failed: "+d.replace(/\+/g," "));cleanAuthUrl()}}
+async function googleSignIn(){if(!window.CLOUD)return setSyncMsg("Cloud sync not available right now.");setSyncMsg("Redirecting to Google…");
+  const{error}=await CLOUD.sb.auth.signInWithOAuth({provider:"google",options:{redirectTo:location.origin+location.pathname}});
+  if(error)setSyncMsg("❌ "+error.message)}
 async function syncOnLogin(){setSyncMsg("Loading cloud progress…");
   try{const remote=await CLOUD.pull();const r=pickNewer(S,remote);
     if(r.source==="remote"){S=r.state;save(false);go(S.cur);setSyncMsg("☁️ Loaded newer progress from cloud.")}else await CLOUD.push(S)}
