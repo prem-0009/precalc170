@@ -18,22 +18,25 @@ input{width:100%;padding:12px;font-size:1.05rem;border:2px solid #dde;border-rad
 .small{font-size:.8rem;color:#667;margin-top:4px}.tag{background:#e7f5ff;color:var(--b);padding:3px 8px;border-radius:6px;font-weight:600;font-size:.85rem}.tag.rv{background:#fff3bf;color:#a15c00}
 .okb{color:var(--g);font-weight:700;margin-top:12px}.nob{color:var(--r);margin-top:12px}.steps{background:#f8f9fa;border-left:4px solid var(--b);padding:8px 12px;margin-top:10px;border-radius:6px}
 .win{background:#fff9db;padding:10px;border-radius:8px;margin-top:10px;font-weight:700}
-.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}input.big{font-size:1.15rem;padding:14px;margin-top:8px}.mlbtn{width:100%;padding:15px;margin-top:8px;font-size:1.1rem;font-weight:700;background:#3b5bdb;color:#fff;border:0;border-radius:12px;cursor:pointer}.mlbtn:disabled{opacity:.6}details.pw{background:none;padding:0;margin:10px 0 0}details.pw summary{font-weight:500;font-size:.9rem;color:#3b5bdb}.go.sm{padding:8px 12px;font-size:.9rem}input.code{letter-spacing:.5em;text-align:center;font-size:1.5rem;font-variant-numeric:tabular-nums}.nwrap{margin-bottom:8px}.nwrap .node{margin-bottom:2px}.mini{background:none;border:0;color:#3b5bdb;font-size:.78rem;padding:4px 6px;cursor:pointer}.skp{color:#a15c00;font-size:.75rem}@media(max-width:760px){.nwrap{min-width:150px}}</style>
+.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}input.big{font-size:1.15rem;padding:14px;margin-top:8px}.mlbtn{width:100%;padding:15px;margin-top:8px;font-size:1.1rem;font-weight:700;background:#3b5bdb;color:#fff;border:0;border-radius:12px;cursor:pointer}.mlbtn:disabled{opacity:.6}details.pw{background:none;padding:0;margin:10px 0 0}details.pw summary{font-weight:500;font-size:.9rem;color:#3b5bdb}.go.sm{padding:8px 12px;font-size:.9rem}input.code{letter-spacing:.5em;text-align:center;font-size:1.5rem;font-variant-numeric:tabular-nums}.nwrap{margin-bottom:8px}.nwrap .node{margin-bottom:2px}.mini{background:none;border:0;color:#3b5bdb;font-size:.78rem;padding:4px 6px;cursor:pointer}.skp{color:#a15c00;font-size:.75rem}@media(max-width:760px){.nwrap{min-width:150px}}#authPass.big{margin-top:6px}.row2{margin-top:4px}.go.link{background:none;color:#3b5bdb}</style>
 <script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.remove()"></script>
 <script>window.SB_CONFIG={url:"https://wtzwsvlxbryrvttlkysn.supabase.co",key:"sb_publishable_3qwXb5QQ671_xUEsGNUU2w_x0-4-ZsQ"};</script>
 </head><body>
 <header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><span><button onclick="resetAll()">Reset progress</button></span></header>
 <div class="wrap"><nav id="map"></nav><main class="panel"><section class="io" id="auth"><b>☁️ Sync across devices</b>
-<div id="authOut"><input id="authEmail" class="big" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" autocapitalize="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter')sendCode()">
-<button id="codeBtn" class="mlbtn" onclick="sendCode()">Email me a code</button>
-<div id="codeStep" hidden><input id="authCode" class="big code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="6-digit code" aria-label="6-digit code" oninput="this.value=this.value.replace(/\D/g,'').slice(0,6);if(this.value.length===6)verifyCode()" onkeydown="if(event.key==='Enter')verifyCode()">
-<button id="verifyBtn" class="mlbtn" style="background:#2f9e44" onclick="verifyCode()">Verify &amp; sign in</button></div>
-<div class="small">No password needed: we'll email you a 6-digit code.</div>
-<details class="pw"><summary>Use a password instead</summary>
-<input id="authPass" type="password" autocomplete="current-password" placeholder="Password (6+ characters)" style="margin-top:6px">
-<div><button class="go sm" onclick="authDo('in')">Sign in</button> <button class="go sm" style="background:#495057" onclick="authDo('up')">Create account</button> <button class="go sm" style="background:none;color:#3b5bdb" onclick="authDo('reset')">Forgot password</button></div></details></div>
-<div id="authIn" hidden>Signed in as <b id="authWho"></b> <button class="go" style="background:#495057" onclick="signOutCloud()">Sign out</button></div>
+<div id="authOut"><input id="authEmail" class="big" type="email" inputmode="email" autocomplete="username" placeholder="Email" autocapitalize="off" autocorrect="off" spellcheck="false">
+<input id="authPass" class="big" type="password" autocomplete="current-password" placeholder="Password" onkeydown="if(event.key==='Enter')authDo('in')">
+<button class="mlbtn" onclick="authDo('in')">Sign in</button>
+<div class="row2"><button class="go sm" style="background:#495057" onclick="authDo('up')">Create account</button> <button class="go sm link" onclick="authDo('reset')">Forgot password</button></div>
+<details class="pw"><summary>No password yet? Email me a sign-in link</summary>
+<button class="go sm" onclick="magicLink()">Email me a sign-in link</button>
+<div class="small">On iPhone, long-press the link in the email and choose <b>Open in Safari</b>. After signing in, set a password below so you can use it on your other devices.</div></details></div>
+<div id="authIn" hidden>Signed in as <b id="authWho"></b> <button class="go sm" style="background:#495057" onclick="signOutCloud()">Sign out</button>
+<details class="pw" id="pwSet"><summary>Set / change password</summary>
+<input id="newPass" type="password" autocomplete="new-password" placeholder="New password (8+ characters)" style="margin-top:6px">
+<input id="newPass2" type="password" autocomplete="new-password" placeholder="Repeat new password" style="margin-top:6px" onkeydown="if(event.key==='Enter')setPassword()">
+<button class="go sm" onclick="setPassword()">Save password</button></details></div>
 <div id="syncMsg" class="small" role="status"></div></section>
 <details id="recap" open></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
 <script>
@@ -349,19 +352,15 @@ function cleanAuthUrl(){ // remove OAuth/confirm tokens (#access_token=… or ?c
     history.replaceState(null,"",location.pathname+(q?"?"+q:""))}}
 function authErrorFromUrl(){const p=new URLSearchParams(location.hash.slice(1)+"&"+location.search.slice(1));const d=p.get("error_description");
   if(d){setSyncMsg("❌ Sign-in failed: "+d.replace(/\+/g," "));cleanAuthUrl()}}
-async function sendCode(){if(!window.CLOUD)return setSyncMsg("Cloud sync not available right now.");
-  const e=$("authEmail").value.trim();if(!/^\S+@\S+\.\S+$/.test(e))return setSyncMsg("Enter a valid email address.");
-  const b=$("codeBtn");b.disabled=true;setSyncMsg("Sending code…");
-  const{error}=await CLOUD.sb.auth.signInWithOtp({email:e,options:{shouldCreateUser:true}});b.disabled=false;
-  if(error)return setSyncMsg("❌ "+error.message);
-  $("codeStep").hidden=false;b.textContent="Resend code";const c=$("authCode");c.value="";c.focus();
-  setSyncMsg("📧 We emailed a 6-digit code to "+e+". Enter it below.")}
-async function verifyCode(){const e=$("authEmail").value.trim(),tok=$("authCode").value.replace(/\D/g,"");
-  if(tok.length<6)return setSyncMsg("Enter the 6-digit code from the email.");
-  const b=$("verifyBtn");b.disabled=true;setSyncMsg("Checking code…");
-  const{error}=await CLOUD.sb.auth.verifyOtp({email:e,token:tok,type:"email"});b.disabled=false;
-  if(error)return setSyncMsg("❌ "+(/expired|invalid/i.test(error.message)?"That code is invalid or expired. Tap Resend code.":error.message));
-  $("authCode").value="";$("codeStep").hidden=true;$("codeBtn").textContent="Email me a code"}
+async function magicLink(){if(!window.CLOUD)return setSyncMsg("Cloud sync not available right now.");
+  const e=$("authEmail").value.trim();if(!/^\S+@\S+\.\S+$/.test(e))return setSyncMsg("Enter your email above first.");
+  setSyncMsg("Sending link…");const{error}=await CLOUD.sb.auth.signInWithOtp({email:e,options:{emailRedirectTo:location.origin+location.pathname}});
+  setSyncMsg(error?"❌ "+error.message:"📧 Sign-in link sent to "+e+". On iPhone, long-press the link and choose Open in Safari.")}
+async function setPassword(){const p=$("newPass").value,p2=$("newPass2").value;
+  if(p.length<8)return setSyncMsg("Password must be at least 8 characters.");if(p!==p2)return setSyncMsg("Passwords don't match.");
+  setSyncMsg("Saving password…");const{error}=await CLOUD.sb.auth.updateUser({password:p});
+  if(error)return setSyncMsg("❌ "+error.message);$("newPass").value=$("newPass2").value="";$("pwSet").open=false;
+  setSyncMsg("✅ Password saved. Use your email + this password to sign in on your other devices.")}
 async function syncOnLogin(){setSyncMsg("Loading cloud progress…");
   try{const remote=await CLOUD.pull();const r=pickNewer(S,remote);
     if(r.source==="remote"){S=r.state;save(false);go(S.cur);setSyncMsg("☁️ Loaded newer progress from cloud.")}else await CLOUD.push(S)}
@@ -371,7 +370,7 @@ async function authDo(kind){if(!window.CLOUD)return setSyncMsg("Cloud sync not a
   const e=$("authEmail").value.trim(),p=$("authPass").value,sb=CLOUD.sb,here=location.origin+location.pathname;let r;
   if(!e)return setSyncMsg("Enter your email.");
   if(kind==="reset"){r=await sb.auth.resetPasswordForEmail(e,{redirectTo:here});return setSyncMsg(r.error?"❌ "+r.error.message:"📧 Password reset email sent.")}
-  if(kind!=="out"&&p.length<6)return setSyncMsg("Password must be at least 6 characters.");
+  if(!p)return setSyncMsg("Enter your password.");if(kind==="up"&&p.length<8)return setSyncMsg("Choose a password with at least 8 characters.");
   r=kind==="up"?await sb.auth.signUp({email:e,password:p,options:{emailRedirectTo:here}}):await sb.auth.signInWithPassword({email:e,password:p});
   if(r.error)return setSyncMsg("❌ "+r.error.message);$("authPass").value="";
   if(kind==="up"&&!r.data.session)setSyncMsg("📧 Account created. Check your email and tap the confirmation link, then sign in.")}
