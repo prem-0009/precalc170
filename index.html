@@ -1,0 +1,352 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MATH 170 · Ch.1 Functions Mastery</title>
+<style>
+:root{--b:#3b5bdb;--g:#2f9e44;--r:#e03131;--bg:#f5f7fb}*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#1c1e21}
+header{background:var(--b);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+header h1{font-size:1.05rem;margin:0}header button{background:#fff2;color:#fff;border:1px solid #fff6;border-radius:8px;padding:6px 10px}
+.wrap{max-width:1000px;margin:auto;display:grid;grid-template-columns:280px 1fr;gap:16px;padding:16px}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}#map{display:flex;overflow-x:auto;gap:8px}.node{min-width:150px}}
+.node{display:block;width:100%;text-align:left;border:2px solid #dde;background:#fff;border-radius:12px;padding:10px;margin-bottom:8px;cursor:pointer}
+.node.cur{border-color:var(--b)}.node.done{background:#ebfbee}.node.locked{opacity:.5;cursor:not-allowed}
+.sid{display:inline-block;width:34px;font-weight:700}.st{font-size:.85rem}.bar{display:block;height:6px;background:#eee;border-radius:3px;margin-top:6px}.bar i{display:block;height:100%;background:var(--g);border-radius:3px}
+.panel{background:#fff;border-radius:14px;padding:16px;box-shadow:0 1px 4px #0001}
+details{margin-bottom:12px;background:#eef2ff;border-radius:10px;padding:8px 12px}summary{cursor:pointer;font-weight:600}
+.q{font-size:1.15rem;margin:12px 0}.ch{display:block;width:100%;text-align:left;padding:12px;margin:6px 0;border:2px solid #dde;border-radius:10px;background:#fff;font-size:1rem;cursor:pointer}
+.ch:hover:not(:disabled){border-color:var(--b)}.ch.good{border-color:var(--g);background:#ebfbee}.ch.bad{border-color:var(--r);background:#fff5f5}
+input{width:100%;padding:12px;font-size:1.05rem;border:2px solid #dde;border-radius:10px}.go{margin-top:10px;background:var(--b);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-size:1rem;cursor:pointer}
+.small{font-size:.8rem;color:#667;margin-top:4px}.tag{background:#e7f5ff;color:var(--b);padding:3px 8px;border-radius:6px;font-weight:600;font-size:.85rem}.tag.rv{background:#fff3bf;color:#a15c00}
+.okb{color:var(--g);font-weight:700;margin-top:12px}.nob{color:var(--r);margin-top:12px}.steps{background:#f8f9fa;border-left:4px solid var(--b);padding:8px 12px;margin-top:10px;border-radius:6px}
+.win{background:#fff9db;padding:10px;border-radius:8px;margin-top:10px;font-weight:700}
+.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}</style>
+<script>window.MathJax={tex:{inlineMath:[["\\(","\\)"]]}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.remove()"></script>
+<script>window.SB_CONFIG={url:"https://wtzwsvlxbryrvttlkysn.supabase.co",key:"sb_publishable_3qwXb5QQ671_xUEsGNUU2w_x0-4-ZsQ"};</script>
+</head><body>
+<header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><span><button onclick="openIO()">Export / Import</button> <button onclick="resetAll()">Reset progress</button></span></header>
+<div class="wrap"><nav id="map"></nav><main class="panel"><section class="io" id="auth"><b>☁️ Sync across devices</b>
+<div id="authOut"><input id="authEmail" type="email" autocomplete="username" placeholder="Email" autocapitalize="off">
+<input id="authPass" type="password" autocomplete="current-password" placeholder="Password (6+ characters)" style="margin-top:6px">
+<div><button class="go" onclick="authDo('in')">Sign in</button> <button class="go" style="background:#495057" onclick="authDo('up')">Create account</button> <button class="go" style="background:none;color:#3b5bdb" onclick="authDo('reset')">Forgot password</button></div></div>
+<div id="authIn" hidden>Signed in as <b id="authWho"></b> <button class="go" style="background:#495057" onclick="signOutCloud()">Sign out</button></div>
+<div id="syncMsg" class="small" role="status"></div></section>
+<section id="io" hidden class="io"><b>Save or move your progress</b>
+<div><button class="go" onclick="exportProgress()">Export progress</button></div>
+<textarea id="expBox" readonly hidden rows="3" onclick="this.select()" aria-label="Progress code"></textarea>
+<textarea id="impBox" rows="3" placeholder="Paste a progress code here" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Paste progress code"></textarea>
+<div><button class="go" onclick="importProgress()">Import progress</button></div><div id="ioMsg" class="small" role="status"></div></section><details id="recap" open></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
+<script>
+// ===== CORE (shared with node tests) =====
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const rnz=(a,b)=>{let x;do{x=ri(a,b)}while(x===0);return x};
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1};
+function fr(n,d){if(d<0){n=-n;d=-d}const g=gcd(n,d);n/=g;d/=g;return d===1?String(n):n+"/"+d}
+const sg=(c,first)=>{ // signed term coefficient formatting helper
+  if(first) return c<0?"− "+Math.abs(c):String(c); return c<0?" − "+Math.abs(c):" + "+c};
+function lin(m,b,v="x"){ // m x + b
+  let s=m===1?v:m===-1?"−"+v:m+v; if(m===0)s=""; if(b!==0)s+= s?(b<0?" − "+(-b):" + "+b):String(b); return s||"0"}
+function quad(a,b,c,v="x"){let s=(a===1?"":a===-1?"−":a)+v+"²";
+  if(b)s+=(b<0?" − ":" + ")+(Math.abs(b)===1?"":Math.abs(b))+v; if(c)s+=(c<0?" − ":" + ")+Math.abs(c);return s}
+function parseNum(s){s=String(s).trim().replace(/−/g,"-").replace(/\s+/g,"");
+  if(/^[-+]?(inf|infinity|∞)$/i.test(s))return s[0]==="-"?-Infinity:Infinity;
+  let m=s.match(/^([-+]?\d*\.?\d+)\/([-+]?\d*\.?\d+)$/);if(m)return parseFloat(m[1])/parseFloat(m[2]);
+  if(/^[-+]?\d*\.?\d+$/.test(s))return parseFloat(s);
+  m=s.match(/^([-+]?\d*)√(\d+)$/);if(m){const k=m[1]===""||m[1]==="+"?1:m[1]==="-"?-1:+m[1];return k*Math.sqrt(+m[2])}
+  return NaN}
+function numEq(a,b){if(!isFinite(a)||!isFinite(b))return a===b;return Math.abs(a-b)<1e-6*Math.max(1,Math.abs(b))+1e-9}
+// intervals: "(-inf,3]U(5,inf)"
+function parseIntervals(s){s=String(s).replace(/\s+/g,"").replace(/−/g,"-").replace(/∪/g,"U").replace(/u/g,"U").replace(/∞/g,"inf");
+  if(/^(all|allreals|r|ℝ)$/i.test(s))s="(-inf,inf)";
+  const parts=s.split("U");const out=[];
+  for(const p of parts){const m=p.match(/^([\[\(])([^,]+),([^,\]\)]+)([\]\)])$/);if(!m)return null;
+    const a=parseNum(m[2]),b=parseNum(m[3]);if(isNaN(a)||isNaN(b))return null;out.push([m[1],a,b,m[4]])}
+  return out}
+function intEq(u,k){const A=parseIntervals(u),B=parseIntervals(k);if(!A||!B||A.length!==B.length)return false;
+  return A.every((x,i)=>x[0]===B[i][0]&&x[3]===B[i][3]&&numEq(x[1],B[i][1])&&numEq(x[2],B[i][2]))}
+function check(q,ans){
+  if(q.type==="mc")return ans===q.answer;
+  if(q.type==="num"){const v=parseNum(ans);return !isNaN(v)&&numEq(v,parseNum(q.answer))}
+  if(q.type==="interval")return intEq(ans,q.answer);
+  if(q.type==="pair"){const a=String(ans).replace(/[()\s]/g,"").split(","),b=q.answer.replace(/[()\s]/g,"").split(",");
+    return a.length===b.length&&a.every((x,i)=>numEq(parseNum(x),parseNum(b[i])))}
+  return false}
+// Multiple choice builder: correct + distractors (deduped)
+function mc(q,correct,distractors,steps){const ch=[correct];for(const d of distractors)if(!ch.includes(d)&&ch.length<4)ch.push(d);
+  let k=1;while(ch.length<4){const f="None of these"+(k>1?" ("+k+")":"");ch.push(f);k++}
+  const s=shuffle(ch);return {type:"mc",q,choices:s,answer:s.indexOf(correct),steps}}
+const num=(q,answer,steps,hint)=>({type:"num",q,answer:String(answer),steps,hint:hint||"Enter a number (fractions like 3/4 ok)"});
+const itv=(q,answer,steps)=>({type:"interval",q,answer,steps,hint:"Interval notation, e.g. (-inf,3] U (5,inf)  — type inf for ∞, U for union"});
+const fx=(c,first)=>c; // placeholder
+const fixed=(q,correct,distractors,steps)=>()=>mc(q,correct,distractors,steps);
+const iv=(lo,hi,lc,rc)=>(lc?"[":"(")+(lo===-Infinity?"-inf":lo)+","+(hi===Infinity?"inf":hi)+(rc?"]":")");
+
+const SECTIONS=[
+{id:"1.1",title:"Functions and Function Notation",recap:[
+"A <b>function</b> assigns each input exactly one output. A relation fails to be a function if some input has two outputs.",
+"<b>Vertical line test:</b> a graph is a function if no vertical line hits it more than once.",
+"<b>Notation:</b> f(a) means 'plug a in for x'. Solving f(x)=k means find the inputs that give output k.",
+"<b>One-to-one:</b> each output comes from exactly one input (horizontal line test)."],
+gens:[
+()=>{const a=rnz(-5,5),b=ri(-9,9),x=ri(-6,6);const y=a*x+b;return num(`If f(x) = ${lin(a,b)}, find f(${x}).`,y,[`Replace x with ${x}: f(${x}) = ${a}(${x}) + (${b})`,`= ${a*x} + (${b}) = ${y}`])},
+()=>{const a=rnz(-3,3),b=ri(-6,6),c=ri(-9,9),x=ri(-4,4);const y=a*x*x+b*x+c;return num(`If g(x) = ${quad(a,b,c)}, find g(${x}).`,y,[`g(${x}) = ${a}(${x})² + ${b}(${x}) + ${c}`,`= ${a*x*x} + ${b*x} + ${c} = ${y}`])},
+()=>{const m=rnz(-6,6),x=ri(-8,8),b=ri(-10,10);const k=m*x+b;return num(`If f(x) = ${lin(m,b)}, solve f(x) = ${k}.`,x,[`Set ${lin(m,b)} = ${k}`,`${m}x = ${k} − (${b}) = ${k-b}`,`x = ${k-b}/${m} = ${x}`])},
+()=>{const a=ri(1,5),h=ri(1,4);const v=a*(2+h)**2-a*4; // f(2+h)-f(2) evaluated
+  return num(`Let f(x) = ${a}x². Compute f(${2+h}) − f(2).`,v,[`f(${2+h}) = ${a}·${(2+h)**2} = ${a*(2+h)**2}`,`f(2) = ${a}·4 = ${4*a}`,`Difference = ${v}`])},
+()=>{const xs=shuffle([1,2,3,4,5,6,7]).slice(0,4);const isF=Math.random()<.5;const ys=xs.map(()=>ri(-5,5));let pairs=xs.map((x,i)=>[x,ys[i]]);
+  if(!isF){pairs.push([xs[0],ys[0]+ri(1,3)]);pairs=shuffle(pairs)}const str="{"+pairs.map(p=>`(${p[0]}, ${p[1]})`).join(", ")+"}";
+  return mc(`Is the relation ${str} a function?`,isF?"Yes":"No",[isF?"No":"Yes","Only if the y-values are distinct","Cannot be determined"],[isF?"Every x-value appears once, so each input has exactly one output → function.":`x = ${xs[0]} is paired with two different outputs, so it is NOT a function.`])},
+()=>{const a=rnz(-4,4),b=ri(-5,5);return mc(`If f(x) = ${lin(a,b)}, which expression equals f(x + 1)?`,lin(a,a+b),[lin(a,b+1),lin(a+1,b),lin(a,b)+" + 1"],[`Substitute (x+1) for x: ${a}(x + 1) + ${b}`,`= ${a}x + ${a} + ${b} = ${lin(a,a+b)}`])},
+()=>{const r=ri(1,6);return mc(`How many solutions does x² = ${r*r} have when asked to solve f(x) = ${r*r} for f(x)=x²?`,"2 (x = ±"+r+")",["1 (x = "+r+")","0","Infinitely many"],[`x² = ${r*r} ⇒ x = ${r} or x = −${r}. Two inputs give the same output.`])},
+fixed("Which test determines whether a graph represents a function?","Vertical line test",["Horizontal line test","Slope test","Origin test"],["If any vertical line crosses the graph more than once, an input has two outputs → not a function."]),
+fixed("Which test determines whether a function is one-to-one?","Horizontal line test",["Vertical line test","Symmetry test","Zero test"],["One-to-one means each output has only one input; a horizontal line may hit the graph at most once."]),
+fixed("Which equation does NOT define y as a function of x?","x² + y² = 9",["y = x² + 9","y = |x| − 2","y = √(x+1)"],["Solving x² + y² = 9 gives y = ±√(9 − x²): two outputs for most x, so not a function."]),
+fixed("Is f(x) = x² one-to-one?","No — f(2) = f(−2) = 4",["Yes — it passes the vertical line test","Yes — every input has one output","No — it fails the vertical line test"],["Two different inputs (2 and −2) give the same output, so it fails the horizontal line test."]),
+fixed("In the notation f(3) = 7, what is the input?","3",["7","f","21"],["f(input) = output, so 3 is the input and 7 is the output."]),
+fixed("Which of these toolkit functions is one-to-one?","f(x) = x³",["f(x) = x²","f(x) = |x|","f(x) = 5 (constant)"],["x³ is always increasing, so each output comes from exactly one input."]),
+fixed("A relation pairs each student with their birthday. Is 'student → birthday' a function?","Yes",["No","Only if no two students share a birthday","Only for one student"],["Each student has exactly one birthday (one output per input). Sharing outputs is allowed."]),
+fixed("A relation pairs each birthday with the students born that day. Is 'birthday → student' a function?","Not necessarily",["Always","Never — dates are not numbers","Yes, because birthdays are unique"],["One date could correspond to several students, giving one input multiple outputs."]),
+]},
+{id:"1.2",title:"Domain and Range",recap:[
+"<b>Domain:</b> all allowed inputs. <b>Range:</b> all resulting outputs.",
+"Exclude inputs that make a <b>denominator zero</b>. Require radicands of <b>even roots ≥ 0</b>.",
+"Use <b>interval notation</b>: ( ) excludes, [ ] includes, ∞ always gets ( ). Join pieces with ∪.",
+"Toolkit: x² has range [0,∞); √x domain [0,∞); 1/x domain and range (−∞,0)∪(0,∞)."],
+gens:[
+()=>{const a=ri(-9,9);return itv(`Find the domain of f(x) = 1/(x ${a<0?"+ "+(-a):"− "+a}). (Use interval notation.)`,`(-inf,${a})U(${a},inf)`,[`The denominator cannot be 0: x − ${a} ≠ 0 ⇒ x ≠ ${a}`,`Domain: (−∞, ${a}) ∪ (${a}, ∞)`])},
+()=>{const a=ri(-9,9);return itv(`Find the domain of f(x) = √(x ${a<0?"+ "+(-a):"− "+a}).`,`[${a},inf)`,[`Radicand must be ≥ 0: x − ${a} ≥ 0 ⇒ x ≥ ${a}`,`Domain: [${a}, ∞)`])},
+()=>{const a=ri(-8,8),k=ri(2,4);const lim=fr(a,k);return itv(`Find the domain of f(x) = √(${a} − ${k}x).`,`(-inf,${lim}]`,[`Need ${a} − ${k}x ≥ 0`,`−${k}x ≥ ${-a} ⇒ x ≤ ${lim} (dividing by a negative flips the sign)`,`Domain: (−∞, ${lim}]`])},
+()=>{const r=ri(1,7);return itv(`Find the domain of f(x) = (x + 1)/(x² − ${r*r}).`,`(-inf,${-r})U(${-r},${r})U(${r},inf)`,[`x² − ${r*r} = 0 ⇒ (x − ${r})(x + ${r}) = 0 ⇒ x = ±${r}`,`Exclude both: (−∞, −${r}) ∪ (−${r}, ${r}) ∪ (${r}, ∞)`])},
+()=>{const k=ri(-9,9);return itv(`Find the range of f(x) = x² ${k<0?"− "+(-k):"+ "+k}.`,`[${k},inf)`,[`x² ≥ 0 for all x, so x² + (${k}) ≥ ${k}`,`Range: [${k}, ∞)`])},
+()=>{const k=ri(-9,9);return itv(`Find the range of f(x) = −|x| ${k<0?"− "+(-k):"+ "+k}.`,`(-inf,${k}]`,[`−|x| ≤ 0, so −|x| + (${k}) ≤ ${k}`,`Range: (−∞, ${k}]`])},
+()=>{const a=ri(-6,2),b=a+ri(1,8),lc=Math.random()<.5,rc=Math.random()<.5;const ineq=`${a} ${lc?"≤":"<"} x ${rc?"≤":"<"} ${b}`;
+  return itv(`Write the inequality ${ineq} in interval notation.`,iv(a,b,lc,rc),[`'${lc?"≤":"<"}' at the left ⇒ ${lc?"[":"("}, '${rc?"≤":"<"}' at the right ⇒ ${rc?"]":")"}`,`Answer: ${iv(a,b,lc,rc).replace("inf","∞")}`])},
+()=>{const a=ri(-5,5),b=ri(1,4);return itv(`Find the domain of f(x) = 1/√(x ${a<0?"+ "+(-a):"− "+a}).`,`(${a},inf)`,[`Radicand ≥ 0 AND denominator ≠ 0 ⇒ x − ${a} > 0`,`Domain: (${a}, ∞)`])},
+fixed("What is the domain of f(x) = ∛x (cube root)?","(−∞, ∞)",["[0, ∞)","(0, ∞)","(−∞, 0]"],["Odd roots accept negative inputs, so every real number works."]),
+fixed("What is the range of f(x) = 1/x?","(−∞, 0) ∪ (0, ∞)",["(−∞, ∞)","[0, ∞)","(0, ∞)"],["1/x can be any nonzero number; it never equals 0."]),
+fixed("Which bracket is always used next to ∞?","Parenthesis ( )",["Square bracket [ ]","Either one","Curly brace { }"],["∞ is not a number you can reach, so it is never included."]),
+fixed("Piecewise f(x) = x² for x < 0, and 2x for x ≥ 0. What is f(0)?","0",["Undefined","2","Both 0 and 0²"],["x = 0 falls in the piece x ≥ 0, so f(0) = 2·0 = 0."]),
+fixed("Piecewise f(x) = x + 1 for x ≤ 2, and 5 for x > 2. What is f(3)?","5",["4","3","Undefined"],["3 > 2, so use the second piece: f(3) = 5."]),
+fixed("What is the domain of f(x) = x² + 3x − 1?","(−∞, ∞)",["[0, ∞)","[−1, ∞)","(−∞, 0)"],["Polynomials have no denominators or even roots, so all real inputs work."]),
+fixed("Set-builder {x | x ≥ −2} in interval notation is:","[−2, ∞)",["(−2, ∞)","(−∞, −2]","[−2, ∞]"],["Includes −2 → bracket; ∞ → parenthesis."]),
+]},
+{id:"1.3",title:"Rates of Change and Behavior of Graphs",recap:[
+"<b>Average rate of change</b> on [a,b]: (f(b) − f(a)) / (b − a).",
+"<b>Increasing</b> where outputs rise as x increases; <b>decreasing</b> where they fall (use open intervals of x).",
+"A <b>local maximum</b> is a highest point nearby; <b>local minimum</b> lowest nearby. Absolute max/min are over the whole domain.",
+"For a parabola y = a(x − h)² + k the vertex (h,k) is a min if a > 0 and max if a < 0."],
+gens:[
+()=>{const a=rnz(-3,3),b=ri(-5,5),c=ri(-5,5);const f=x=>a*x*x+b*x+c;let p=ri(-4,2),q=p+ri(1,4);const v=fr(f(q)-f(p),q-p);
+  return num(`Find the average rate of change of f(x) = ${quad(a,b,c)} on [${p}, ${q}].`,v,[`f(${q}) = ${f(q)}, f(${p}) = ${f(p)}`,`(f(${q}) − f(${p}))/(${q} − (${p})) = ${f(q)-f(p)}/${q-p} = ${v}`])},
+()=>{const p=ri(0,3),q=p+ri(1,3);const f=x=>x**3;const v=fr(f(q)-f(p),q-p);return num(`Average rate of change of f(x) = x³ from x = ${p} to x = ${q}?`,v,[`f(${q}) = ${f(q)}, f(${p}) = ${f(p)}`,`(${f(q)} − ${f(p)})/${q-p} = ${v}`])},
+()=>{const t1=ri(0,3),t2=t1+ri(1,4),d1=ri(10,60),d2=d1+ri(20,200);const v=fr(d2-d1,t2-t1);return num(`A car is ${d1} miles from home at t = ${t1} h and ${d2} miles at t = ${t2} h. Average speed (mph)?`,v,[`Rate = Δd/Δt = (${d2} − ${d1})/(${t2} − ${t1}) = ${d2-d1}/${t2-t1} = ${v}`])},
+()=>{const h=ri(-6,6),k=ri(-6,6),a=pick([1,2,3]);return itv(`On what interval is f(x) = ${a===1?"":a}(x ${h<0?"+ "+(-h):"− "+h})² ${k<0?"− "+(-k):"+ "+k} increasing?`,`(${h},inf)`,[`Opens up (a = ${a} > 0), vertex at x = ${h}`,`Rises to the right of the vertex: (${h}, ∞)`])},
+()=>{const h=ri(-6,6),k=ri(-6,6);return itv(`On what interval is f(x) = −(x ${h<0?"+ "+(-h):"− "+h})² ${k<0?"− "+(-k):"+ "+k} increasing?`,`(-inf,${h})`,[`Opens down, vertex at x = ${h}`,`Rises up to the vertex then falls: increasing on (−∞, ${h})`])},
+()=>{const h=ri(-6,6),k=ri(-9,9),up=Math.random()<.5;return num(`f(x) = ${up?"":"−"}(x ${h<0?"+ "+(-h):"− "+h})² ${k<0?"− "+(-k):"+ "+k}. What is the ${up?"minimum":"maximum"} value of f?`,k,[`Vertex form a(x − h)² + k has vertex (${h}, ${k})`,`a ${up?"> 0 → minimum":"< 0 → maximum"} value is k = ${k}`])},
+()=>{const m=rnz(-7,7),b=ri(-9,9),p=ri(-5,5),q=p+ri(1,6);return num(`Average rate of change of f(x) = ${lin(m,b)} on [${p}, ${q}]?`,m,[`For a line the average rate of change is always the slope.`,`Check: (f(${q}) − f(${p}))/${q-p} = ${m*q+b-(m*p+b)}/${q-p} = ${m}`])},
+()=>{const a=ri(1,4),h=ri(1,4);return mc(`Average rate of change of f(x) = ${a}x² between x = 1 and x = 1 + h (h ≠ 0)?`,`${2*a} + ${a}h`,[`${a}h`,`${2*a}h + ${a}`,`${a} + h`],[`f(1+h) − f(1) = ${a}(1 + 2h + h²) − ${a} = ${2*a}h + ${a}h²`,`Divide by h: ${2*a} + ${a}h`])},
+fixed("A function's graph rises, peaks at (2, 5), then falls. What is (2, 5)?","A local maximum",["A local minimum","An x-intercept","A point where f is increasing"],["Highest point among nearby points → local maximum. The value is 5, at x = 2."]),
+fixed("If the average rate of change of f on [a, b] is negative, then:","f(b) < f(a)",["f(b) > f(a)","f is decreasing everywhere on [a,b]","f(a) = f(b)"],["(f(b) − f(a))/(b − a) < 0 with b > a ⇒ f(b) − f(a) < 0. It does NOT require f to decrease everywhere."]),
+fixed("On what interval is f(x) = 1/x decreasing?","(−∞, 0) and (0, ∞) separately",["(−∞, ∞)","Nowhere","(0, ∞) only"],["1/x decreases on each branch, but not across 0 (f(−1) < f(1))."]),
+fixed("Intervals of increasing/decreasing are stated using:","x-values (input intervals)",["y-values","Points (x, y)","Slopes"],["We describe where on the x-axis the function rises or falls."]),
+fixed("What is the absolute minimum of f(x) = x² + 4?","4",["0","−4","None"],["x² ≥ 0, smallest at x = 0, giving 4."]),
+fixed("Does f(x) = x³ have a local maximum?","No",["Yes, at x = 0","Yes, at x = 1","Only an absolute maximum"],["x³ always increases; x = 0 is a flat point but not a max or min."]),
+fixed("The average rate of change of a function on an interval represents the slope of:","The secant line through the endpoints",["The tangent line","The x-axis","The vertical line at the midpoint"],["It's the slope between (a, f(a)) and (b, f(b))."]),
+]},
+{id:"1.4",title:"Composition of Functions",recap:[
+"<b>(f ∘ g)(x) = f(g(x))</b>: do g first, then f. Usually f∘g ≠ g∘f.",
+"Arithmetic combos: (f + g)(x), (fg)(x), (f/g)(x) with g(x) ≠ 0.",
+"<b>Domain of f∘g:</b> x in the domain of g AND g(x) in the domain of f.",
+"Decomposing: h(x) = √(x+3) can be f(g(x)) with g(x) = x+3, f(x) = √x."],
+gens:[
+()=>{const a=rnz(-4,4),b=ri(-6,6),c=rnz(-4,4),d=ri(-6,6),x=ri(-5,5);const g=c*x+d,v=a*g+b;return num(`f(x) = ${lin(a,b)}, g(x) = ${lin(c,d)}. Find (f ∘ g)(${x}).`,v,[`Inside first: g(${x}) = ${g}`,`Then f(${g}) = ${a}(${g}) + ${b} = ${v}`])},
+()=>{const b=ri(-5,5),c=rnz(-4,4),d=ri(-5,5),x=ri(-4,4);const f=t=>t*t+b,g=t=>c*t+d;const v=g(f(x));return num(`f(x) = x² ${b<0?"− "+(-b):"+ "+b}, g(x) = ${lin(c,d)}. Find g(f(${x})).`,v,[`f(${x}) = ${x*x} + (${b}) = ${f(x)}`,`g(${f(x)}) = ${c}(${f(x)}) + (${d}) = ${v}`])},
+()=>{const a=rnz(-4,4),b=ri(-6,6),c=rnz(-4,4),d=ri(-6,6);return mc(`f(x) = ${lin(a,b)}, g(x) = ${lin(c,d)}. Which is f(g(x))?`,lin(a*c,a*d+b),[lin(a*c,c*b+d),lin(a*c,b+d),lin(a+c,b+d)],[`f(g(x)) = ${a}(${lin(c,d)}) + ${b}`,`= ${lin(a*c,a*d)} + ${b} = ${lin(a*c,a*d+b)}`])},
+()=>{const a=rnz(-5,5),b=ri(-5,5),x=ri(-5,5);const f=a*x+b,g=x*x;return num(`f(x) = ${lin(a,b)}, g(x) = x². Find (f·g)(${x}).`,f*g,[`f(${x}) = ${f}, g(${x}) = ${g}`,`(f·g)(${x}) = ${f}·${g} = ${f*g}`])},
+()=>{const a=rnz(-5,5),b=ri(-5,5),c=ri(1,4),x=ri(-5,5);let gx=x+c;if(gx===0)gx=x+c+1;const cc=gx-x;const f=a*x+b;return num(`f(x) = ${lin(a,b)}, g(x) = x + ${cc}. Find (f/g)(${x}).`,fr(f,gx),[`f(${x}) = ${f}, g(${x}) = ${gx}`,`(f/g)(${x}) = ${f}/${gx} = ${fr(f,gx)}`])},
+()=>{const k=ri(-6,6);return itv(`f(x) = √x, g(x) = x ${k<0?"+ "+(-k):"− "+k}. Domain of (f ∘ g)(x)?`,`[${k},inf)`,[`f(g(x)) = √(x − ${k}) (g has domain all reals)`,`Need x − ${k} ≥ 0 ⇒ [${k}, ∞)`])},
+()=>{const vals=[ri(-3,3),ri(-3,3),ri(-3,3)];const t=shuffle([1,2,3]);const f={1:t[0],2:t[1],3:t[2]};const g={1:ri(1,3),2:ri(1,3),3:ri(1,3)};const x=ri(1,3);
+  return num(`Table: f(1)=${f[1]}, f(2)=${f[2]}, f(3)=${f[3]}; g(1)=${g[1]}, g(2)=${g[2]}, g(3)=${g[3]}. Find f(g(${x})).`,f[g[x]],[`g(${x}) = ${g[x]}`,`f(${g[x]}) = ${f[g[x]]}`])},
+()=>{const a=ri(2,5);return mc(`h(x) = (x + ${a})². If h = f ∘ g with g(x) = x + ${a}, what is f(x)?`,"x²",[`(x + ${a})²`,`x + ${a}`,`x² + ${a}`],[`f(g(x)) = f(x + ${a}) must equal (x + ${a})², so f squares its input: f(x) = x².`])},
+fixed("(f ∘ g)(x) means:","f(g(x)) — apply g first",["g(f(x)) — apply f first","f(x)·g(x)","f(x) + g(x)"],["The function written closest to x acts first."]),
+fixed("Is composition commutative (f∘g = g∘f always)?","No",["Yes","Only for linear functions","Only when f = g"],["Example: f(x)=x+1, g(x)=x²: f(g(x)) = x²+1 but g(f(x)) = (x+1)²."]),
+fixed("Domain of (f/g)(x) excludes:","x-values where g(x) = 0",["x-values where f(x) = 0","Negative x-values","Nothing extra"],["Division by zero is undefined."]),
+fixed("f(x) = 1/x, g(x) = x − 2. Domain of f(g(x))?","x ≠ 2",["x ≠ 0","x ≠ −2","All reals"],["f(g(x)) = 1/(x − 2), undefined at x = 2."]),
+fixed("h(x) = √(3x − 1). A valid decomposition f(g(x)) is:","g(x) = 3x − 1, f(x) = √x",["g(x) = √x, f(x) = 3x − 1","g(x) = 3x, f(x) = −1","g(x) = x − 1, f(x) = √(3x)"],["Inside operation 3x − 1, then the square root."]),
+fixed("f(x) = x², g(x) = x + 3. What is g(f(x))?","x² + 3",["(x + 3)²","x² + 6x + 9","3x²"],["g(f(x)) = f(x) + 3 = x² + 3."]),
+fixed("If f(g(x)) = x for all x, then f and g are:","Inverses of each other (if g(f(x)) = x too)",["Equal","Both linear","Both constant"],["Composition gives the identity exactly when they undo each other."]),
+]},
+{id:"1.5",title:"Transformation of Functions",recap:[
+"<b>f(x) + k</b>: shift up k. <b>f(x − h)</b>: shift right h (inside = opposite direction!).",
+"<b>−f(x)</b>: reflect over x-axis. <b>f(−x)</b>: reflect over y-axis.",
+"<b>a·f(x)</b>: vertical stretch (|a|>1) / compression (|a|<1). <b>f(bx)</b>: horizontal compression by 1/b.",
+"<b>Even</b>: f(−x) = f(x) (y-axis symmetry). <b>Odd</b>: f(−x) = −f(x) (origin symmetry).",
+"Order: horizontal shift, stretch/reflect, vertical shift — or just track points: (x,y) → (x+h, ay+k)."],
+gens:[
+()=>{const h=rnz(-6,6),k=rnz(-6,6);const hs=h>0?`right ${h}`:`left ${-h}`,vs=k>0?`up ${k}`:`down ${-k}`;return mc(`How is g(x) = (x ${h<0?"+ "+(-h):"− "+h})² ${k<0?"− "+(-k):"+ "+k} obtained from f(x) = x²?`,`Shift ${hs}, ${vs}`,[`Shift ${h>0?"left "+h:"right "+(-h)}, ${vs}`,`Shift ${hs}, ${k>0?"down "+k:"up "+(-k)}`,`Shift ${h>0?"left "+h:"right "+(-h)}, ${k>0?"down "+k:"up "+(-k)}`],[`x − (${h}) inside ⇒ horizontal shift ${hs}`,`${k} outside ⇒ vertical shift ${vs}`])},
+()=>{const x0=ri(-5,5),y0=ri(-5,5),h=rnz(-4,4),k=rnz(-4,4);return {type:"pair",q:`The point (${x0}, ${y0}) is on y = f(x). What point is on y = f(x ${h<0?"+ "+(-h):"− "+h}) ${k<0?"− "+(-k):"+ "+k}?`,answer:`(${x0+h},${y0+k})`,hint:"Enter as (x, y)",steps:[`f(x − ${h}) shifts x by +${h}: x = ${x0+h}`,`+ ${k} shifts y: y = ${y0+k}`,`Point: (${x0+h}, ${y0+k})`]}},
+()=>{const x0=ri(-5,5),y0=ri(-5,5),a=pick([-3,-2,2,3]);return {type:"pair",q:`(${x0}, ${y0}) is on y = f(x). What point is on y = ${a}f(x)?`,answer:`(${x0},${a*y0})`,hint:"Enter as (x, y)",steps:[`Vertical stretch/reflection multiplies y by ${a}`,`(${x0}, ${a}·${y0}) = (${x0}, ${a*y0})`]}},
+()=>{const x0=pick([-8,-6,-4,4,6,8,2,-2]),y0=ri(-5,5),b=pick([2,-2]);return {type:"pair",q:`(${x0}, ${y0}) is on y = f(x). What point is on y = f(${b}x)?`,answer:`(${x0/b},${y0})`,hint:"Enter as (x, y)",steps:[`f(${b}x) = ${y0} when ${b}x = ${x0} ⇒ x = ${x0/b}`,`Horizontal: divide x by ${b}. Point (${x0/b}, ${y0})`]}},
+()=>{const h=ri(-5,5),k=ri(-5,5),a=pick([-1,1]);return {type:"pair",q:`Vertex of g(x) = ${a<0?"−":""}|x ${h<0?"+ "+(-h):"− "+h}| ${k<0?"− "+(-k):"+ "+k} (a shift of |x|)?`,answer:`(${h},${k})`,hint:"Enter as (x, y)",steps:[`|x| has vertex (0, 0); shifts move it to (${h}, ${k})`]}},
+()=>{const h=rnz(-5,5),k=rnz(-5,5),neg=Math.random()<.5;const ans=`${neg?"−":""}√(x ${h<0?"− "+(-h):"+ "+h}) ${k<0?"− "+(-k):"+ "+k}`;
+  return mc(`Write g(x): take f(x) = √x, shift ${h>0?"left "+h:"right "+(-h)}, ${neg?"reflect over the x-axis, ":""}then shift ${k>0?"up "+k:"down "+(-k)}.`,ans,[`${neg?"−":""}√(x ${h<0?"+ "+(-h):"− "+h}) ${k<0?"− "+(-k):"+ "+k}`,`${neg?"":"−"}√(x ${h<0?"− "+(-h):"+ "+h}) ${k<0?"− "+(-k):"+ "+k}`,`${neg?"−":""}√(x ${h<0?"− "+(-h):"+ "+h}) ${k<0?"+ "+(-k):"− "+k}`],[`Left ${h} means replace x with x + ${h} (if left) — inside is the opposite sign`,`Reflection multiplies the whole function by −1`,`Vertical shift adds ${k} outside`])},
+()=>{const t=pick([["x⁴ + 2x²","Even"],["x³ − x","Odd"],["x² + x","Neither"],["|x| + 1","Even"],["5x","Odd"],["x³ + 1","Neither"],["1/x","Odd"],["x² − 7","Even"]]);return mc(`Is f(x) = ${t[0]} even, odd, or neither?`,t[1],["Even","Odd","Neither"],[`Compute f(−x) and compare with f(x) and −f(x).`,`Result: ${t[1]}.`])},
+fixed("g(x) = f(x − 3) shifts the graph of f:","Right 3",["Left 3","Up 3","Down 3"],["Subtracting inside moves right."]),
+fixed("g(x) = f(−x) is a reflection over:","The y-axis",["The x-axis","The origin","y = x"],["Negating the input flips left/right."]),
+fixed("g(x) = ½ f(x) is a:","Vertical compression by ½",["Vertical stretch by 2","Horizontal stretch by 2","Horizontal compression by ½"],["Multiplying outputs by ½ squeezes vertically."]),
+fixed("g(x) = f(2x) is a:","Horizontal compression by factor ½",["Horizontal stretch by 2","Vertical stretch by 2","Shift right 2"],["Inputs are doubled, so the graph squeezes toward the y-axis."]),
+fixed("An even function is symmetric about:","The y-axis",["The x-axis","The origin","The line y = x"],["f(−x) = f(x) means mirror image across the y-axis."]),
+fixed("Can a nonzero function be both even and odd?","No — only f(x) = 0 is both",["Yes, any line","Yes, x²","Yes, |x|"],["f(x) = f(−x) = −f(x) forces f(x) = 0."]),
+fixed("g(x) = −f(x) + 2: first reflect over the x-axis, then:","Shift up 2",["Shift down 2","Shift right 2","Shift left 2"],["+2 outside raises the graph."]),
+fixed("Which describes g(x) = 3(x + 1)² ?","x² shifted left 1, stretched vertically by 3",["Shifted right 1, stretched by 3","Shifted left 1, compressed by 1/3","Shifted up 3, left 1"],["x + 1 inside ⇒ left 1; factor 3 outside ⇒ vertical stretch by 3."]),
+]},
+{id:"1.6",title:"Absolute Value Functions",recap:[
+"|x| is distance from 0, so |x| ≥ 0. f(x) = a|x − h| + k is a V with vertex (h, k).",
+"<b>|A| = B</b> (B ≥ 0) ⇒ A = B or A = −B. If B < 0, no solution.",
+"<b>|A| < B</b> ⇒ −B < A < B (one interval). <b>|A| > B</b> ⇒ A < −B or A > B (two pieces).",
+"Isolate the absolute value FIRST before splitting."],
+gens:[
+()=>{const a=ri(-8,8),b=ri(1,9);const s=[a-b,a+b];return mc(`Solve |x ${a<0?"+ "+(-a):"− "+a}| = ${b}.`,`x = ${s[0]} or x = ${s[1]}`,[`x = ${s[1]} only`,`x = ${-a-b} or x = ${-a+b}`,`No solution`],[`x − ${a} = ${b} ⇒ x = ${s[1]}`,`x − ${a} = −${b} ⇒ x = ${s[0]}`])},
+()=>{const a=ri(-8,8),b=ri(1,9);return itv(`Solve |x ${a<0?"+ "+(-a):"− "+a}| < ${b}. Interval notation.`,`(${a-b},${a+b})`,[`−${b} < x − ${a} < ${b}`,`Add ${a}: ${a-b} < x < ${a+b}`,`(${a-b}, ${a+b})`])},
+()=>{const a=ri(-8,8),b=ri(1,9);return itv(`Solve |x ${a<0?"+ "+(-a):"− "+a}| ≥ ${b}. Interval notation.`,`(-inf,${a-b}]U[${a+b},inf)`,[`x − ${a} ≤ −${b} or x − ${a} ≥ ${b}`,`x ≤ ${a-b} or x ≥ ${a+b}`,`(−∞, ${a-b}] ∪ [${a+b}, ∞)`])},
+()=>{const k=ri(2,4),c=ri(-6,6),b=ri(1,6);const r1=fr(c-b,k),r2=fr(c+b,k);return itv(`Solve |${k}x ${c<0?"+ "+(-c):"− "+c}| ≤ ${b}.`,`[${r1},${r2}]`,[`−${b} ≤ ${k}x − ${c} ≤ ${b}`,`${c-b} ≤ ${k}x ≤ ${c+b}`,`${r1} ≤ x ≤ ${r2}`])},
+()=>{const m=ri(2,4),a=ri(-5,5),b=ri(1,5),k=ri(-6,6);const R=m*b+k;const s1=a-b,s2=a+b;return mc(`Solve ${m}|x ${a<0?"+ "+(-a):"− "+a}| ${k<0?"− "+(-k):"+ "+k} = ${R}.`,`x = ${s1} or x = ${s2}`,[`x = ${s2} only`,`x = ${a-R} or x = ${a+R}`,`No solution`],[`Isolate: ${m}|x − ${a}| = ${R-k} ⇒ |x − ${a}| = ${b}`,`x − ${a} = ±${b} ⇒ x = ${s1} or ${s2}`])},
+()=>{const a=ri(-5,5),b=ri(1,9);return mc(`Solve |x ${a<0?"+ "+(-a):"− "+a}| = −${b}.`,"No solution",[`x = ${a-b} or x = ${a+b}`,`x = ${a}`,`All real numbers`],[`An absolute value is never negative, so it can't equal −${b}.`])},
+()=>{const a=ri(-6,6),x=ri(-8,8),m=rnz(-3,3),k=ri(-5,5);const v=m*Math.abs(x-a)+k;return num(`f(x) = ${m===1?"":m===-1?"−":m}|x ${a<0?"+ "+(-a):"− "+a}| ${k<0?"− "+(-k):"+ "+k}. Find f(${x}).`,v,[`|${x} − (${a})| = |${x-a}| = ${Math.abs(x-a)}`,`${m}·${Math.abs(x-a)} + ${k} = ${v}`])},
+()=>{const h=ri(-5,5),k=ri(1,6);return mc(`How many x-intercepts does f(x) = |x ${h<0?"+ "+(-h):"− "+h}| ${"+ "+k} have?`,"0",["1","2","Infinitely many"],[`|x − ${h}| ≥ 0, so f(x) ≥ ${k} > 0: the graph never touches the x-axis.`])},
+fixed("|x| = x is true for:","x ≥ 0",["All real x","x ≤ 0","Only x = 0"],["For negatives, |x| = −x ≠ x."]),
+fixed("|x − 4| ≤ 2 describes points whose distance from 4 is:","At most 2",["At least 2","Exactly 2","More than 4"],["|x − c| is the distance between x and c."]),
+fixed("The graph of y = |x| has its vertex at:","(0, 0)",["(1, 1)","(0, 1)","No vertex"],["Corner of the V at the origin."]),
+fixed("Solve |x| < −3.","No solution",["(−3, 3)","All real numbers","x < −3"],["|x| ≥ 0 can never be less than a negative number."]),
+fixed("Solve |x| > −3.","All real numbers",["No solution","(−3, 3)","x > 3"],["|x| ≥ 0 > −3 always."]),
+fixed("Which interval matches |x| > 5?","(−∞, −5) ∪ (5, ∞)",["(−5, 5)","[−5, 5]","(5, ∞)"],["Greater-than gives two outer pieces."]),
+fixed("What is the range of f(x) = 2|x + 1| − 3?","[−3, ∞)",["[−1, ∞)","(−∞, −3]","(−∞, ∞)"],["Vertex (−1, −3), opens up, so y ≥ −3."]),
+]},
+{id:"1.7",title:"Inverse Functions",recap:[
+"f⁻¹ undoes f: f(a) = b ⇔ f⁻¹(b) = a. Only <b>one-to-one</b> functions have inverses.",
+"To find f⁻¹: write y = f(x), swap x and y, solve for y.",
+"Check: f(f⁻¹(x)) = x and f⁻¹(f(x)) = x.",
+"Domain of f⁻¹ = range of f; range of f⁻¹ = domain of f. Graph of f⁻¹ reflects f over y = x.",
+"f⁻¹(x) ≠ 1/f(x)!"],
+gens:[
+()=>{const m=rnz(-6,6),b=ri(-9,9),x=ri(-5,5);const y=m*x+b;return num(`f(x) = ${lin(m,b)}. Find f⁻¹(${y}).`,x,[`Solve ${lin(m,b)} = ${y}`,`${m}x = ${y-b} ⇒ x = ${x}`,`So f⁻¹(${y}) = ${x}`])},
+()=>{const m=rnz(-6,6),b=ri(-9,9);const ans=m===1?`x ${b<0?"+ "+(-b):"− "+b}`:`(x ${b<0?"+ "+(-b):"− "+b})/${m}`;const bad1=`(x ${b<0?"− "+(-b):"+ "+b})/${m}`;const bad2=`1/(${lin(m,b)})`;const bad3=`${m}x ${b<0?"+ "+(-b):"− "+b}`;
+  return mc(`f(x) = ${lin(m,b)}. Find f⁻¹(x).`,ans,[bad1,bad2,bad3],[`y = ${lin(m,b)}; swap: x = ${lin(m,b,"y")}`,`x − (${b}) = ${m}y ⇒ y = (x − (${b}))/${m}`,`f⁻¹(x) = ${ans}`])},
+()=>{const a=ri(2,5),b=ri(-9,9),x=ri(-4,4);const y=a*x**3+b;return num(`f(x) = ${a}x³ ${b<0?"− "+(-b):"+ "+b}. Find f⁻¹(${y}).`,x,[`Solve ${a}x³ + ${b} = ${y}`,`x³ = ${(y-b)/a} ⇒ x = ${x}`])},
+()=>{const k=ri(-6,6),x=ri(0,6);const y=Math.sqrt(x*x)+0; // f(x)=x^2+k, x>=0
+  return num(`f(x) = x² ${k<0?"− "+(-k):"+ "+k} with domain x ≥ 0. Find f⁻¹(${x*x+k}).`,x,[`Solve x² + ${k} = ${x*x+k} ⇒ x² = ${x*x}`,`With x ≥ 0: x = ${x}`])},
+()=>{const t=shuffle([ri(-9,-1),ri(0,4),ri(5,9),ri(10,15)]);const xs=[1,2,3,4];const i=ri(0,3);return num(`Table: f(1)=${t[0]}, f(2)=${t[1]}, f(3)=${t[2]}, f(4)=${t[3]}. Find f⁻¹(${t[i]}).`,xs[i],[`f⁻¹(${t[i]}) is the input with output ${t[i]}`,`f(${xs[i]}) = ${t[i]} ⇒ f⁻¹(${t[i]}) = ${xs[i]}`])},
+()=>{const a=ri(-9,9),b=ri(-9,9);return {type:"pair",q:`(${a}, ${b}) is on the graph of f. What point must be on the graph of f⁻¹?`,answer:`(${b},${a})`,hint:"Enter as (x, y)",steps:[`Inverses swap inputs and outputs: (${b}, ${a})`]}},
+()=>{const c=ri(1,6),d=ri(-5,5),x=ri(-10,10);if(x===0)return num(`f(x) = ${c}/x ${d<0?"− "+(-d):"+ "+d}. Find f⁻¹(${c+d}).`,1,[`Solve ${c}/x + ${d} = ${c+d} ⇒ ${c}/x = ${c} ⇒ x = 1`]);
+  const y=c/x+d;const ys=fr(c+d*x,x);return num(`f(x) = ${c}/x ${d<0?"− "+(-d):"+ "+d}. Find f⁻¹(${ys}).`,x,[`Solve ${c}/x + ${d} = ${ys}`,`${c}/x = ${fr(c,x)} ⇒ x = ${x}`])},
+fixed("Which function has an inverse function (without restricting the domain)?","f(x) = 2x + 1",["f(x) = x²","f(x) = |x|","f(x) = x² − 4"],["Only the line is one-to-one."]),
+fixed("The graph of f⁻¹ is the reflection of f over:","y = x",["The x-axis","The y-axis","The origin"],["Swapping x and y reflects across y = x."]),
+fixed("If f has domain [0, ∞) and range [2, ∞), the domain of f⁻¹ is:","[2, ∞)",["[0, ∞)","(−∞, ∞)","(−∞, 2]"],["Domain of f⁻¹ = range of f."]),
+fixed("f⁻¹(x) means:","The inverse function of f",["1/f(x)","−f(x)","f(x)⁻¹ as a reciprocal"],["The −1 is notation, not an exponent."]),
+fixed("To verify g = f⁻¹ you check that:","f(g(x)) = x and g(f(x)) = x",["f(x)·g(x) = 1","f(x) + g(x) = 0","f(x) = g(x)"],["Each must undo the other."]),
+fixed("The inverse of f(x) = x³ is:","∛x",["1/x³","−x³","x^(1/2)"],["Cube root undoes cubing."]),
+fixed("To make f(x) = (x − 2)² one-to-one we can restrict the domain to:","[2, ∞)",["[0, ∞)","(−∞, ∞)","[−2, ∞)"],["Vertex at x = 2; take one side of the parabola."]),
+fixed("The inverse of f(x) = √x (x ≥ 0) is:","x², x ≥ 0",["x², all x","1/√x","−√x"],["Range of √x is [0, ∞), so f⁻¹(x) = x² restricted to x ≥ 0."]),
+]}
+];
+
+// ===== Progress export/import =====
+function encodeProgress(state){const j=JSON.stringify({v:1,s:state});return btoa(unescape(encodeURIComponent(j)))}
+function validState(s){if(!s||typeof s!=="object")return false;
+  if(!s.hist||typeof s.hist!=="object"||!s.mastered||typeof s.mastered!=="object")return false;
+  const ids=SECTIONS.map(x=>x.id);if(!ids.includes(s.cur))return false;
+  for(const k in s.hist){if(!ids.includes(k)||!Array.isArray(s.hist[k])||!s.hist[k].every(b=>typeof b==="boolean"))return false}
+  for(const k in s.mastered){if(!ids.includes(k)||typeof s.mastered[k]!=="boolean")return false}
+  return true}
+function decodeProgress(code){try{const t=String(code).replace(/\s+/g,"");if(!/^[A-Za-z0-9+/=]+$/.test(t))return null;
+  const o=JSON.parse(decodeURIComponent(escape(atob(t))));if(!o||o.v!==1||!validState(o.s))return null;
+  const s=o.s;return {hist:s.hist,mastered:s.mastered,cur:s.cur,count:typeof s.count==="number"?s.count:0,updatedAt:typeof s.updatedAt==="number"?s.updatedAt:0}}catch(e){return null}}
+// ===== Sync conflict rule: last-write-wins by updatedAt (ms) =====
+function pickNewer(local,remote){const lv=local&&validState(local),rv=remote&&validState(remote);
+  if(!rv)return {state:local,source:"local"};if(!lv)return {state:remote,source:"remote"};
+  const lt=+local.updatedAt||0,rt=+remote.updatedAt||0;return rt>lt?{state:remote,source:"remote"}:{state:local,source:"local"}}
+if(typeof module!=="undefined")module.exports={pickNewer,SECTIONS,check,parseNum,intEq,parseIntervals,encodeProgress,decodeProgress};
+
+const KEY="precalc170_ch1_v1";
+let S=JSON.parse(localStorage.getItem(KEY)||"null")||{hist:{},mastered:{},cur:"1.1",count:0};
+let pushTimer=null;
+function save(touch=true){if(touch)S.updatedAt=Date.now();localStorage.setItem(KEY,JSON.stringify(S));
+  if(window.CLOUD&&CLOUD.user){clearTimeout(pushTimer);pushTimer=setTimeout(()=>CLOUD.push(S),800)}}
+const $=id=>document.getElementById(id);
+const unlocked=i=>i===0||S.mastered[SECTIONS[i-1].id];
+function isMastered(h){if(h.length<10)return false;const l=h.slice(-10);if(l.filter(Boolean).length<8)return false;return l.slice(-3).every(Boolean)}
+let curQ=null,curSec=null,isReview=false,answered=false,lastIdx={};
+function renderMap(){$("map").innerHTML=SECTIONS.map((s,i)=>{const h=S.hist[s.id]||[],l=h.slice(-10),c=l.filter(Boolean).length;
+ const st=S.mastered[s.id]?"done":unlocked(i)?"open":"locked";
+ return `<button class="node ${st} ${S.cur===s.id?"cur":""}" ${st==="locked"?"disabled":""} onclick="go('${s.id}')"><span class="sid">${st==="done"?"✓":st==="locked"?"🔒":s.id}</span><span class="st">${s.id} ${s.title}</span><span class="bar"><i style="width:${S.mastered[s.id]?100:c*10}%"></i></span></button>`}).join("")}
+function go(id){S.cur=id;save();renderMap();showRecap();next()}
+function showRecap(){const s=SECTIONS.find(x=>x.id===S.cur);$("recap").innerHTML=`<summary>📘 Concept recap: ${s.id} ${s.title}</summary><ul>${s.recap.map(r=>"<li>"+r+"</li>").join("")}</ul>`}
+function pickQ(sec){const n=sec.gens.length;let i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===lastIdx[sec.id]);lastIdx[sec.id]=i;return sec.gens[i]()}
+function next(){answered=false;S.count++;const done=SECTIONS.filter(s=>S.mastered[s.id]&&s.id!==S.cur);
+ isReview=done.length>0&&Math.random()<0.25;curSec=isReview?pick(done):SECTIONS.find(x=>x.id===S.cur);curQ=pickQ(curSec);
+ const h=S.hist[S.cur]||[];const l=h.slice(-10);
+ $("status").innerHTML=isReview?`<span class="tag rv">🔁 Spaced review: ${curSec.id} ${curSec.title}</span>`:`<span class="tag">${curSec.id} ${curSec.title}</span> <span class="small">Last 10: ${l.map(x=>x?"🟢":"🔴").join("")||"—"} (need 8/10 + last 3 correct)</span>`;
+ let html=`<div class="q">${curQ.q}</div>`;
+ if(curQ.type==="mc")html+=curQ.choices.map((c,i)=>`<button class="ch" onclick="submit(${i})">${c}</button>`).join("");
+ else html+=`<input id="ans" autocomplete="off" placeholder="${curQ.hint||""}" onkeydown="if(event.key==='Enter')submit()"><div class="small">${curQ.hint||""}</div><button class="go" onclick="submit()">Check</button>`;
+ $("card").innerHTML=html;$("fb").innerHTML="";const a=$("ans");if(a)a.focus();save()}
+function submit(i){if(answered)return;const ans=curQ.type==="mc"?i:$("ans").value;if(curQ.type!=="mc"&&!String(ans).trim())return;answered=true;
+ const ok=check(curQ,ans);const right=curQ.type==="mc"?curQ.choices[curQ.answer]:curQ.answer.replace(/inf/g,"∞").replace(/U/g," ∪ ");
+ if(curQ.type==="mc")document.querySelectorAll(".ch").forEach((b,j)=>{b.disabled=true;if(j===curQ.answer)b.classList.add("good");else if(j===i)b.classList.add("bad")});else $("ans").disabled=true;
+ let msg="";if(isReview){const h=S.hist[curSec.id]=S.hist[curSec.id]||[];h.push(ok);}
+ else{const h=S.hist[S.cur]=S.hist[S.cur]||[];h.push(ok);if(h.length>50)h.shift();
+  if(!S.mastered[S.cur]&&isMastered(h)){S.mastered[S.cur]=true;const ix=SECTIONS.findIndex(s=>s.id===S.cur);msg=ix<SECTIONS.length-1?`<div class="win">🎉 ${S.cur} mastered! ${SECTIONS[ix+1].id} unlocked.</div>`:`<div class="win">🏆 Chapter 1 complete! Keep practicing for review.</div>`}}
+ $("fb").innerHTML=`<div class="${ok?"okb":"nob"}">${ok?"✅ Correct!":"❌ Not quite. Correct answer: <b>"+right+"</b>"}</div><div class="steps"><b>Worked solution</b><ol>${curQ.steps.map(s=>"<li>"+s+"</li>").join("")}</ol></div>${msg}<button class="go" onclick="${msg&&SECTIONS.findIndex(s=>s.id===S.cur)<6?`go(SECTIONS[SECTIONS.findIndex(s=>s.id===S.cur)+1].id)`:"next()"}">Next →</button>`;
+ save();renderMap();if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise().catch(()=>{})}
+function resetAll(){if(confirm("Reset all progress?")){localStorage.removeItem(KEY);S={hist:{},mastered:{},cur:"1.1",count:0};go("1.1")}}
+function openIO(){$("io").hidden=!$("io").hidden;$("ioMsg").textContent=""}
+function copyText(t){ // Clipboard API, then execCommand fallback (older iOS Safari)
+  if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(t).then(()=>true,()=>legacyCopy(t));return Promise.resolve(legacyCopy(t))}
+function legacyCopy(t){const ta=$("expBox");ta.removeAttribute("readonly");ta.focus();ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand("copy")}catch(e){}ta.setAttribute("readonly","");return ok}
+function exportProgress(){const code=encodeProgress(S);const ta=$("expBox");ta.value=code;ta.hidden=false;
+  copyText(code).then(ok=>{$("ioMsg").textContent=ok?"✅ Code copied to clipboard (also shown below).":"⚠️ Couldn't copy automatically. Select the code below and copy it.";ta.focus();ta.select();ta.setSelectionRange(0,code.length)})}
+function importProgress(){const st=decodeProgress($("impBox").value);
+  if(!st){$("ioMsg").textContent="❌ Invalid progress code. Check that you pasted the whole code.";return}
+  const n=Object.keys(st.mastered).filter(k=>st.mastered[k]).length;
+  if(!confirm(`Replace your current progress with this code (${n} section(s) mastered, current ${st.cur})? This cannot be undone.`))return;
+  S=st;save(true);$("impBox").value="";$("ioMsg").textContent="✅ Progress imported.";go(S.cur)}
+go(S.cur);
+
+// ===== Cloud sync (Supabase Auth + Postgres), optional =====
+function setSyncMsg(t){const e=$("syncMsg");if(e)e.textContent=t}
+async function loadSupabase(){for(const u of["https://esm.sh/@supabase/supabase-js@2","https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"]){try{const m=await import(u);if(m.createClient)return m}catch(e){}}return null}
+async function initCloud(){const cfg=window.SB_CONFIG;if(!cfg||!cfg.url){setSyncMsg("Cloud sync not configured — progress saved on this device only.");return}
+  if(!navigator.onLine)setSyncMsg("Offline — progress saved on this device.");
+  const m=await loadSupabase();if(!m){setSyncMsg("Cloud sync unavailable (offline?) — progress saved on this device.");return}
+  const sb=m.createClient(cfg.url,cfg.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:window.localStorage,storageKey:"precalc170-auth"}});
+  window.CLOUD={user:null,sb,
+    push:async st=>{if(!CLOUD.user)return;const{error}=await sb.from("progress").upsert({user_id:CLOUD.user.id,state:st,updated_at:st.updatedAt||0});
+      setSyncMsg(error?"⚠️ Sync failed ("+(error.message||"offline")+") — will retry on next answer.":"☁️ Synced "+new Date().toLocaleTimeString())},
+    pull:async()=>{const{data,error}=await sb.from("progress").select("state,updated_at").eq("user_id",CLOUD.user.id).maybeSingle();if(error)throw error;
+      if(!data)return null;const s=data.state;if(s&&typeof s==="object")s.updatedAt=+data.updated_at||s.updatedAt||0;return s}};
+  let lastUid=null;
+  sb.auth.onAuthStateChange((ev,session)=>{const u=session&&session.user||null;CLOUD.user=u;renderAuth();
+    if(ev==="PASSWORD_RECOVERY")setTimeout(async()=>{const p=prompt("Enter a new password (6+ characters):");if(p){const{error}=await sb.auth.updateUser({password:p});setSyncMsg(error?"❌ "+error.message:"✅ Password updated.")}},0);
+    if(!u){lastUid=null;return}if(u.id===lastUid)return;lastUid=u.id;setTimeout(syncOnLogin,0)});
+  // Retry pending upload when connection returns / app regains focus (iOS)
+  window.addEventListener("online",()=>CLOUD.user&&CLOUD.push(S));
+  document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&CLOUD.user)syncOnLogin()});
+}
+async function syncOnLogin(){setSyncMsg("Loading cloud progress…");
+  try{const remote=await CLOUD.pull();const r=pickNewer(S,remote);
+    if(r.source==="remote"){S=r.state;save(false);go(S.cur);setSyncMsg("☁️ Loaded newer progress from cloud.")}else await CLOUD.push(S)}
+  catch(e){setSyncMsg("⚠️ Couldn't reach cloud ("+(e.message||e)+"); using this device's progress.")}}
+function renderAuth(){const u=window.CLOUD&&CLOUD.user;$("authOut").hidden=!!u;$("authIn").hidden=!u;if(u)$("authWho").textContent=u.email}
+async function authDo(kind){if(!window.CLOUD)return setSyncMsg("Cloud sync not available right now.");
+  const e=$("authEmail").value.trim(),p=$("authPass").value,sb=CLOUD.sb,here=location.origin+location.pathname;let r;
+  if(!e)return setSyncMsg("Enter your email.");
+  if(kind==="reset"){r=await sb.auth.resetPasswordForEmail(e,{redirectTo:here});return setSyncMsg(r.error?"❌ "+r.error.message:"📧 Password reset email sent.")}
+  if(kind!=="out"&&p.length<6)return setSyncMsg("Password must be at least 6 characters.");
+  r=kind==="up"?await sb.auth.signUp({email:e,password:p,options:{emailRedirectTo:here}}):await sb.auth.signInWithPassword({email:e,password:p});
+  if(r.error)return setSyncMsg("❌ "+r.error.message);$("authPass").value="";
+  if(kind==="up"&&!r.data.session)setSyncMsg("📧 Account created. Check your email and tap the confirmation link, then sign in.")}
+async function signOutCloud(){if(window.CLOUD){await CLOUD.sb.auth.signOut();setSyncMsg("Signed out. Progress stays on this device.")}}
+initCloud();
+
+</script></body></html>
