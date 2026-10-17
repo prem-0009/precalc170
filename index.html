@@ -63,7 +63,7 @@ body{padding-bottom:16px;overflow-x:hidden}
 #menuBtn{background:var(--b)!important;color:#fff!important;border:0!important;border-radius:10px!important;padding:7px 9px!important;font-size:.75rem!important;flex:0 0 auto;white-space:nowrap}
 #menu{top:auto!important;bottom:70px;max-height:calc(100dvh - 90px)}
 .wrap{padding-top:10px;grid-template-columns:minmax(0,1fr)!important}.wrap>*{min-width:0}#dock #sections>summary{overflow:hidden}html,body{max-width:100%;overflow-x:hidden}
-</style>
+#recap{margin:0 0 8px}#recap>summary{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:.9rem;line-height:1.25}#recap>summary .rt{flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}#recap>summary .hint{float:none;flex:0 0 auto;font-size:1.1rem}</style>
 <div class="wrap"><h1 class="apptitle">MATH 170 · Precalculus 2e</h1><main class="panel">
 <details id="recap"></details><div id="status"></div><div id="card"></div><div id="fb"></div></main><div id="dock"><details id="sections"><summary id="secSum">📚 Sections</summary><nav id="map"></nav></details><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▴</span></button></div></div>
 <script>
@@ -1743,7 +1743,7 @@ function undoMaster(id){const later=SECTIONS.slice(SECTIONS.findIndex(s=>s.id===
  if(!confirm(`Unmark ${id} as mastered${later.length?" (later sections "+later.join(", ")+" will be unmarked too, to keep the order)":""}?`))return;
  S=unmarkMastered(S,id);save();go(S.cur);$("sections").open=true}
 function go(id){S.cur=id;save();$("sections").open=false;renderMap();showRecap();next()}
-function showRecap(){const s=SECTIONS.find(x=>x.id===S.cur);$("recap").open=false;$("recap").innerHTML=`<summary>📘 Concept recap: ${s.id} ${s.title} <span class="hint"><span class="show">tap to show ▸</span><span class="hide">tap to hide ▾</span></span></summary><ul>${s.recap.map(r=>"<li>"+r+"</li>").join("")}</ul>`}
+function showRecap(){const s=SECTIONS.find(x=>x.id===S.cur);$("recap").open=false;$("recap").innerHTML=`<summary><span class="rt">📘 ${s.id} ${s.title}</span><span class="hint"><span class="show">▸</span><span class="hide">▾</span></span></summary><ul>${s.recap.map(r=>"<li>"+r+"</li>").join("")}</ul>`}
 function pickQ(sec){const n=sec.gens.length;let i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===lastIdx[sec.id]);lastIdx[sec.id]=i;return sec.gens[i]()}
 function next(){answered=false;S.count++;const done=SECTIONS.filter(s=>S.mastered[s.id]&&s.id!==S.cur);
  isReview=done.length>0&&Math.random()<0.25;curSec=isReview?pick(done):SECTIONS.find(x=>x.id===S.cur);curQ=pickQ(curSec);
