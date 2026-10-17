@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MATH 170 · Precalculus Mastery</title>
 <style>
 :root{--b:#3b5bdb;--g:#2f9e44;--r:#e03131;--bg:#f5f7fb}*{box-sizing:border-box}
@@ -52,18 +52,18 @@ body:not(.manage) .mini{display:none}</style>
 <style>@media(max-width:600px){header{padding:6px 10px;position:static}header h1{font-size:.85rem}#menuBtn{padding:5px 9px;font-size:.8rem}.wrap{padding:6px 8px 10px;gap:6px}#sections>summary{padding:7px 10px;font-size:.85rem}#sections>summary .stxt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#sections>summary .stxt br,#sections>summary .stxt .small{display:none}#sections>summary .hint{font-size:.75rem}#sections #map{max-height:60vh;overflow-y:auto;padding:8px}.panel{padding:12px}#menu{top:44px}}</style>
 <style>
 .apptitle{font-size:.85rem;margin:0;color:#667;font-weight:600}
-body{padding-bottom:16px;overflow-x:hidden}
-#dock{position:relative;width:100%;max-width:900px;margin:0 auto;background:#fff;border:2px solid var(--b);border-radius:12px;display:flex;gap:6px;align-items:center;padding:4px 6px;overflow:visible}
+body{padding-bottom:64px;overflow-x:hidden}
+#dock{position:fixed;left:0;right:0;bottom:0;z-index:30;width:100%;max-width:900px;margin:0 auto;background:#fff;border:0;border-top:2px solid var(--b);border-radius:0;box-shadow:0 -2px 10px #0002;display:flex;gap:6px;align-items:center;padding:5px 8px calc(5px + env(safe-area-inset-bottom));overflow:visible}
 #dock #sections{flex:1;min-width:0;position:static;border:0;box-shadow:none;border-radius:0;background:none}
-#dock #sections>summary{padding:6px 2px;font-size:.78rem;gap:4px}#dock #sections>summary .hint{font-size:.7rem}#dock #sections>summary .hint .show,#dock #sections>summary .hint .hide{font-size:0}#dock #sections>summary .hint .show:after{content:"▾";font-size:.8rem}#dock #sections>summary .hint .hide:after{content:"▴";font-size:.8rem}
+#dock #sections>summary{padding:6px 2px;font-size:.78rem;gap:4px}#dock #sections>summary .hint{font-size:.7rem}#dock #sections>summary .hint .show,#dock #sections>summary .hint .hide{font-size:0}#dock #sections>summary .hint .show:after{content:"▴";font-size:.8rem}#dock #sections>summary .hint .hide:after{content:"▾";font-size:.8rem}
 #dock #sections[open]>summary{border-bottom:0}
 #dock #sections>summary .stxt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #dock #sections>summary .stxt br,#dock #sections>summary .stxt .small{display:none}
-#dock #sections #map{position:absolute;left:0;right:0;bottom:calc(100% + 4px);background:#fff;border:2px solid var(--b);border-radius:12px;box-shadow:0 -6px 16px #0003;max-height:60vh;max-height:60dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px}
+#dock #sections #map{position:absolute;left:4px;right:4px;bottom:calc(100% + 6px);background:#fff;border:2px solid var(--b);border-radius:12px;box-shadow:0 -6px 16px #0003;max-height:60vh;max-height:60dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:8px}
 #menuBtn{background:var(--b)!important;color:#fff!important;border:0!important;border-radius:10px!important;padding:7px 9px!important;font-size:.75rem!important;flex:0 0 auto;white-space:nowrap}
 #menu{top:auto!important;bottom:70px;max-height:calc(100dvh - 90px)}
 .wrap{padding-top:10px;grid-template-columns:minmax(0,1fr)!important}.wrap>*{min-width:0}#dock #sections>summary{overflow:hidden}html,body{max-width:100%;overflow-x:hidden}
-#recap{margin:0 0 8px}#recap>summary{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:.9rem;line-height:1.25}#recap>summary .rt{flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}#recap>summary .hint{float:none;flex:0 0 auto;font-size:1.1rem}</style>
+#recap{margin:0 0 8px}#recap>summary{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:.85rem;line-height:1.25}#recap>summary .rt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#recap>summary .hint{float:none;flex:0 0 auto;font-size:1.1rem}</style>
 <div class="wrap"><h1 class="apptitle">MATH 170 · Precalculus 2e</h1><main class="panel">
 <details id="recap"></details><div id="status"></div><div id="card"></div><div id="fb"></div></main><div id="dock"><details id="sections"><summary id="secSum">📚 Sections</summary><nav id="map"></nav></details><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▴</span></button></div></div>
 <script>
@@ -1748,7 +1748,7 @@ function pickQ(sec){const n=sec.gens.length;let i;do{i=Math.floor(Math.random()*
 function next(){answered=false;S.count++;const done=SECTIONS.filter(s=>S.mastered[s.id]&&s.id!==S.cur);
  isReview=done.length>0&&Math.random()<0.25;curSec=isReview?pick(done):SECTIONS.find(x=>x.id===S.cur);curQ=pickQ(curSec);
  const h=S.hist[S.cur]||[];const l=h.slice(-10);
- $("status").innerHTML=isReview?`<span class="tag rv">🔁 Spaced review: ${curSec.id} ${curSec.title}</span>`:`<span class="tag">${curSec.id} ${curSec.title}</span> <span class="small">Last 10: ${l.map(x=>x?"🟢":"🔴").join("")||"—"} (need 8/10 + last 3 correct)</span>`;
+ $("status").innerHTML=isReview?`<span class="tag rv">🔁 Spaced review: ${curSec.id} ${curSec.title}</span>`:`<span class="small">Last 10: ${l.map(x=>x?"🟢":"🔴").join("")||"—"} (need 8/10 + last 3 correct)</span>`;
  let html=`<div class="q">${curQ.q}</div>`;
  if(curQ.type==="mc")html+=curQ.choices.map((c,i)=>`<button class="ch" onclick="submit(${i})">${c}</button>`).join("");
  else html+=`<input id="ans" autocomplete="off" placeholder="${curQ.hint||""}" onkeydown="if(event.key==='Enter')submit()"><div class="small">${curQ.hint||""}</div><button class="go" onclick="submit()">Check</button>`;
