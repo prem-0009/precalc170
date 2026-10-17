@@ -31,7 +31,7 @@ body:not(.manage) .mini{display:none}</style>
 <style>#recap{margin:10px 0;border:2px solid #3b82f6;border-radius:10px;background:#eff6ff}#recap>summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:16px;color:#1e40af;list-style:none}#recap>summary::-webkit-details-marker{display:none}#recap>summary .hint{float:right;font-weight:600}#recap[open]>summary .show{display:none}#recap:not([open])>summary .hide{display:none}#recap ul{margin:0;padding:0 18px 14px 34px}</style><style>.steps{padding:10px 14px}.steps ol{margin:8px 0 0;padding-left:22px}.steps li{margin:0 0 11px;line-height:1.55;overflow-wrap:anywhere}.steps li b{color:#1e3a8a}.yours{margin:8px 0 0;font-size:.95rem;overflow-wrap:anywhere}.mist{background:#fff4e6;border-left:4px solid #f08c00;border-radius:6px;padding:9px 12px;margin-top:10px;line-height:1.5;overflow-wrap:anywhere}.whyall{background:#fff5f5;border-left:4px solid #e03131;border-radius:6px;padding:9px 12px;margin-top:10px}.whyall ul{margin:6px 0 0;padding-left:18px}.whyall li{margin:0 0 9px;line-height:1.5;overflow-wrap:anywhere}details.mistd{background:#fff4e6;margin-top:10px;font-size:.95rem}.ch{overflow-wrap:anywhere}</style>
 <style>#sections{margin:0;background:#fff;border:2px solid var(--b);border-radius:12px;padding:0;box-shadow:0 1px 4px #0001}#sections>summary{cursor:pointer;padding:13px 14px;font-weight:700;font-size:16px;color:#1e3a8a;list-style:none;display:flex;align-items:center;gap:8px;line-height:1.3}#sections>summary::-webkit-details-marker{display:none}#sections>summary .stxt{flex:1;min-width:0;overflow-wrap:anywhere}#sections>summary .hint{flex:0 0 auto;font-weight:600;font-size:.85rem;color:var(--b);white-space:nowrap}#sections:not([open])>summary .hide,#sections[open]>summary .show{display:none}#sections[open]>summary{border-bottom:1px solid #dde}#sections #map{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;padding:12px}#sections .nwrap{margin:0}#sections .node{margin-bottom:2px}.panel{min-width:0}@media(max-width:520px){#sections #map{grid-template-columns:1fr;padding:10px}}</style>
 </head><body>
-<header><h1>MATH 170 · Precalculus 2e</h1><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▾</span></button></header><div id="menuBack" hidden onclick="toggleMenu(false)"></div>
+<div id="menuBack" hidden onclick="toggleMenu(false)"></div>
 <div id="menu" hidden role="dialog" aria-label="Account menu"><div class="mhead"><b>☁️ Account &amp; sync</b><button class="mclose" onclick="toggleMenu(false)" aria-label="Close">✕</button></div>
 
 <div id="authOut"><input id="authEmail" class="big" type="email" inputmode="email" autocomplete="username" placeholder="Email" autocapitalize="off" autocorrect="off" spellcheck="false">
@@ -50,8 +50,22 @@ body:not(.manage) .mini{display:none}</style>
 <hr><label class="tog"><input type="checkbox" id="manageTog" onchange="setManage(this.checked)"> Manage sections <span class="small">(show Mark as mastered / Undo on the map)</span></label>
 <hr><button class="go sm danger" onclick="toggleMenu(false);resetAll()">Reset progress</button></div>
 <style>@media(max-width:600px){header{padding:6px 10px;position:static}header h1{font-size:.85rem}#menuBtn{padding:5px 9px;font-size:.8rem}.wrap{padding:6px 8px 10px;gap:6px}#sections>summary{padding:7px 10px;font-size:.85rem}#sections>summary .stxt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#sections>summary .stxt br,#sections>summary .stxt .small{display:none}#sections>summary .hint{font-size:.75rem}#sections #map{max-height:60vh;overflow-y:auto;padding:8px}.panel{padding:12px}#menu{top:44px}}</style>
-<div class="wrap"><details id="sections"><summary id="secSum">📚 Sections</summary><nav id="map"></nav></details><main class="panel">
-<details id="recap"></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
+<style>
+.apptitle{font-size:.85rem;margin:0;color:#667;font-weight:600}
+body{padding-bottom:76px}
+#dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:2px solid var(--b);box-shadow:0 -2px 10px #0002;display:flex;gap:8px;align-items:center;padding:8px 10px calc(8px + env(safe-area-inset-bottom));max-width:900px;margin:auto}
+#dock #sections{flex:1;min-width:0;position:static;border:0;box-shadow:none;border-radius:0;background:none}
+#dock #sections>summary{padding:8px 4px;font-size:.9rem}
+#dock #sections[open]>summary{border-bottom:0}
+#dock #sections>summary .stxt{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#dock #sections>summary .stxt br,#dock #sections>summary .stxt .small{display:none}
+#dock #sections #map{position:absolute;left:0;right:0;bottom:100%;background:#fff;border-top:2px solid var(--b);box-shadow:0 -6px 16px #0003;max-height:65vh;max-height:65dvh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:10px}
+#menuBtn{background:var(--b)!important;color:#fff!important;border:0!important;border-radius:10px!important;padding:10px 12px!important;font-size:.85rem!important}
+#menu{top:auto!important;bottom:70px;max-height:calc(100dvh - 90px)}
+.wrap{padding-top:10px}
+</style>
+<div class="wrap"><h1 class="apptitle">MATH 170 · Precalculus 2e</h1><main class="panel">
+<details id="recap"></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div><div id="dock"><details id="sections"><summary id="secSum">📚 Sections</summary><nav id="map"></nav></details><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▴</span></button></div>
 <script>
 // ===== CORE (shared with node tests) =====
 const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
@@ -1717,7 +1731,7 @@ const unlocked=i=>i===0||S.mastered[SECTIONS[i-1].id];
 function isMastered(h){if(h.length<10)return false;const l=h.slice(-10);if(l.filter(Boolean).length<8)return false;return l.slice(-3).every(Boolean)}
 let curQ=null,curSec=null,isReview=false,answered=false,lastIdx={};
 function renderSum(){const s=SECTIONS.find(x=>x.id===S.cur)||SECTIONS[0];const n=SECTIONS.filter(x=>S.mastered[x.id]).length;
- $("secSum").innerHTML=`<span class="stxt">📚 Sections: ${s.id} ${s.title}<br><span class="small" style="font-weight:500;color:#556">${n} of ${SECTIONS.length} mastered</span></span><span class="hint"><span class="show">tap to choose ▾</span><span class="hide">tap to close ▴</span></span>`}
+ $("secSum").innerHTML=`<span class="stxt">📚 Sections: ${s.id} ${s.title}<br><span class="small" style="font-weight:500;color:#556">${n} of ${SECTIONS.length} mastered</span></span><span class="hint"><span class="show">tap to choose ▴</span><span class="hide">tap to close ▾</span></span>`}
 function renderMap(){renderSum();$("map").innerHTML=SECTIONS.map((s,i)=>{const h=S.hist[s.id]||[],l=h.slice(-10),c=l.filter(Boolean).length;
  const st=S.mastered[s.id]?"done":unlocked(i)?"open":"locked";const sk=S.skipped&&S.skipped[s.id];
  return `<div class="nwrap"><button class="node ${st} ${S.cur===s.id?"cur":""}" ${st==="locked"?"disabled":""} onclick="go('${s.id}')"><span class="sid">${st==="done"?"✓":st==="locked"?"🔒":s.id}</span><span class="st">${s.id} ${s.title}${sk?' <em class="skp">(skipped)</em>':""}</span><span class="bar"><i style="width:${S.mastered[s.id]?100:c*10}%"></i></span></button>`+
@@ -1800,7 +1814,7 @@ async function syncOnLogin(){setSyncMsg("Loading cloud progress…");
   catch(e){setSyncMsg("⚠️ Couldn't reach cloud ("+(e.message||e)+"); using this device's progress.")}}
 function renderAuth(){const u=window.CLOUD&&CLOUD.user;$("authOut").hidden=!!u;$("authIn").hidden=!u;if(u)$("authWho").textContent=u.email;
   const b=$("authBadge");b.textContent=u?"Signed in":"Signed out";b.classList.toggle("on",!!u)}
-function toggleMenu(open){const m=$("menu");if(open===undefined)open=m.hidden;if(open)m.style.top=(document.querySelector("header").getBoundingClientRect().bottom+6)+"px";m.hidden=!open;$("menuBack").hidden=!open;$("menuBtn").setAttribute("aria-expanded",open)}
+function toggleMenu(open){const m=$("menu");if(open===undefined)open=m.hidden;if(open){const d=$("dock");m.style.bottom=(d.offsetHeight+6)+"px"}m.hidden=!open;$("menuBack").hidden=!open;$("menuBtn").setAttribute("aria-expanded",open)}
 document.addEventListener("keydown",e=>{if(e.key==="Escape")toggleMenu(false)});
 const MKEY="precalc170_manage";
 function setManage(on){document.body.classList.toggle("manage",on);localStorage.setItem(MKEY,on?"1":"0");$("manageTog").checked=on}
