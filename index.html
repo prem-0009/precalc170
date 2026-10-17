@@ -1,12 +1,12 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MATH 170 · Ch.1 Functions Mastery</title>
+<title>MATH 170 · Precalculus Mastery</title>
 <style>
 :root{--b:#3b5bdb;--g:#2f9e44;--r:#e03131;--bg:#f5f7fb}*{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#1c1e21}
 header{background:var(--b);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
 header h1{font-size:1.05rem;margin:0}header button{background:#fff2;color:#fff;border:1px solid #fff6;border-radius:8px;padding:6px 10px}
-.wrap{max-width:1000px;margin:auto;display:grid;grid-template-columns:280px 1fr;gap:16px;padding:16px}
-@media(max-width:760px){.wrap{grid-template-columns:1fr}#map{display:flex;overflow-x:auto;gap:8px}.node{min-width:150px}}
+.wrap{max-width:900px;margin:auto;display:grid;grid-template-columns:1fr;gap:12px;padding:12px 16px 16px}
+
 .node{display:block;width:100%;text-align:left;border:2px solid #dde;background:#fff;border-radius:12px;padding:10px;margin-bottom:8px;cursor:pointer}
 .node.cur{border-color:var(--b)}.node.done{background:#ebfbee}.node.locked{opacity:.5;cursor:not-allowed}
 .sid{display:inline-block;width:34px;font-weight:700}.st{font-size:.85rem}.bar{display:block;height:6px;background:#eee;border-radius:3px;margin-top:6px}.bar i{display:block;height:100%;background:var(--g);border-radius:3px}
@@ -18,7 +18,7 @@ input{width:100%;padding:12px;font-size:1.05rem;border:2px solid #dde;border-rad
 .small{font-size:.8rem;color:#667;margin-top:4px}.tag{background:#e7f5ff;color:var(--b);padding:3px 8px;border-radius:6px;font-weight:600;font-size:.85rem}.tag.rv{background:#fff3bf;color:#a15c00}
 .okb{color:var(--g);font-weight:700;margin-top:12px}.nob{color:var(--r);margin-top:12px}.steps{background:#f8f9fa;border-left:4px solid var(--b);padding:8px 12px;margin-top:10px;border-radius:6px}
 .win{background:#fff9db;padding:10px;border-radius:8px;margin-top:10px;font-weight:700}
-.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}input.big{font-size:1.15rem;padding:14px;margin-top:8px}.mlbtn{width:100%;padding:15px;margin-top:8px;font-size:1.1rem;font-weight:700;background:#3b5bdb;color:#fff;border:0;border-radius:12px;cursor:pointer}.mlbtn:disabled{opacity:.6}details.pw{background:none;padding:0;margin:10px 0 0}details.pw summary{font-weight:500;font-size:.9rem;color:#3b5bdb}.go.sm{padding:8px 12px;font-size:.9rem}input.code{letter-spacing:.5em;text-align:center;font-size:1.5rem;font-variant-numeric:tabular-nums}.nwrap{margin-bottom:8px}.nwrap .node{margin-bottom:2px}.mini{background:none;border:0;color:#3b5bdb;font-size:.78rem;padding:4px 6px;cursor:pointer}.skp{color:#a15c00;font-size:.75rem}@media(max-width:500px){header h1{font-size:.9rem}}@media(max-width:760px){.nwrap{min-width:150px}}#authPass.big{margin-top:6px}.row2{margin-top:4px}.go.link{background:none;color:#3b5bdb}header{position:sticky;top:0;z-index:30;gap:10px}header h1{flex:1;min-width:0}#menuBtn{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;white-space:nowrap;font-size:.9rem;padding:8px 12px;cursor:pointer}
+.io{background:#f1f3f5;border-radius:10px;padding:12px;margin-bottom:12px}textarea{width:100%;margin-top:8px;padding:10px;font-size:16px;font-family:ui-monospace,monospace;border:2px solid #dde;border-radius:8px;word-break:break-all;-webkit-user-select:text;user-select:text}header span{display:flex;gap:6px;flex-wrap:wrap}input.big{font-size:1.15rem;padding:14px;margin-top:8px}.mlbtn{width:100%;padding:15px;margin-top:8px;font-size:1.1rem;font-weight:700;background:#3b5bdb;color:#fff;border:0;border-radius:12px;cursor:pointer}.mlbtn:disabled{opacity:.6}details.pw{background:none;padding:0;margin:10px 0 0}details.pw summary{font-weight:500;font-size:.9rem;color:#3b5bdb}.go.sm{padding:8px 12px;font-size:.9rem}input.code{letter-spacing:.5em;text-align:center;font-size:1.5rem;font-variant-numeric:tabular-nums}.nwrap{margin-bottom:8px}.nwrap .node{margin-bottom:2px}.mini{background:none;border:0;color:#3b5bdb;font-size:.78rem;padding:4px 6px;cursor:pointer}.skp{color:#a15c00;font-size:.75rem}@media(max-width:500px){header h1{font-size:.9rem}}#authPass.big{margin-top:6px}.row2{margin-top:4px}.go.link{background:none;color:#3b5bdb}header{position:sticky;top:0;z-index:30;gap:10px}header h1{flex:1;min-width:0}#menuBtn{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;white-space:nowrap;font-size:.9rem;padding:8px 12px;cursor:pointer}
 #authBadge.on::before{content:"● ";color:#8ce99a}
 #menuBack{position:fixed;inset:0;z-index:40;background:#0003}
 #menu{position:fixed;z-index:50;top:56px;right:10px;width:min(360px,calc(100vw - 20px));max-height:calc(100vh - 70px);max-height:calc(100dvh - 70px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:14px;box-shadow:0 8px 30px #0004;padding:14px}
@@ -29,8 +29,9 @@ body:not(.manage) .mini{display:none}</style>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" onerror="this.remove()"></script>
 <script>window.SB_CONFIG={url:"https://wtzwsvlxbryrvttlkysn.supabase.co",key:"sb_publishable_3qwXb5QQ671_xUEsGNUU2w_x0-4-ZsQ"};</script>
 <style>#recap{margin:10px 0;border:2px solid #3b82f6;border-radius:10px;background:#eff6ff}#recap>summary{cursor:pointer;padding:14px 16px;font-weight:700;font-size:16px;color:#1e40af;list-style:none}#recap>summary::-webkit-details-marker{display:none}#recap>summary .hint{float:right;font-weight:600}#recap[open]>summary .show{display:none}#recap:not([open])>summary .hide{display:none}#recap ul{margin:0;padding:0 18px 14px 34px}</style><style>.steps{padding:10px 14px}.steps ol{margin:8px 0 0;padding-left:22px}.steps li{margin:0 0 11px;line-height:1.55;overflow-wrap:anywhere}.steps li b{color:#1e3a8a}.yours{margin:8px 0 0;font-size:.95rem;overflow-wrap:anywhere}.mist{background:#fff4e6;border-left:4px solid #f08c00;border-radius:6px;padding:9px 12px;margin-top:10px;line-height:1.5;overflow-wrap:anywhere}.whyall{background:#fff5f5;border-left:4px solid #e03131;border-radius:6px;padding:9px 12px;margin-top:10px}.whyall ul{margin:6px 0 0;padding-left:18px}.whyall li{margin:0 0 9px;line-height:1.5;overflow-wrap:anywhere}details.mistd{background:#fff4e6;margin-top:10px;font-size:.95rem}.ch{overflow-wrap:anywhere}</style>
+<style>#sections{margin:0;background:#fff;border:2px solid var(--b);border-radius:12px;padding:0;box-shadow:0 1px 4px #0001}#sections>summary{cursor:pointer;padding:13px 14px;font-weight:700;font-size:16px;color:#1e3a8a;list-style:none;display:flex;align-items:center;gap:8px;line-height:1.3}#sections>summary::-webkit-details-marker{display:none}#sections>summary .stxt{flex:1;min-width:0;overflow-wrap:anywhere}#sections>summary .hint{flex:0 0 auto;font-weight:600;font-size:.85rem;color:var(--b);white-space:nowrap}#sections:not([open])>summary .hide,#sections[open]>summary .show{display:none}#sections[open]>summary{border-bottom:1px solid #dde}#sections #map{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;padding:12px}#sections .nwrap{margin:0}#sections .node{margin-bottom:2px}.panel{min-width:0}@media(max-width:520px){#sections #map{grid-template-columns:1fr;padding:10px}}</style>
 </head><body>
-<header><h1>MATH 170 · Precalculus 2e · Ch. 1 Functions</h1><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▾</span></button></header><div id="menuBack" hidden onclick="toggleMenu(false)"></div>
+<header><h1>MATH 170 · Precalculus 2e</h1><button id="menuBtn" onclick="toggleMenu()" aria-haspopup="dialog" aria-expanded="false"><span id="authBadge">Signed out</span><span aria-hidden="true">▾</span></button></header><div id="menuBack" hidden onclick="toggleMenu(false)"></div>
 <div id="menu" hidden role="dialog" aria-label="Account menu"><div class="mhead"><b>☁️ Account &amp; sync</b><button class="mclose" onclick="toggleMenu(false)" aria-label="Close">✕</button></div>
 
 <div id="authOut"><input id="authEmail" class="big" type="email" inputmode="email" autocomplete="username" placeholder="Email" autocapitalize="off" autocorrect="off" spellcheck="false">
@@ -48,7 +49,7 @@ body:not(.manage) .mini{display:none}</style>
 <div id="syncMsg" class="small" role="status"></div>
 <hr><label class="tog"><input type="checkbox" id="manageTog" onchange="setManage(this.checked)"> Manage sections <span class="small">(show Mark as mastered / Undo on the map)</span></label>
 <hr><button class="go sm danger" onclick="toggleMenu(false);resetAll()">Reset progress</button></div>
-<div class="wrap"><nav id="map"></nav><main class="panel">
+<div class="wrap"><details id="sections"><summary id="secSum">📚 Sections</summary><nav id="map"></nav></details><main class="panel">
 <details id="recap"></details><div id="status"></div><div id="card"></div><div id="fb"></div></main></div>
 <script>
 // ===== CORE (shared with node tests) =====
@@ -87,6 +88,17 @@ function check(q,ans){
   if(q.type==="pair"){const a=String(ans).replace(/[()\s]/g,"").split(","),b=q.answer.replace(/[()\s]/g,"").split(",");
     return a.length===b.length&&a.every((x,i)=>numEq(parseNum(x),parseNum(b[i])))}
   return false}
+const pw=n=>n<=1?"":(["","","²","³","⁴","⁵","⁶","⁷","⁸"][n]||("^"+n));
+const facS=r=>r===0?"x":`(x ${r<0?"+ "+(-r):"− "+r})`;
+const facP=(r,m)=>facS(r)+(m>1?pw(m):"");
+const lin2=(A,B)=>`${lin(A,0)} ${B<0?"−":"+"} ${Math.abs(B)===1?"":Math.abs(B)}y`;
+const ptTxt=(x,y)=>`(${x}, ${y})`;
+const ineqOp=(v,k,op)=>op==="≥"?v>=k:op===">"?v>k:op==="≤"?v<=k:v<k;
+const polyU=terms=>terms.map(([c,e],i)=>{const co=Math.abs(c),v=e===0?"":e===1?"x":"x"+pw(e);const t=(co===1&&e>0?"":co)+v;return i===0?(c<0?"−":"")+t:(c<0?" − ":" + ")+t}).join("");
+const polyS=cs=>{const n=cs.length-1;return polyU(cs.map((c,i)=>[c,n-i]).filter(t=>t[0]))||"0"};
+const evP=(cs,x)=>cs.reduce((s,c)=>s*x+c,0);
+const evLine=(nm,cs,x)=>{const n=cs.length-1;const t=cs.map((c,i)=>[c,n-i]).filter(u=>u[0]);return `${nm}(${N(x)}) = ${ST(t.map(([c,e])=>[c,e===0?"":P(x)+pw(e)]))} = ${ST(t.map(([c,e])=>[c*x**e,""]))} = ${N(evP(cs,x))}`};
+const facsStr=(a,rs,ms)=>(a===1?"":a===-1?"−":N(a))+rs.map((r,i)=>facP(r,ms[i])).join("");
 // Multiple choice builder: correct + distractors (deduped)
 // ===== Worked-solution helpers =====
 const N=n=>String(n).replace(/-/g,"−");                       // true minus sign for display
@@ -1053,6 +1065,617 @@ fixed("The inverse of f(x) = √x (x ≥ 0) is:","the inverse function of f(x) =
   `Swap x and y, solve for y, and use the range of f as the domain of f⁻¹.`,
   [`Write y = √x.`,`Swap: x = √y.`,`Square both sides: y = x².`,`The outputs of √x are ≥ 0, so f⁻¹'s inputs must be ≥ 0: f⁻¹(x) = x², x ≥ 0.`],
   `f(9) = 3 and f⁻¹(3) = 3² = 9 ✓.`),
+]},
+{id:"3.2",title:"Quadratic Functions",recap:[
+"<b>Standard form:</b> f(x) = ax² + bx + c. <b>Vertex form:</b> f(x) = a(x − h)² + k with vertex (h, k). If a &gt; 0 the parabola opens up (vertex is a minimum); if a &lt; 0 it opens down (maximum).",
+"<b>Vertex &amp; axis:</b> h = −b/(2a), k = f(h). The axis of symmetry is the vertical line x = h. The y-intercept is (0, c).",
+"<b>Discriminant</b> D = b² − 4ac: D &gt; 0 → two x-intercepts; D = 0 → one (vertex on the axis); D &lt; 0 → none.",
+"<b>Quadratic formula:</b> x = (−b ± √(b² − 4ac)) / (2a). <b>Completing the square:</b> add and subtract (b/2)² to get a perfect square.",
+"<b>Applications:</b> the max or min of a quadratic model occurs at the vertex — read the output for the max/min value and the input for when it happens."],
+gens:[
+()=>{const a=pick([-3,-2,-1,1,2,3]),h=ri(-5,5),k=ri(-9,9);const b=-2*a*h,c=a*h*h+k;const E=quad(a,b,c);const ans=`(${h},${k})`;
+  return prs(`Find the vertex of f(x) = ${E}. Enter as (x, y).`,ans,sol(
+   `the vertex (turning point) of the parabola f(x) = ${E}.`,
+   `For standard form f(x) = ax² + bx + c, the vertex has x-coordinate h = −b ÷ (2a). The y-coordinate is k = f(h). The vertex is (h, k).`,
+   [`Identify the coefficients: a = ${N(a)}, b = ${N(b)}, c = ${N(c)}.`,
+    `x-coordinate: h = −b ÷ (2a) = −${P(b)} ÷ (2·${P(a)}) = ${N(-b)} ÷ ${N(2*a)} = ${N(h)}.`,
+    `y-coordinate: substitute x = ${N(h)} into f: ${qEval("f",a,b,c,h)}.`,
+    `Write the vertex as (h, k) = (${N(h)}, ${N(k)}).`],
+   `(${N(h)}, ${N(k)})`,
+   `a = ${N(a)} ${a>0?"&gt;":"&lt;"} 0, so the parabola opens ${a>0?"up and the vertex is the lowest point":"down and the vertex is the highest point"}. Points one step either side of x = ${N(h)} must match: f(${N(h-1)}) = f(${N(h+1)}) = ${N(a+k)} ✓ (symmetry).`),
+   undefined,h!==0?`Forgetting the minus sign in h = −b/(2a). Using b/(2a) would give x = ${N(h*-1)} instead of ${N(h)}.`:undefined)},
+()=>{const a=rnz(-4,4),b=ri(-12,12),c=ri(-9,9);const h=fr(-b,2*a);
+  return num(`Find the axis of symmetry x = h of f(x) = ${quad(a,b,c)}. Enter h.`,h,sol(
+   `the vertical line x = h that splits the parabola f(x) = ${quad(a,b,c)} into two mirror images; enter h.`,
+   `The axis of symmetry of f(x) = ax² + bx + c is the vertical line through the vertex: x = −b ÷ (2a).`,
+   [`Identify a = ${N(a)} and b = ${N(b)} (the coefficients of x² and x).`,
+    `Substitute: h = −b ÷ (2a) = −${P(b)} ÷ (2·${P(a)}).`,
+    `Simplify the numerator and denominator: ${N(-b)} ÷ ${N(2*a)}.`,
+    `Reduce to lowest terms: h = ${N(h)}.`],
+   `x = ${N(h)}`,
+   `If the parabola has real zeros, they add up to −b/a = ${N(fr(-b,a))}; the axis is exactly halfway between them: ${N(fr(-b,a))} ÷ 2 = ${N(h)} ✓.`),
+   undefined,`Using the full coefficient b instead of dividing by 2a, or dropping the minus sign. The axis is −b over 2a, not −b over a.`)},
+()=>{const a=pick([-3,-2,-1,1,2,3]),h=rnz(-5,5),k=ri(-9,9);const E=`${a===1?"":a===-1?"−":N(a)}(x ${h<0?"+ "+(-h):"− "+h})² ${k<0?"− "+(-k):"+ "+k}`;const v=a*h*h+k;
+  return num(`Find the y-intercept (the value f(0)) of f(x) = ${E}.`,v,sol(
+   `the output of f(x) = ${E} when x = 0, which is where the graph crosses the y-axis.`,
+   `The y-intercept is the point where x = 0, so substitute 0 for x in vertex form a(x − h)² + k and simplify (parentheses first, then the square, then multiply).`,
+   [`Substitute x = 0: f(0) = ${N(a)}(0 ${h<0?"+ "+(-h):"− "+h})² ${k<0?"− "+(-k):"+ "+k}.`,
+    `Parentheses: 0 ${h<0?"+ "+(-h):"− "+h} = ${N(-h)}.`,
+    `Square: ${P(-h)}² = ${h*h}.`,
+    `Multiply by ${N(a)}: ${N(a)}·${h*h} = ${N(a*h*h)}.`,
+    `Add the vertical shift: ${N(a*h*h)}${addT(k)} = ${N(v)}.`],
+   `f(0) = ${N(v)}, so the y-intercept is (0, ${N(v)})`,
+   `Expand to standard form: c = a·h² + k = ${N(a)}·${h*h}${addT(k)} = ${N(v)}, which is the constant term and equals f(0) ✓.`),
+   undefined,`Reading k (${N(k)}) as the y-intercept. k is the vertex's y-value; the y-intercept needs x = 0 substituted, and the square of ${N(-h)} is positive.`)},
+()=>{const t=ri(0,2);let a,b,c,D;
+  if(t===1){a=rnz(-3,3);const r=ri(-4,4);b=-2*a*r;c=a*r*r;D=0}else{do{a=rnz(-3,3);b=ri(-6,6);c=ri(-6,6);D=b*b-4*a*c}while(t===0?D>=0:D<=0)}
+  const names=["No x-intercepts","One x-intercept","Two x-intercepts"];const ans=names[t];const E=quad(a,b,c);
+  return mc(`How many x-intercepts does f(x) = ${E} have?`,ans,[names[(t+1)%3],names[(t+2)%3],"Cannot be determined without graphing"],sol(
+   `the number of x-intercepts (real solutions of f(x) = 0) of f(x) = ${E}.`,
+   `Use the discriminant D = b² − 4ac. If D &gt; 0 there are two real zeros; if D = 0 there is exactly one (a repeated zero, the vertex touches the x-axis); if D &lt; 0 there are no real zeros.`,
+   [`Identify the coefficients: a = ${N(a)}, b = ${N(b)}, c = ${N(c)}.`,
+    `Compute b²: ${P(b)}² = ${b*b}.`,
+    `Compute 4ac: 4·${P(a)}·${P(c)} = ${N(4*a*c)}.`,
+    `Discriminant: D = ${b*b} − ${P(4*a*c)} = ${N(D)}.`,
+    `Interpret: D ${D>0?"&gt; 0":D<0?"&lt; 0":"= 0"}, so there ${D>0?"are two real zeros":D<0?"are no real zeros":"is exactly one real zero"}.`],
+   ans,
+   `The vertex's y-value is −D/(4a) = ${N(fr(-D,4*a))} and the parabola opens ${a>0?"up":"down"}: ${D===0?"the vertex sits on the x-axis, so it touches once":D<0?"the vertex is "+((a>0)?"above":"below")+" the x-axis and the parabola opens away from it, so it never crosses":"the vertex is "+((a>0)?"below":"above")+" the x-axis and the parabola opens toward it, so it crosses twice"} ✓.`),
+   Object.fromEntries([0,1,2].filter(j=>j!==t).map(j=>[names[j],`Wrong — D = ${N(D)} ${D>0?"&gt; 0 gives two zeros":D<0?"&lt; 0 gives none":"= 0 gives exactly one"}, not ${j===0?"none":j===1?"exactly one":"two"}.`]).concat([["Cannot be determined without graphing","Wrong — the discriminant answers this from the coefficients alone, no graph needed."]])),
+   4*a*c<0?`Forgetting the sign of 4ac when a and c have opposite signs. Here 4ac = ${N(4*a*c)}, so "− 4ac" means ADD ${-4*a*c}.`:`Mixing up b² with 4ac: compute b² = ${b*b} and 4ac = ${4*a*c} separately, then subtract.`)},
+()=>{const a=rnz(-4,4),b=ri(-9,9),c=rnz(-9,9);const D=b*b-4*a*c;
+  return num(`Compute the discriminant b² − 4ac of f(x) = ${quad(a,b,c)}.`,D,sol(
+   `the value of b² − 4ac for f(x) = ${quad(a,b,c)}.`,
+   `In standard form ax² + bx + c, a, b, c are the signed coefficients (the sign belongs to the number). Then D = b² − 4ac; square b first, then compute the product 4ac, then subtract.`,
+   [`Read the coefficients: a = ${N(a)}, b = ${N(b)}, c = ${N(c)}.`,
+    `Square b: b² = ${P(b)}² = ${b*b}.`,
+    `Multiply 4ac: 4·${P(a)}·${P(c)} = ${N(4*a*c)}.`,
+    `Subtract: D = ${b*b} − ${P(4*a*c)} = ${N(D)}.`],
+   `D = ${N(D)}`,
+   `D ${D>0?"&gt; 0":D<0?"&lt; 0":"= 0"}, so the equation has ${D>0?"two real solutions":D<0?"no real solutions (two complex ones)":"one repeated real solution"}, and the graph ${D>0?"crosses":D<0?"misses":"touches"} the x-axis ✓.`),
+   undefined,`Squaring a negative b as negative: ${P(b)}² = ${b*b}, never ${N(-b*b)}. And subtracting a negative 4ac means adding.`)},
+()=>{const a=pick([1,2,3]);let r1,r2;do{r1=ri(-6,3);r2=r1+ri(1,6)}while(r2===-r1);const b=-a*(r1+r2),c=a*r1*r2;const D=b*b-4*a*c,s=a*(r2-r1);const E=quad(a,b,c);const ans=`x = ${r1} or x = ${r2}`;
+  return mc(`Solve ${E} = 0.`,ans,[`x = ${-r1} or x = ${-r2}`,`x = ${2*r1} or x = ${2*r2}`,`x = ${r2} only`],sol(
+   `all real x with ${E} = 0.`,
+   `Quadratic formula: for ax² + bx + c = 0, x = (−b ± √(b² − 4ac)) ÷ (2a). The ± gives two solutions.`,
+   [`Identify a = ${a}, b = ${N(b)}, c = ${N(c)}.`,
+    `Discriminant: b² − 4ac = ${P(b)}² − 4·${a}·${P(c)} = ${b*b} − ${P(4*a*c)} = ${D}.`,
+    `Square root: √${D} = ${s}.`,
+    `Substitute: x = (−${P(b)} ± ${s}) ÷ (2·${a}) = (${N(-b)} ± ${s}) ÷ ${2*a}.`,
+    `Plus: (${N(-b)} + ${s}) ÷ ${2*a} = ${N(-b+s)} ÷ ${2*a} = ${N(r2)}.`,
+    `Minus: (${N(-b)} − ${s}) ÷ ${2*a} = ${N(-b-s)} ÷ ${2*a} = ${N(r1)}.`],
+   ans,
+   `Product check: ${a}(x ${r1<0?"+ "+(-r1):"− "+r1})(x ${r2<0?"+ "+(-r2):"− "+r2}) has constant term ${a}·${P(r1)}·${P(r2)} = ${N(c)} = c ✓, and the roots add to ${N(r1+r2)} = −b/a ✓.`),
+   [`Wrong — the signs are flipped: substituting x = ${N(-r1)} gives ${N(a*r1*r1-b*r1+c)}, not 0. Use −b (not b) in the formula.`,`Wrong — dividing by a instead of 2a doubles the answers.`,`Wrong — the ± produces two solutions; ${r2} is only the "+" one.`],
+   `Forgetting that the formula's denominator is 2a (the whole top is divided by 2a), or dropping the − in front of b.`)},
+()=>{const m=rnz(-6,6),c=ri(-10,10);const b=2*m,k=c-m*m;const E=quad(1,b,c);
+  return num(`Complete the square: x² ${b<0?"− "+(-b):"+ "+b}x ${c<0?"− "+(-c):"+ "+c} = (x ${m<0?"− "+(-m):"+ "+m})² + k. Find k.`,k,sol(
+   `the constant k in the vertex-form rewrite (x ${m<0?"− "+(-m):"+ "+m})² + k of ${E}.`,
+   `Completing the square on x² + bx + c: take half of b, square it, and add and subtract it. Then x² + bx + (b/2)² = (x + b/2)², and k = c − (b/2)².`,
+   [`Half of the x-coefficient: ${N(b)} ÷ 2 = ${N(m)}.`,
+    `Square it: ${P(m)}² = ${m*m}.`,
+    `Add and subtract ${m*m}: ${E} = (x² ${b<0?"− "+(-b):"+ "+b}x + ${m*m}) − ${m*m} ${c<0?"− "+(-c):"+ "+c}.`,
+    `The group in parentheses is a perfect square: (x ${m<0?"− "+(-m):"+ "+m})².`,
+    `Combine the leftover constants: k = ${N(c)} − ${m*m} = ${N(k)}.`],
+   `k = ${N(k)}`,
+   `Expand (x ${m<0?"− "+(-m):"+ "+m})² ${k<0?"− "+(-k):"+ "+k} = x² ${b<0?"− "+(-b):"+ "+b}x + ${m*m}${addT(k)} = x² ${b<0?"− "+(-b):"+ "+b}x ${c<0?"− "+(-c):"+ "+c} ✓.`),
+   undefined,`Forgetting to SUBTRACT the ${m*m} you added. You must keep the expression equal, so k = c − ${m*m}, not c.`)},
+()=>{const a=pick([4,5,8,16]),t0=ri(1,4),c=ri(0,20);const b=2*a*t0,mx=c+a*t0*t0;
+  return num(`A ball's height in feet is h(t) = −${a}t² + ${b}t + ${c}, where t is in seconds. What is the maximum height?`,mx,sol(
+   `the largest value of h(t) = −${a}t² + ${b}t + ${c} (the maximum height, in feet).`,
+   `The leading coefficient −${a} is negative, so the parabola opens down and its vertex is the highest point. The vertex is at t = −b ÷ (2a); the maximum height is h at that time.`,
+   [`Coefficients: a = −${a}, b = ${b}, c = ${c}.`,
+    `Time of the peak: t = −b ÷ (2a) = −${b} ÷ (2·(−${a})) = ${-b} ÷ ${-2*a} = ${t0} seconds.`,
+    `Substitute t = ${t0}: h(${t0}) = −${a}·${t0}² + ${b}·${t0} + ${c}.`,
+    `Square: ${t0}² = ${t0*t0}, so −${a}·${t0*t0} = ${-a*t0*t0}.`,
+    `Multiply: ${b}·${t0} = ${b*t0}.`,
+    `Add: ${-a*t0*t0} + ${b*t0} + ${c} = ${mx}.`],
+   `Maximum height = ${mx} feet (at t = ${t0} s)`,
+   `Nearby times give lower heights: h(${t0-1}) = ${-a*(t0-1)**2+b*(t0-1)+c} and h(${t0+1}) = ${-a*(t0+1)**2+b*(t0+1)+c}, both below ${mx} ✓.`),
+   undefined,`Answering ${t0} (WHEN it peaks) instead of ${mx} (HOW HIGH it gets). Always re-read what the question asks for: height means the output.`)},
+()=>{const s=ri(3,15),P4=4*s;
+  return num(`You have ${P4} feet of fencing to enclose a rectangular garden. What is the largest possible area (in square feet)?`,s*s,sol(
+   `the greatest area of a rectangle whose perimeter is ${P4} feet.`,
+   `Write the area as a function of one side, then find the vertex of that downward-opening parabola. Perimeter of a rectangle: 2L + 2W = P, so W = P/2 − L. Area = L·W.`,
+   [`Perimeter: 2L + 2W = ${P4}, so L + W = ${P4/2} and W = ${P4/2} − L.`,
+    `Area as a function of L: A(L) = L(${P4/2} − L) = −L² + ${P4/2}L.`,
+    `This is a parabola opening down (a = −1), so the maximum is at the vertex: L = −b ÷ (2a) = −${P4/2} ÷ (2·(−1)) = ${s}.`,
+    `Then W = ${P4/2} − ${s} = ${s}, so the best rectangle is a ${s} ft by ${s} ft square.`,
+    `Maximum area: ${s} × ${s} = ${s*s}.`],
+   `${s*s} square feet`,
+   `Compare a non-square: ${s+1} by ${s-1} also uses ${2*(s+1)+2*(s-1)} ft of fence but has area ${(s+1)*(s-1)}, which is smaller ✓.`),
+   undefined,`Using the whole perimeter as a side length, or forgetting that L + W is only HALF of ${P4} (the fence goes around all four sides).`)},
+fixed("What is the vertex of f(x) = 2(x − 3)² + 5?","the vertex (h, k) of f(x) = 2(x − 3)² + 5 written in vertex form.","(3, 5)",["(−3, 5)","(3, −5)","(2, 5)"],
+  ["Wrong — the sign inside is opposite: (x − 3) means h = +3, not −3.","Wrong — the constant outside is +5, so k = +5 (not −5).","Wrong — 2 is the stretch factor a, not the x-coordinate."],
+  `Vertex form: f(x) = a(x − h)² + k has vertex (h, k).`,
+  [`Match f(x) = 2(x − 3)² + 5 with a(x − h)² + k.`,`The number after the minus inside the parentheses is h = 3.`,`The constant added outside is k = 5.`,`The vertex is (h, k) = (3, 5). (The 2 is just a, which stretches the parabola.)`],
+  `At x = 3 the squared part is 0, so f(3) = 5, and every other x makes it larger ✓.`),
+fixed("The axis of symmetry of f(x) = ax² + bx + c is:","the formula for the axis of symmetry of f(x) = ax² + bx + c.","x = −b/(2a)",["x = b/(2a)","x = −b/a","x = c/a"],
+  ["Wrong — the minus sign is missing. For x² − 6x the axis is x = +3 = −(−6)/2, not −3.","Wrong — −b/a is the SUM of the zeros; the axis is half of that.","Wrong — c/a is the PRODUCT of the zeros, which has nothing to do with the axis."],
+  `The axis of symmetry is the vertical line through the vertex, halfway between any two mirror-image points, such as the two zeros.`,
+  [`Zeros (from the quadratic formula): x = (−b ± √D) ÷ (2a).`,`The midpoint of the two zeros is the average: ((−b + √D) + (−b − √D)) ÷ (4a) = −2b ÷ (4a).`,`Simplify: −b ÷ (2a).`,`So the axis of symmetry is x = −b/(2a).`],
+  `For f(x) = x² − 6x + 5 (zeros 1 and 5): −(−6)/(2·1) = 3, the midpoint of 1 and 5 ✓.`),
+fixed("The parabola f(x) = −2x² + 8x − 3 opens:","which direction the graph of f(x) = −2x² + 8x − 3 opens.","Downward, because a = −2 is negative",["Upward, because a = −2 is negative","Upward, because b = 8 is positive","Downward, because c = −3 is negative"],
+  ["Wrong — a negative leading coefficient makes the parabola open DOWN.","Wrong — only the sign of a (the x² coefficient) decides the direction, not b.","Wrong — c is the y-intercept; it doesn't decide the direction."],
+  `In ax² + bx + c, the sign of a determines the opening: a &gt; 0 opens up (the vertex is a minimum); a &lt; 0 opens down (the vertex is a maximum).`,
+  [`Identify the coefficient of x²: a = −2.`,`−2 is negative, so a &lt; 0.`,`Therefore the parabola opens downward and has a maximum value at its vertex.`,`b = 8 only shifts the vertex horizontally; c = −3 is where it crosses the y-axis.`],
+  `For large x, −2x² is a huge negative number, so the graph falls on both sides ✓.`),
+fixed("If the discriminant of a quadratic is negative, then:","what a negative discriminant tells us about the quadratic equation ax² + bx + c = 0.","There are no real solutions, and the graph never touches the x-axis",["There are two real solutions","There is exactly one real solution","The parabola is a straight line"],
+  ["Wrong — two real solutions happen when D &gt; 0.","Wrong — exactly one solution happens when D = 0.","Wrong — a quadratic is never a straight line (a ≠ 0)."],
+  `Quadratic formula: x = (−b ± √D) ÷ (2a). The square root of a negative number is not real.`,
+  [`D = b² − 4ac is under the square root in the quadratic formula.`,`If D &lt; 0, √D is not a real number.`,`So the formula produces no real solutions (only complex ones).`,`Graphically the parabola never reaches y = 0, so it has no x-intercepts.`],
+  `Example: x² + 1 = 0 has D = −4 and x² = −1 has no real solution ✓.`),
+fixed("If the discriminant of a quadratic equation is 0, then:","what D = 0 tells us about the solutions of ax² + bx + c = 0.","There is exactly one real solution (a repeated root)",["There are no real solutions","There are two different real solutions","There are infinitely many solutions"],
+  ["Wrong — no real solutions needs D &lt; 0.","Wrong — two different solutions needs D &gt; 0.","Wrong — a quadratic equation has at most 2 solutions."],
+  `In x = (−b ± √D) ÷ (2a), the ± only matters when √D ≠ 0.`,
+  [`If D = 0 then √D = 0.`,`Both "+" and "−" give the same value: x = −b ÷ (2a).`,`So there is one real solution, repeated twice.`,`Graphically the vertex touches the x-axis (the parabola is tangent to it).`],
+  `Example: x² − 6x + 9 = (x − 3)² has D = 36 − 36 = 0 and the single zero x = 3 ✓.`),
+fixed("Which is the quadratic formula for ax² + bx + c = 0?","which expression is the quadratic formula.","x = (−b ± √(b² − 4ac)) / (2a)",["x = (b ± √(b² − 4ac)) / (2a)","x = (−b ± √(b² + 4ac)) / (2a)","x = (−b ± √(b² − 4ac)) / a"],
+  ["Wrong — the numerator must begin with −b.","Wrong — the discriminant is b² MINUS 4ac.","Wrong — the denominator is 2a, not a."],
+  `Complete the square on ax² + bx + c = 0 (divide by a, add (b/2a)² to both sides) and solve for x. The result is the quadratic formula.`,
+  [`Divide by a: x² + (b/a)x + c/a = 0.`,`Complete the square: (x + b/(2a))² = b²/(4a²) − c/a = (b² − 4ac)/(4a²).`,`Take the square root: x + b/(2a) = ±√(b² − 4ac) ÷ (2a).`,`Subtract b/(2a): x = (−b ± √(b² − 4ac)) ÷ (2a).`],
+  `Test x² − 5x + 6 = 0: (5 ± √(25 − 24))/2 = (5 ± 1)/2 = 3 or 2, and indeed (x − 3)(x − 2) = x² − 5x + 6 ✓.`),
+fixed("f(x) = −3(x − 1)² + 7 has:","what extreme value f(x) = −3(x − 1)² + 7 has.","A maximum value of 7 at x = 1",["A minimum value of 7 at x = 1","A maximum value of 1 at x = 7","A minimum value of −3 at x = 1"],
+  ["Wrong — a = −3 &lt; 0 opens down, so the vertex is a maximum.","Wrong — the vertex is (1, 7): x = 1 and the value is 7, not reversed.","Wrong — −3 is the stretch factor, not an output value."],
+  `In a(x − h)² + k, the vertex (h, k) is a maximum if a &lt; 0 and a minimum if a &gt; 0. The extreme VALUE is k and it occurs at x = h.`,
+  [`Match: a = −3, h = 1, k = 7.`,`a = −3 &lt; 0, so the parabola opens down and the vertex is the highest point.`,`(x − 1)² ≥ 0, so −3(x − 1)² ≤ 0, so f(x) ≤ 7.`,`The value 7 is reached when x = 1: a maximum of 7 at x = 1.`],
+  `f(1) = 7, f(2) = −3 + 7 = 4, f(0) = 4: both lower ✓.`),
+fixed("The y-intercept of f(x) = ax² + bx + c is:","the y-intercept of f(x) = ax² + bx + c.","(0, c)",["(0, a)","(0, b)","(−b/(2a), c)"],
+  ["Wrong — a is the leading coefficient; it only affects the opening and width.","Wrong — b is the coefficient of x; it vanishes when x = 0.","Wrong — −b/(2a) is the x-coordinate of the vertex, not an intercept."],
+  `The y-intercept is where x = 0, so substitute x = 0 into f.`,
+  [`Set x = 0: f(0) = a·0² + b·0 + c.`,`The first two terms are 0.`,`So f(0) = c.`,`The graph crosses the y-axis at (0, c).`],
+  `For f(x) = 2x² − 5x + 9: f(0) = 9 ✓.`),
+]},
+{id:"2.1",title:"Linear Functions",recap:[
+"<b>Slope</b> m = (y₂ − y₁)/(x₂ − x₁) = rise/run. Positive slope rises, negative falls, 0 is horizontal, a vertical line has slope that does not exist.",
+"<b>Slope-intercept:</b> y = mx + b (b is the y-intercept). <b>Point-slope:</b> y − y₁ = m(x − x₁).",
+"<b>Parallel</b> lines have equal slopes; <b>perpendicular</b> lines have slopes that are negative reciprocals (m₁·m₂ = −1).",
+"To write an equation from two points or a table: find the slope, then solve for b with one point.",
+"Solve linear equations by undoing operations; for inequalities, flip the symbol when multiplying or dividing by a negative."],
+gens:[
+()=>{const x1=ri(-6,6),dx=rnz(-6,6),y1=ri(-9,9),dy=ri(-9,9);const x2=x1+dx,y2=y1+dy;const v=fr(dy,dx);
+  return num(`Find the slope of the line through (${x1}, ${y1}) and (${x2}, ${y2}).`,v,sol(
+   `the slope of the line through the points (${N(x1)}, ${N(y1)}) and (${N(x2)}, ${N(y2)}).`,
+   `Slope = rise ÷ run = (y₂ − y₁) ÷ (x₂ − x₁): the change in y divided by the change in x, subtracting in the same order on top and bottom.`,
+   [`Label the points: (x₁, y₁) = (${N(x1)}, ${N(y1)}) and (x₂, y₂) = (${N(x2)}, ${N(y2)}).`,
+    `Rise: y₂ − y₁ = ${N(y2)} − ${P(y1)} = ${N(dy)}.`,
+    `Run: x₂ − x₁ = ${N(x2)} − ${P(x1)} = ${N(dx)}.`,
+    `Divide: m = ${N(dy)} ÷ ${P(dx)} = ${N(v)}${/\//.test(v)?" (reduced to lowest terms)":""}.`],
+   `m = ${N(v)}`,
+   `Going from the first point to the second, x changes by ${N(dx)} and y by ${N(dy)}; the line ${dy===0?"is horizontal (slope 0)":(dy/dx>0?"rises":"falls")+" as you move right, which matches a "+(dy/dx>0?"positive":"negative")+" slope"} ✓.`),
+   undefined,dy!==0?`Subtracting in different orders (y₂ − y₁ over x₁ − x₂) flips the sign and gives ${N(fr(-dy,dx))}. Keep the same order on top and bottom.`:undefined)},
+()=>{const x1=ri(-4,4),dx=rnz(-4,4),m=rnz(-4,4),b=rnz(-8,8);const x2=x1+dx,y1=m*x1+b,y2=m*x2+b;const ans="y = "+lin(m,b);
+  return mc(`Which equation passes through (${x1}, ${y1}) and (${x2}, ${y2})?`,ans,["y = "+lin(-m,b),"y = "+lin(m,-b),"y = "+lin(m,y1)],sol(
+   `the slope-intercept equation y = mx + b of the line through (${N(x1)}, ${N(y1)}) and (${N(x2)}, ${N(y2)}).`,
+   `First find the slope m = (y₂ − y₁) ÷ (x₂ − x₁). Then substitute one point into y = mx + b and solve for b. Finally write y = mx + b.`,
+   [`Slope: m = (${N(y2)} − ${P(y1)}) ÷ (${N(x2)} − ${P(x1)}) = ${N(y2-y1)} ÷ ${N(dx)} = ${N(m)}.`,
+    `Write y = ${N(m)}x + b and substitute the point (${N(x1)}, ${N(y1)}): ${N(y1)} = ${N(m)}·${P(x1)} + b.`,
+    `Multiply: ${N(y1)} = ${N(m*x1)} + b.`,
+    `Solve for b (${undo(-m*x1)}): b = ${N(y1)} − ${P(m*x1)} = ${N(b)}.`,
+    `Write the equation: y = ${lin(m,b)}.`],
+   ans,
+   `Test the other point (${N(x2)}, ${N(y2)}): ${N(m)}·${P(x2)}${addT(b)} = ${N(m*x2)}${addT(b)} = ${N(y2)} ✓.`),
+   ["Wrong — the slope has the wrong sign (the subtractions were done in opposite orders).","Wrong — the slope is right but b has the wrong sign: b = y₁ − m·x₁ was mis-evaluated.","Wrong — this uses y₁ as the intercept. y₁ is the y-value at x = "+x1+", not at x = 0, unless x₁ = 0."],
+   `Using one point's y-value as b. The intercept b is the value at x = 0, so solve b = y₁ − m·x₁.`)},
+()=>{const m=rnz(-5,5),x1=ri(-5,5),y1=ri(-9,9);const b=y1-m*x1;
+  return num(`A line has slope ${m} and passes through (${x1}, ${y1}). Find its y-intercept b (in y = mx + b).`,b,sol(
+   `the y-intercept b of the line with slope ${N(m)} through (${N(x1)}, ${N(y1)}).`,
+   `Point-slope form: y − y₁ = m(x − x₁). Distribute and solve for y to reach slope-intercept form y = mx + b; the constant term is b.`,
+   [`Write point-slope form: y ${y1<0?"+ "+(-y1):"− "+y1} = ${N(m)}(x ${x1<0?"+ "+(-x1):"− "+x1}).`,
+    `Distribute ${N(m)}: y ${y1<0?"+ "+(-y1):"− "+y1} = ${N(m)}x ${m*x1<0?"+ "+(-m*x1):"− "+(m*x1)}.`,
+    `Add ${N(y1)} to both sides: y = ${N(m)}x ${m*x1<0?"+ "+(-m*x1):"− "+(m*x1)} ${y1<0?"− "+(-y1):"+ "+y1}.`,
+    `Combine the constants: b = ${N(-m*x1)}${addT(y1)} = ${N(b)}.`],
+   `b = ${N(b)}, so y = ${lin(m,b)}`,
+   `Plug in the given point: ${N(m)}·${P(x1)}${addT(b)} = ${N(m*x1)}${addT(b)} = ${N(y1)} ✓.`),
+   undefined,`Writing y − ${N(y1)} = ${N(m)}(x ${x1<0?"−":"+"} ${Math.abs(x1)}) with the wrong sign inside, or forgetting to distribute ${N(m)} over BOTH terms.`)},
+()=>{const m=rnz(-5,5),b0=ri(-8,8),x1=ri(-5,5),y1=ri(-9,9);const b=y1-m*x1;
+  return num(`Line L has equation y = ${lin(m,b0)}. A line parallel to L passes through (${x1}, ${y1}). What is its y-intercept?`,b,sol(
+   `the y-intercept of the line through (${N(x1)}, ${N(y1)}) that is parallel to y = ${lin(m,b0)}.`,
+   `Parallel lines have the SAME slope. So the new line is y = ${N(m)}x + b; substitute the given point to find b.`,
+   [`Slope of L is ${N(m)}, so the parallel line has slope ${N(m)}: y = ${N(m)}x + b.`,
+    `Substitute (${N(x1)}, ${N(y1)}): ${N(y1)} = ${N(m)}·${P(x1)} + b = ${N(m*x1)} + b.`,
+    `Solve for b (${undo(-m*x1)}): b = ${N(y1)} − ${P(m*x1)} = ${N(b)}.`,
+    `The parallel line is y = ${lin(m,b)}.`],
+   `b = ${N(b)}`,
+   `Both lines have slope ${N(m)}, and the new line passes through the point: ${N(m)}·${P(x1)}${addT(b)} = ${N(y1)} ✓.`),
+   undefined,`Using the intercept of the original line (${N(b0)}) for the new line. Parallel lines share the slope, NOT the intercept.`)},
+()=>{let p=rnz(-6,6),q=ri(1,4);const g=gcd(p,q);p/=g;q/=g;const b0=ri(-7,7);const ms=q===1?String(p):`(${p}/${q})`;const ans=fr(-q,p);
+  const E=`y = ${q===1?(p===1?"":p===-1?"−":N(p)):`(${N(p)}/${q})`}x${b0?(b0<0?" − ":" + ")+Math.abs(b0):""}`;
+  return num(`Find the slope of a line perpendicular to ${E}.`,ans,sol(
+   `the slope of any line perpendicular to ${E}.`,
+   `Perpendicular lines have slopes that are NEGATIVE RECIPROCALS: if one slope is m, the other is −1/m (their product is −1).`,
+   [`Read the given slope from y = mx + b: m = ${q===1?N(p):N(p)+"/"+q}.`,
+    `Flip the fraction (reciprocal): ${q===1?"1/"+P(p):q+"/"+P(p)}.`,
+    `Change the sign: −(${q===1?"1/"+P(p):q+"/"+P(p)}) = ${N(ans)}.`,
+    `Perpendicular slope = ${N(ans)}.`],
+   `${N(ans)}`,
+   `Product of the slopes: (${q===1?N(p):N(p)+"/"+q}) × (${N(ans)}) = −1 ✓.`),
+   undefined,`Only flipping the fraction, or only changing the sign. You need BOTH: reciprocal AND opposite sign.`)},
+()=>{const s=ri(0,3),d=ri(1,3),m=rnz(-4,4),b=ri(-9,9);const xs=[s,s+d,s+2*d,s+3*d];const T=s+3*d+d*ri(1,3);const fs=xs.map(x=>m*x+b);const v=m*T+b;
+  return num(`A linear function f has this table: x = ${xs.join(", ")} gives f(x) = ${fs.join(", ")}. Find f(${T}).`,v,sol(
+   `the value of the linear function f at x = ${T}, using the table to build the formula.`,
+   `A linear function has a constant rate of change (slope). Find m = Δf ÷ Δx from two table points, then b from y = mx + b, then evaluate at the new input.`,
+   [`Slope from the first two entries: m = (${N(fs[1])} − ${P(fs[0])}) ÷ (${xs[1]} − ${xs[0]}) = ${N(fs[1]-fs[0])} ÷ ${d} = ${N(m)}. (The other steps also change f by ${N(m*d)} per ${d} in x, so it is linear.)`,
+    `Use y = ${N(m)}x + b with the point (${xs[0]}, ${N(fs[0])}): ${N(fs[0])} = ${N(m)}·${xs[0]} + b.`,
+    `Solve for b: b = ${N(fs[0])} − ${P(m*xs[0])} = ${N(b)}.`,
+    `The formula is f(x) = ${lin(m,b)}.`,
+    `Evaluate: f(${T}) = ${N(m)}·${T}${addT(b)} = ${N(m*T)}${addT(b)} = ${N(v)}.`],
+   `f(${T}) = ${N(v)}`,
+   `Count from the last table value: f(${xs[3]}) = ${N(fs[3])}, and ${T-xs[3]} more in x adds ${N(m)}·${T-xs[3]} = ${N(m*(T-xs[3]))}: ${N(fs[3])}${addT(m*(T-xs[3]))} = ${N(v)} ✓.`),
+   undefined,`Using the difference of the f-values without dividing by the change in x (here the x-values step by ${d}, so the slope is the f-step ÷ ${d}).`)},
+()=>{const F=ri(10,60),r=ri(5,30),n=ri(2,12);const T=F+r*n;
+  return num(`A gym charges a $${F} joining fee plus $${r} per month, so the total cost is C(m) = ${r}m + ${F}. After how many months is the total cost $${T}?`,n,sol(
+   `the number of months m for which C(m) = ${r}m + ${F} equals ${T}.`,
+   `Solving f(x) = k in a linear model: set the formula equal to the target, undo the added constant, then divide by the rate (slope). Interpret the result with units.`,
+   [`Set C(m) = ${T}: ${r}m + ${F} = ${T}.`,
+    `Subtract the joining fee ${F} from both sides: ${r}m = ${T} − ${F} = ${T-F}.`,
+    `Divide both sides by the monthly rate ${r}: m = ${T-F} ÷ ${r} = ${n}.`,
+    `Interpretation: the total cost reaches $${T} after ${n} months.`],
+   `${n} months`,
+   `C(${n}) = ${r}·${n} + ${F} = ${r*n} + ${F} = ${T} ✓.`),
+   undefined,`Forgetting that the joining fee is paid only once. Dividing ${T} by ${r} directly (${fr(T,r)}) ignores the fee.`)},
+()=>{const m=rnz(-5,5),b=ri(-8,8),k=ri(-10,10),op=pick(["≥",">","≤","<"]);const v=fr(k-b,m);const fl=m<0;
+  const dir=(op==="≥"||op===">")!==fl?"gt":"lt";const incl=op==="≥"||op==="≤";
+  const ans=dir==="gt"?`${incl?"[":"("}${v},inf)`:`(-inf,${v}${incl?"]":")"}`;
+  const vn=(k-b)/m;const inT=dir==="gt"?Math.ceil(vn)+1:Math.floor(vn)-1,outT=dir==="gt"?Math.floor(vn)-1:Math.ceil(vn)+1;
+  const opHtml=o=>o.replace("<","&lt;").replace(">","&gt;");const flipOp=op==="≥"?"≤":op==="≤"?"≥":op===">"?"<":">";
+  const newOp=fl?flipOp:op;
+  return itv(`For f(x) = ${lin(m,b)}, solve f(x) ${op} ${k}. Interval notation.`,ans,sol(
+   `all inputs x for which f(x) = ${lin(m,b)} is ${op==="≥"?"at least":op===">"?"greater than":op==="≤"?"at most":"less than"} ${N(k)}, written as an interval.`,
+   `Solve a linear inequality like a linear equation: do the same thing to both sides. The ONE special rule: multiplying or dividing by a NEGATIVE number reverses the inequality symbol.`,
+   [`Write the inequality: ${lin(m,b)} ${opHtml(op)} ${N(k)}.`,
+    b?`Undo the ${b<0?"subtraction":"addition"} (${undo(-b)}): ${N(m)}x ${opHtml(op)} ${N(k)}${addT(-b)} = ${N(k-b)}.`:`There is no constant: ${N(m)}x ${opHtml(op)} ${N(k)}.`,
+    `Divide both sides by ${N(m)}${fl?" (negative, so the inequality symbol flips)":" (positive, so the symbol stays)"}: x ${opHtml(newOp)} ${N(k-b)} ÷ ${P(m)} = ${N(v)}.`,
+    `Write it as an interval: x ${opHtml(newOp)} ${N(v)} means ${dir==="gt"?"everything to the right of":"everything to the left of"} ${N(v)}; ${incl?"the endpoint is included (bracket)":"the endpoint is not included (parenthesis)"}; infinity always gets a parenthesis.`],
+   dI(ans),
+   `Test x = ${N(inT)} (inside): f(${N(inT)}) = ${N(m*inT+b)} ${opHtml(op)} ${N(k)} is ${ineqOp(m*inT+b,k,op)?"true ✓":"FALSE ✗"}. Test x = ${N(outT)} (outside): f(${N(outT)}) = ${N(m*outT+b)} ${opHtml(op)} ${N(k)} is ${ineqOp(m*outT+b,k,op)?"true ✗":"false ✓"}.`),
+   fl?`Forgetting to flip the inequality when dividing by the negative number ${N(m)}. That gives the opposite ray.`:`Mixing up brackets and parentheses: only ≥ and ≤ include the endpoint.`)},
+fixed("The slope of the line through (x₁, y₁) and (x₂, y₂) is:","the formula for slope from two points.","(y₂ − y₁) / (x₂ − x₁)",["(x₂ − x₁) / (y₂ − y₁)","(y₂ + y₁) / (x₂ + x₁)","(y₂ − y₁) / (x₁ − x₂)"],
+  ["Wrong — this is run over rise (the reciprocal of the slope).","Wrong — slope uses differences (changes), not sums.","Wrong — the subtraction order is different on top and bottom, which flips the sign."],
+  `Slope measures steepness: rise ÷ run, the change in y divided by the change in x.`,
+  [`Rise = how far up (or down) you go = y₂ − y₁.`,`Run = how far right you go = x₂ − x₁.`,`Slope = rise ÷ run = (y₂ − y₁) ÷ (x₂ − x₁).`,`Keep the same order (point 2 minus point 1) in both the numerator and the denominator.`],
+  `Points (1, 2) and (3, 8): (8 − 2)/(3 − 1) = 3, and the line indeed climbs 3 for every 1 right ✓.`),
+fixed("In the slope-intercept form y = mx + b, the number b is:","what b represents in y = mx + b.","The y-intercept (the value of y when x = 0)",["The slope","The x-intercept","The value of x when y = 1"],
+  ["Wrong — the slope is m, the coefficient of x.","Wrong — the x-intercept is where y = 0 and equals −b/m.","Wrong — nothing in the form singles out y = 1."],
+  `Substitute x = 0 into y = mx + b to see what b is.`,
+  [`Set x = 0: y = m·0 + b.`,`m·0 = 0, so y = b.`,`So the graph crosses the y-axis at (0, b).`,`Therefore b is the y-intercept (the starting value), and m is the rate of change.`],
+  `For y = 3x + 7, the graph passes through (0, 7) ✓.`),
+fixed("A line with a negative slope:","how a line with negative slope behaves as x increases.","Falls as you move to the right",["Rises as you move to the right","Is perfectly horizontal","Is perfectly vertical"],
+  ["Wrong — that describes a positive slope.","Wrong — a horizontal line has slope exactly 0.","Wrong — a vertical line has an slope that does not exist."],
+  `Slope = rise ÷ run. A negative slope means that for each step right (positive run), the rise is negative: the line goes down.`,
+  [`Take m = −2: run 1 to the right, rise −2 (down 2).`,`Every step right lowers y.`,`So the line falls from left to right (the function is decreasing).`,`Positive slope rises, zero slope is flat, and a vertical line has no slope.`],
+  `y = −2x + 5: at x = 0, y = 5; at x = 1, y = 3: lower ✓.`),
+fixed("Two distinct non-vertical lines are parallel exactly when they have:","what must be true of the slopes of two parallel (non-vertical) lines.","The same slope",["Slopes that are negative reciprocals","The same y-intercept","Slopes that add up to 0"],
+  ["Wrong — negative reciprocal slopes mean the lines are perpendicular.","Wrong — lines with the same slope AND the same intercept are the same line; parallel lines have different intercepts.","Wrong — opposite slopes (like 2 and −2) make lines that cross."],
+  `Parallel lines never meet, so they must rise at the same rate.`,
+  [`If the slopes were different, the steeper line would eventually catch up and the lines would intersect.`,`So parallel lines must have the same slope.`,`They must also have different intercepts, or they would be the same line.`,`Example: y = 2x + 1 and y = 2x − 5 are parallel.`],
+  `Set 2x + 1 = 2x − 5: this gives 1 = −5, impossible, so they never intersect ✓.`),
+fixed("Two lines with slopes m₁ and m₂ are perpendicular when:","the relationship between slopes of perpendicular lines.","m₁ · m₂ = −1",["m₁ = m₂","m₁ + m₂ = 0","m₁ · m₂ = 1"],
+  ["Wrong — equal slopes mean parallel.","Wrong — opposite slopes (like 3 and −3) are not perpendicular.","Wrong — a product of 1 means reciprocal slopes of the same sign, which is not perpendicular."],
+  `Rotating a line 90° swaps rise and run and flips one sign, so the slope becomes the negative reciprocal.`,
+  [`Start with slope m₁ = rise/run = 2/3.`,`Rotate 90°: rise and run swap, and one of them changes sign: −3/2.`,`Their product: (2/3)·(−3/2) = −1.`,`In general perpendicular lines satisfy m₁ · m₂ = −1.`],
+  `y = x and y = −x are perpendicular: 1·(−1) = −1 ✓.`),
+fixed("The slope of a vertical line is:","the slope of a vertical line such as x = 4.","Undefined",["0","1","Infinitely many"],
+  ["Wrong — 0 is the slope of a horizontal line.","Wrong — 1 would be a diagonal line.","Wrong — a line has one slope or none, not infinitely many."],
+  `Slope = (y₂ − y₁) ÷ (x₂ − x₁). On a vertical line every point has the same x-value.`,
+  [`Take two points on x = 4: (4, 1) and (4, 6).`,`Rise = 6 − 1 = 5 and run = 4 − 4 = 0.`,`Slope = 5 ÷ 0, and division by 0 is not defined.`,`So the slope of a vertical line is not defined (and it is not a function).`],
+  `A vertical line fails the vertical line test: x = 4 is hit at every y ✓.`),
+fixed("Point-slope form of the line through (x₁, y₁) with slope m is:","the point-slope form of a line.","y − y₁ = m(x − x₁)",["y + y₁ = m(x + x₁)","y = m(x − x₁)","y − x₁ = m(x − y₁)"],
+  ["Wrong — the signs should be subtractions, because it comes from (y − y₁)/(x − x₁) = m.","Wrong — the −y₁ is missing, so the line wouldn't pass through (x₁, y₁).","Wrong — the coordinates are swapped."],
+  `For any point (x, y) on the line, the slope between (x₁, y₁) and (x, y) equals m.`,
+  [`Write the slope between (x₁, y₁) and (x, y): (y − y₁) ÷ (x − x₁) = m.`,`Multiply both sides by (x − x₁): y − y₁ = m(x − x₁).`,`This is point-slope form.`,`Check that (x, y) = (x₁, y₁) satisfies it: 0 = m·0 ✓.`],
+  `Slope 2 through (1, 3): y − 3 = 2(x − 1), which gives y = 2x + 1 ✓.`),
+fixed("Which of these is a linear function?","which of the four formulas is a linear function (a straight line).","f(x) = 3x − 5",["f(x) = x² + 1","f(x) = 1/x","f(x) = |x|"],
+  ["Wrong — the x² makes a parabola.","Wrong — 1/x is a hyperbola, not a line.","Wrong — |x| is a V-shape, not a line."],
+  `A linear function can be written f(x) = mx + b: x appears only to the first power with no other operations on x.`,
+  [`3x − 5 matches mx + b with m = 3 and b = −5.`,`x² + 1 has x squared, so it isn't linear.`,`1/x has x in a denominator, so it isn't linear.`,`|x| bends at 0 (slope −1 then +1), so it isn't linear.`],
+  `Constant rate test for 3x − 5: f(1) = −2, f(2) = 1, f(3) = 4, the output rises by 3 each step ✓.`),
+]},
+{id:"2.2",title:"Graphs of Linear Functions",recap:[
+"<b>Graph by slope:</b> plot the y-intercept (0, b), then move right by the run and up/down by the rise.",
+"<b>Intercepts:</b> x-intercept: set y = 0. y-intercept: set x = 0. Standard form Ax + By = C has intercepts (C/A, 0) and (0, C/B).",
+"<b>Horizontal line:</b> y = c (slope 0). <b>Vertical line:</b> x = c (slope that does not exist, not a function).",
+"<b>Transformations:</b> f(x) + k shifts up, f(x − h) shifts right, −f(x) reflects over the x-axis, a·f(x) changes steepness.",
+"<b>Intersection</b> of two lines: set the two y-expressions equal, solve for x, then find y. Equal slopes with different intercepts never intersect."],
+gens:[
+()=>{const m=rnz(-6,6),b=rnz(-12,12);const v=fr(-b,m);
+  return num(`Find the x-intercept of f(x) = ${lin(m,b)}. Enter the x-value.`,v,sol(
+   `the x-value where the graph of f(x) = ${lin(m,b)} crosses the x-axis.`,
+   `The x-intercept is where the output is 0, so set f(x) = 0 and solve for x.`,
+   [`Set f(x) = 0: ${lin(m,b)} = 0.`,
+    `Undo the ${b<0?"subtraction":"addition"} (${undo(-b)}): ${N(m)}x = ${N(-b)}.`,
+    `Divide both sides by ${N(m)}: x = ${N(-b)} ÷ ${P(m)} = ${N(v)}.`,
+    `The x-intercept is the point (${N(v)}, 0).`],
+   `x = ${N(v)}`,
+   `Plug back in: f(${N(v)}) = ${N(m)}·${P(v)}${addT(b)} = ${N(-b)}${addT(b)} = 0 ✓.`),
+   undefined,`Answering with b (the y-intercept ${N(b)}) or forgetting to divide by the slope ${N(m)}. The y-intercept is f(0); the x-intercept solves f(x) = 0.`)},
+()=>{const a=rnz(-6,6),b=rnz(-6,6),xi=rnz(-6,6);const C=a*xi;const eq=`${lin2(a,b)} = ${C}`;const v=fr(C,b);
+  return num(`Find the y-intercept of the line ${eq}. Enter the y-value.`,v,sol(
+   `the y-value where the line ${eq} crosses the y-axis.`,
+   `The y-intercept is where x = 0. Substitute x = 0 into the equation and solve for y.`,
+   [`Substitute x = 0: ${N(a)}·0 ${b<0?"−":"+"} ${Math.abs(b)}y = ${N(C)}.`,
+    `Simplify: ${N(b)}y = ${N(C)}.`,
+    `Divide both sides by ${N(b)}: y = ${N(C)} ÷ ${P(b)} = ${N(v)}.`,
+    `The y-intercept is the point (0, ${N(v)}).`],
+   `y = ${N(v)}`,
+   `Check in the original equation: ${N(a)}·0 ${b<0?"−":"+"} ${Math.abs(b)}·${P(v)} = 0 + ${N(C)} = ${N(C)} ✓.`),
+   undefined,`Setting y = 0 instead of x = 0. For the y-intercept the x-coordinate is 0.`)},
+()=>{let p=rnz(-6,6),q=ri(1,4);const g=gcd(p,q);p/=g;q/=g;const b=ri(-6,6);const ans=`(${q},${b+p})`;
+  return prs(`A line has y-intercept (0, ${b}) and slope ${q===1?N(p):N(p)+"/"+q}. Starting at the y-intercept, move one "rise over run" step to find the next point on the line. Enter as (x, y).`,ans,sol(
+   `the next point on the line after moving one rise-over-run step from (0, ${N(b)}) with slope ${q===1?N(p):N(p)+"/"+q}.`,
+   `Slope = rise ÷ run. From any point on the line, move RIGHT by the run and UP (if the rise is positive) or DOWN (if negative) by the rise to land on another point of the same line.`,
+   [`Read rise and run from the slope ${q===1?N(p)+" = "+N(p)+"/1":N(p)+"/"+q}: rise = ${N(p)}, run = ${q}.`,
+    `Start at (0, ${N(b)}).`,
+    `Move right ${q}: x = 0 + ${q} = ${q}.`,
+    `Move ${p>=0?"up":"down"} ${Math.abs(p)}: y = ${N(b)}${addT(p)} = ${N(b+p)}.`],
+   `(${q}, ${N(b+p)})`,
+   `Slope between (0, ${N(b)}) and (${q}, ${N(b+p)}): (${N(b+p)} − ${P(b)}) ÷ (${q} − 0) = ${N(p)}/${q} ✓.`),
+   undefined,`Moving the rise horizontally and the run vertically. Rise is the VERTICAL change (numerator); run is the HORIZONTAL change (denominator).`)},
+()=>{const horiz=Math.random()<.5,c=ri(-8,8),u=ri(-6,6);let u2=u;while(u2===u)u2=ri(-6,6);
+  const P1=horiz?[u,c]:[c,u],P2=horiz?[u2,c]:[c,u2];const ans=horiz?`y = ${c}`:`x = ${c}`;const other=horiz?`x = ${c}`:`y = ${c}`;
+  return mc(`Write the equation of the line through (${P1[0]}, ${P1[1]}) and (${P2[0]}, ${P2[1]}).`,ans,[other,`y = ${P1[0]}x`,`y = ${P2[1]}x + ${P1[1]}`],sol(
+   `the equation of the line through (${N(P1[0])}, ${N(P1[1])}) and (${N(P2[0])}, ${N(P2[1])}).`,
+   `Compare the coordinates. If both points have the same y-value the line is HORIZONTAL: y = that value (slope 0). If both have the same x-value the line is VERTICAL: x = that value (slope does not exist).`,
+   [`The x-values are ${N(P1[0])} and ${N(P2[0])}; the y-values are ${N(P1[1])} and ${N(P2[1])}.`,
+    horiz?`The y-values match (both ${N(c)}), while the x-values differ.`:`The x-values match (both ${N(c)}), while the y-values differ.`,
+    horiz?`Slope = (${N(P2[1])} − ${P(P1[1])}) ÷ (${N(P2[0])} − ${P(P1[0])}) = 0 ÷ ${N(P2[0]-P1[0])} = 0, so the line is horizontal.`:`Run = ${N(P2[0])} − ${P(P1[0])} = 0, so the slope ${N(P2[1]-P1[1])}/0 does not exist, and the line is vertical.`,
+    horiz?`Every point on the line has y = ${N(c)}, so the equation is y = ${N(c)}.`:`Every point on the line has x = ${N(c)}, so the equation is x = ${N(c)}.`],
+   ans,
+   `Both given points satisfy ${ans}: ${horiz?`y = ${N(P1[1])} and y = ${N(P2[1])}`:`x = ${N(P1[0])} and x = ${N(P2[0])}`} ✓.`),
+   [`Wrong — the letters are swapped: ${other} is the ${horiz?"vertical":"horizontal"} line through the value ${N(c)}, which does not contain both points.`,`Wrong — this line passes through the origin and doesn't fit the points.`,`Wrong — this is not a line through both points; check by substituting either point.`],
+   `Mixing up which variable is constant. A horizontal line is y = (number); a vertical line is x = (number).`)},
+()=>{const m=rnz(-4,4),b=ri(-6,6),h=rnz(-5,5),k=rnz(-6,6);const nb=b+k-m*h;const ans=lin(m,nb);
+  return mc(`The graph of f(x) = ${lin(m,b)} is shifted ${h>0?"right "+h:"left "+(-h)} and ${k>0?"up "+k:"down "+(-k)} to give g. Which is g(x)?`,ans,[lin(m,b+k+m*h),lin(m,b+k),lin(m,b-k-m*h)],sol(
+   `a simplified formula for g(x), the graph of f(x) = ${lin(m,b)} shifted ${h>0?"right "+h:"left "+(-h)} and ${k>0?"up "+k:"down "+(-k)}.`,
+   `A horizontal shift of h replaces x with (x − h): g(x) = f(x − h) + k. Right ${"h"} means x − h; left means x + h. A vertical shift adds k OUTSIDE. Then simplify to y = mx + b.`,
+   [`Horizontal shift ${h>0?"right "+h:"left "+(-h)}: replace x with ${facS(h)}: f${facS(h)} = ${N(m)}${facS(h)}${addT(b)}.`,
+    `Distribute ${N(m)}: ${lin(m,0)} ${-m*h<0?"−":"+"} ${Math.abs(m*h)}${addT(b)} = ${lin(m,-m*h+b)}.`,
+    `Vertical shift ${k>0?"up "+k:"down "+(-k)}: add ${N(k)}: ${lin(m,-m*h+b)}${addT(k)}.`,
+    `Combine the constants: ${N(-m*h)}${addT(b)}${addT(k)} = ${N(nb)}.`,
+    `So g(x) = ${ans}.`],
+   ans,
+   `The slope is unchanged (${N(m)}) since shifting never changes steepness. Test: f(0) = ${N(b)}; the point (0, ${N(b)}) moves to (${N(h)}, ${N(b+k)}) and g(${N(h)}) = ${N(m)}·${P(h)}${addT(nb)} = ${N(b+k)} ✓.`),
+   [`Wrong — the horizontal shift sign is reversed: ${h>0?"right":"left"} ${Math.abs(h)} subtracts ${N(m)}·${N(h)} = ${N(m*h)} from the intercept, not adds it.`,`Wrong — this applies only the vertical shift. A horizontal shift of a line also changes its y-intercept (by −m·h = ${N(-m*h)}).`,`Wrong — the vertical shift went the wrong direction.`],
+   `Thinking a horizontal shift doesn't change a line's equation. It does: the slope stays, but the intercept changes by −m·h.`)},
+()=>{const m1=rnz(-4,4);let m2=rnz(-4,4);while(m2===m1)m2=rnz(-4,4);const x0=ri(-5,5),y0=ri(-9,9);const b1=y0-m1*x0,b2=y0-m2*x0;const ans=`(${x0},${y0})`;
+  return prs(`Find where the lines y = ${lin(m1,b1)} and y = ${lin(m2,b2)} intersect. Enter as (x, y).`,ans,sol(
+   `the point (x, y) that lies on both lines y = ${lin(m1,b1)} and y = ${lin(m2,b2)}.`,
+   `At the intersection both lines have the same y for the same x. Set the two expressions for y equal, solve for x, then substitute x into either line to get y.`,
+   [`Set the right sides equal: ${lin(m1,b1)} = ${lin(m2,b2)}.`,
+    `Collect the x-terms on the left (subtract ${N(m2)}x from both sides): ${N(m1-m2)}x${addT(b1)} = ${N(b2)}.`,
+    `Move the constant (${undo(-b1)}): ${N(m1-m2)}x = ${N(b2-b1)}.`,
+    `Divide by ${N(m1-m2)}: x = ${N(b2-b1)} ÷ ${P(m1-m2)} = ${N(x0)}.`,
+    `Find y using the first line: y = ${N(m1)}·${P(x0)}${addT(b1)} = ${N(m1*x0)}${addT(b1)} = ${N(y0)}.`],
+   `(${N(x0)}, ${N(y0)})`,
+   `Second line: y = ${N(m2)}·${P(x0)}${addT(b2)} = ${N(m2*x0)}${addT(b2)} = ${N(y0)}. Both lines give ${N(y0)} ✓.`),
+   undefined,`Stopping after finding x. The intersection is a POINT, so you also need y; and check it in both equations.`)},
+()=>{const m=rnz(-4,4),a=rnz(-5,5);const b=-m*a;const ans=lin(m,b);
+  return mc(`A line crosses the y-axis at (0, ${b}) and the x-axis at (${a}, 0). Which is its equation?`,"y = "+ans,["y = "+lin(-m,b),"y = "+lin(m,-b),"y = "+lin(-m,-b)],sol(
+   `the equation y = mx + b of the line through the intercepts (0, ${N(b)}) and (${N(a)}, 0).`,
+   `The y-intercept gives b directly. The slope comes from the two intercept points: m = (change in y) ÷ (change in x). Then write y = mx + b.`,
+   [`The y-intercept is (0, ${N(b)}), so b = ${N(b)}.`,
+    `Slope between (0, ${N(b)}) and (${N(a)}, 0): m = (0 − ${P(b)}) ÷ (${N(a)} − 0) = ${N(-b)} ÷ ${P(a)} = ${N(m)}.`,
+    `Write y = mx + b: y = ${N(m)}x ${b<0?"− "+(-b):"+ "+b}.`],
+   "y = "+ans,
+   `Check the x-intercept: y = ${N(m)}·${P(a)}${addT(b)} = ${N(m*a)}${addT(b)} = 0 ✓.`),
+   ["Wrong — the slope sign is wrong: from the y-intercept to the x-intercept the line "+(m>0?"rises":"falls")+" overall, so m = "+N(m)+".","Wrong — the line must pass through (0, "+N(b)+"), so b = "+N(b)+", not "+N(-b)+".","Wrong — both the slope and the intercept have the wrong sign."],
+   `Using the x-intercept value as the slope or as b. The y-intercept is b; the slope needs both intercepts.`)},
+()=>{const a=rnz(-6,6),b=rnz(-6,6);const eq=`${lin2(b,a)} = ${a*b}`;const area=fr(Math.abs(a*b),2);
+  return num(`The line ${eq} forms a triangle with the two axes. Find the area of that triangle.`,area,sol(
+   `the area of the right triangle bounded by the line ${eq}, the x-axis, and the y-axis.`,
+   `The triangle's legs run along the axes from the origin to the intercepts. Find the x-intercept (set y = 0) and y-intercept (set x = 0); then area = ½ · |x-intercept| · |y-intercept|.`,
+   [`x-intercept: set y = 0: ${N(b)}x = ${N(a*b)}, so x = ${N(a*b)} ÷ ${P(b)} = ${N(a)}.`,
+    `y-intercept: set x = 0: ${N(a)}y = ${N(a*b)}, so y = ${N(a*b)} ÷ ${P(a)} = ${N(b)}.`,
+    `The legs have lengths |${N(a)}| = ${Math.abs(a)} and |${N(b)}| = ${Math.abs(b)} (lengths are positive).`,
+    `Area = ½ · ${Math.abs(a)} · ${Math.abs(b)} = ½ · ${Math.abs(a*b)} = ${N(area)}.`],
+   `Area = ${N(area)}`,
+   `A ${Math.abs(a)} by ${Math.abs(b)} rectangle has area ${Math.abs(a*b)}; the triangle is half of it ✓.`),
+   undefined,`Forgetting the ½ (that gives the rectangle's area ${Math.abs(a*b)}), or using a negative intercept as a negative length.`)},
+fixed("The slope of the horizontal line y = 5 is:","the slope of the horizontal line y = 5.","0",["5","Undefined","1"],
+  ["Wrong — 5 is the y-value of every point, not the slope.","Wrong — that choice is the slope of a VERTICAL line.","Wrong — slope 1 is a 45° diagonal."],
+  `Slope = (y₂ − y₁) ÷ (x₂ − x₁). On a horizontal line all y-values are equal.`,
+  [`Take two points on y = 5: (1, 5) and (4, 5).`,`Rise = 5 − 5 = 0 and run = 4 − 1 = 3.`,`Slope = 0 ÷ 3 = 0.`,`So horizontal lines have slope 0 (and y = 5 is a constant function).`],
+  `y = 0·x + 5 is slope-intercept form with m = 0 ✓.`),
+fixed("Which equation describes a vertical line through (3, 7)?","which equation gives the vertical line through the point (3, 7).","x = 3",["y = 7","y = 3","x = 7"],
+  ["Wrong — y = 7 is the HORIZONTAL line through (3, 7).","Wrong — y = 3 is a horizontal line through (0, 3).","Wrong — x = 7 is a vertical line, but through (7, 0), not (3, 7)."],
+  `A vertical line is the set of all points with the same x-value, so its equation is x = (that x-value).`,
+  [`The point is (3, 7); its x-value is 3.`,`Every point on the vertical line through it also has x = 3.`,`The y-value can be anything: (3, 0), (3, 7), (3, −2)…`,`So the equation is x = 3.`],
+  `(3, 7) satisfies x = 3 ✓, and a vertical line is not the graph of a function.`),
+fixed("To find the x-intercept of a line, you:","the method for finding an x-intercept.","Set y = 0 and solve for x",["Set x = 0 and solve for y","Set the slope equal to 0","Add the slope and the y-intercept"],
+  ["Wrong — that finds the y-intercept.","Wrong — a slope of 0 means a horizontal line; it isn't how intercepts are found.","Wrong — this has no meaning for intercepts."],
+  `The x-intercept is where the graph meets the x-axis; every point on the x-axis has y = 0.`,
+  [`Points on the x-axis look like (x, 0).`,`So set y = 0 in the equation.`,`Solve the remaining equation for x.`,`The result is the x-intercept (x, 0).`],
+  `For y = 2x − 6: 0 = 2x − 6 gives x = 3, and (3, 0) is on the line ✓.`),
+fixed("Two lines with the same slope and different y-intercepts:","how many intersection points two lines with equal slopes and different intercepts have.","Never intersect (they are parallel)",["Intersect at exactly one point","Intersect at the origin","Are the same line"],
+  ["Wrong — one intersection needs different slopes.","Wrong — passing through the origin needs both intercepts to be 0.","Wrong — the same line needs equal intercepts too."],
+  `Solve for the intersection by setting the two expressions for y equal.`,
+  [`Let the lines be y = mx + b₁ and y = mx + b₂ with b₁ ≠ b₂.`,`Set them equal: mx + b₁ = mx + b₂.`,`Subtract mx from both sides: b₁ = b₂, which is false.`,`No x works, so the lines never meet: they are parallel.`],
+  `y = 2x + 1 and y = 2x + 4 stay a constant 3 apart vertically ✓.`),
+fixed("The graph of g(x) = f(x) + 4, where f is linear, is the graph of f:","what the transformation g(x) = f(x) + 4 does to the line y = f(x).","Shifted up 4 units",["Shifted right 4 units","Shifted left 4 units","Shifted down 4 units"],
+  ["Wrong — horizontal shifts need the change INSIDE the parentheses, like f(x − 4).","Wrong — horizontal shifts need the change INSIDE the parentheses, like f(x + 4).","Wrong — shifting down would be f(x) − 4."],
+  `A constant added OUTSIDE the function changes every output by that constant, which moves the graph vertically.`,
+  [`Take a point (a, b) on f.`,`On g the output at x = a is f(a) + 4 = b + 4.`,`So the point (a, b) moves to (a, b + 4), 4 units up.`,`The slope is unchanged; only the y-intercept increases by 4.`],
+  `If f(x) = 2x, then g(x) = 2x + 4 has y-intercept 4 instead of 0 ✓.`),
+fixed("g(x) = −f(x) for a linear function f is the graph of f:","what the transformation g(x) = −f(x) does.","Reflected over the x-axis (the slope changes sign)",["Reflected over the y-axis only","Shifted down by the slope","Stretched horizontally"],
+  ["Wrong — reflection over the y-axis is f(−x). For a line this changes the slope sign too but keeps the intercept; the outputs are not negated.","Wrong — a shift changes the intercept but not the slope.","Wrong — a stretch changes steepness, not the sign."],
+  `A minus sign OUTSIDE f multiplies every output by −1, flipping the graph across the x-axis.`,
+  [`If f(x) = mx + b, then −f(x) = −mx − b.`,`The slope changes from m to −m and the y-intercept changes from b to −b.`,`Each point (a, c) on f becomes (a, −c) on g, a mirror image across the x-axis.`,`So g is f reflected over the x-axis.`],
+  `f(x) = 2x + 1 → g(x) = −2x − 1; f(1) = 3 and g(1) = −3 ✓.`),
+fixed("For f(x) = 2x + 1 and g(x) = 5x + 1, the graph of g is:","how the graph of g(x) = 5x + 1 compares with f(x) = 2x + 1.","Steeper than f, with the same y-intercept",["Less steep than f, with the same y-intercept","The same steepness, shifted up","Parallel to f"],
+  ["Wrong — a larger slope means a steeper line.","Wrong — the slope changed from 2 to 5, so the steepness is different.","Wrong — parallel lines have equal slopes; 2 ≠ 5."],
+  `In y = mx + b, a larger |m| gives a steeper line, and b is where the line meets the y-axis.`,
+  [`Slope of f is 2 and slope of g is 5; |5| &gt; |2|, so g is steeper.`,`Both have b = 1, so both cross the y-axis at (0, 1).`,`From (0, 1), f goes up 2 per step right, g goes up 5.`,`So g is steeper with the same y-intercept.`],
+  `g(1) = 6 and f(1) = 3: g climbs faster from the same start (0, 1) ✓.`),
+fixed("A line passes through the origin exactly when its y-intercept is:","what the y-intercept b must be for the line y = mx + b to pass through the origin (0, 0).","0",["1","The slope","Undefined"],
+  ["Wrong — b = 1 gives the point (0, 1) on the y-axis, not the origin.","Wrong — the slope is a separate number; b is the intercept.","Wrong — a non-vertical line always has a defined y-intercept."],
+  `The origin is (0, 0). Substitute it into y = mx + b and see what b must be.`,
+  [`Substitute x = 0 and y = 0: 0 = m·0 + b.`,`m·0 = 0, so 0 = b.`,`So b = 0, which means the y-intercept is 0.`,`The line is y = mx (a direct variation).`],
+  `y = 3x passes through (0, 0): 3·0 = 0 ✓.`),
+fixed("To graph y = (2/3)x − 1 starting from the y-intercept, move:","how to plot the second point of y = (2/3)x − 1 using slope.","Right 3 and up 2 from (0, −1)",["Right 2 and up 3 from (0, −1)","Right 3 and up 2 from (0, 1)","Up 3 and right 2 from the origin"],
+  ["Wrong — rise 2 and run 3: the 2 (rise) goes up and the 3 (run) goes right; these are swapped.","Wrong — the y-intercept is −1 (the constant term), so the starting point is (0, −1).","Wrong — the line doesn't pass through the origin; it starts at (0, −1)."],
+  `The y-intercept b gives the starting point (0, b). Slope = rise/run, so from (0, b) go right by the run and up by the rise.`,
+  [`Constant term b = −1: start at (0, −1).`,`Slope 2/3: rise = 2 (up), run = 3 (right).`,`Move right 3 to x = 3 and up 2 to y = 1.`,`The second point is (3, 1); draw the line through (0, −1) and (3, 1).`],
+  `Check: (3, 1) in the equation: (2/3)·3 − 1 = 2 − 1 = 1 ✓.`),
+]},
+{id:"3.3",title:"Power Functions and Polynomial Functions",recap:[
+"<b>Power function:</b> f(x) = k·xᵖ (a constant times the variable to a constant power). A <b>polynomial</b> is a sum of terms kxⁿ with whole-number exponents; <b>degree</b> = highest power, <b>leading coefficient</b> = coefficient of that term.",
+"<b>End behavior</b> (leading term): even degree → both ends same direction (+ rises, − falls); odd degree → opposite ends (+ falls left, rises right; − the reverse).",
+"<b>Zeros &amp; multiplicity:</b> factor (x − r)ᵐ gives a zero at r. Odd m → the graph crosses; even m → it touches and turns around.",
+"<b>Turning points:</b> at most degree − 1. <b>y-intercept:</b> f(0). The x-intercepts of a factored polynomial are its zeros.",
+"<b>Intermediate Value Theorem:</b> if f is continuous and f(a), f(b) have opposite signs, f has a zero between a and b."],
+gens:[
+()=>{const n=ri(2,6),k=pick([-5,-4,-3,-2,2,3,4,5]),c=ri(1,9);const ans=`${N(k)}x${pw(n)}`;
+  return mc(`Which of these is a power function (of the form f(x) = k·xᵖ)?`,ans,[`${N(k)}·${n}ˣ`,`x${pw(n)} + ${c}`,`${N(k)}x${pw(n)} − x`],sol(
+   `which expression is a power function, meaning one term k·xᵖ where k and p are constants.`,
+   `A power function has the form f(x) = k·xᵖ: a constant coefficient times the VARIABLE raised to a CONSTANT power, and nothing else added. If the variable is in the exponent it is exponential; if other terms are added it is a polynomial with more than one term.`,
+   [`Check ${ans}: one term, coefficient ${N(k)}, variable x raised to the constant power ${n}. It matches k·xᵖ.`,
+    `Check ${N(k)}·${n}ˣ: here the VARIABLE x is in the exponent and the base ${n} is constant. That is an exponential function, not a power function.`,
+    `Check x${pw(n)} + ${c}: there is an extra constant term, so it is not just k·xᵖ (it is a polynomial).`,
+    `Check ${N(k)}x${pw(n)} − x: two terms, so it is not a single k·xᵖ (it is a polynomial).`],
+   ans,
+   `Test the rule: f(1) = ${N(k)}·1 = ${N(k)} and f(2) = ${N(k)}·2${pw(n)} = ${N(k*2**n)}, and doubling x multiplies the output by 2${pw(n)} = ${2**n} exactly, the signature of a power function ✓.`),
+   [`Wrong — x is in the exponent, so this grows by a constant factor per step: it is exponential, not a power function.`,`Wrong — adding ${c} makes two terms; a power function is a single term k·xᵖ.`,`Wrong — it has two terms, so it is a polynomial, not a single power function.`],
+   `Mixing up x² (variable base) with 2ˣ (variable exponent). In a power function the exponent is a fixed number.`)},
+()=>{const n=ri(2,6),a=pick([-4,-3,-2,-1,1,2,3,4]),b=rnz(-6,6),c=ri(-9,9);const cs=[a,...Array(n-2).fill(0),b,c];const E=polyU([[a,n],[b,1],[c,0]].filter(t=>t[0]));
+  const ev0=n%2===0,pos=a>0;const opts={"Rises to the left and rises to the right":["even","positive"],"Falls to the left and falls to the right":["even","negative"],"Falls to the left and rises to the right":["odd","positive"],"Rises to the left and falls to the right":["odd","negative"]};
+  const ans=Object.keys(opts).find(k=>opts[k][0]===(ev0?"even":"odd")&&opts[k][1]===(pos?"positive":"negative"));
+  const why=Object.fromEntries(Object.keys(opts).filter(k=>k!==ans).map(k=>[k,`Wrong — that behavior needs an ${opts[k][0]} degree and a ${opts[k][1]} leading coefficient, but here the degree is ${n} (${ev0?"even":"odd"}) and the leading coefficient is ${N(a)} (${pos?"positive":"negative"}).`]));
+  return mc(`Describe the end behavior of f(x) = ${E}.`,ans,Object.keys(opts).filter(k=>k!==ans),sol(
+   `what happens to f(x) = ${E} as x → −∞ (far left) and as x → +∞ (far right).`,
+   `End behavior is controlled by the LEADING TERM (highest power) because it dominates for large |x|. Even degree: both ends go the same way; odd degree: ends go opposite ways. Positive leading coefficient: the right end rises; negative: the right end falls.`,
+   [`Find the highest power of x: the leading term is ${polyU([[a,n]])}, so the degree is ${n} and the leading coefficient is ${N(a)}.`,
+    `The degree ${n} is ${ev0?"EVEN, so both ends point the same way":"ODD, so the ends point in opposite directions"}.`,
+    `The leading coefficient ${N(a)} is ${pos?"POSITIVE, so the right end rises":"NEGATIVE, so the right end falls"}.`,
+    ev0?`Both ends ${pos?"rise":"fall"}.`:`The right end ${pos?"rises":"falls"} and the left end ${pos?"falls":"rises"}.`],
+   ans,
+   `Test large inputs: f(10) = ${N(evP(cs,10))} and f(−10) = ${N(evP(cs,-10))}. Right end ${evP(cs,10)>0?"positive (rising)":"negative (falling)"}, left end ${evP(cs,-10)>0?"positive (rising)":"negative (falling)"} ✓.`),
+   why,
+   `Looking at the constant or middle terms. Only the term with the highest power matters for end behavior.`)},
+()=>{const cnt=ri(2,3);const rs=shuffle([-5,-4,-3,-2,-1,1,2,3,4,5]).slice(0,cnt),ms=rs.map(()=>ri(1,3)),a=pick([-3,-2,2,3]);const deg=ms.reduce((s,m)=>s+m,0);const E=facsStr(a,rs,ms);
+  return num(`What is the degree of f(x) = ${E}?`,deg,sol(
+   `the degree (the highest power of x after multiplying everything out) of f(x) = ${E}.`,
+   `When factors are multiplied, their highest powers ADD. A factor like (x − r)ᵐ contributes degree m. The constant ${N(a)} in front does not change the degree.`,
+   [`List the factors and each one's exponent: ${rs.map((r,i)=>`${facS(r)} has exponent ${ms[i]}`).join("; ")}.`,
+    `Each linear factor (x − r) has degree 1, so ${rs.map((r,i)=>`${facP(r,ms[i])} contributes ${ms[i]}`).join(", ")}.`,
+    `Add the contributions: ${ms.join(" + ")} = ${deg}.`,
+    `The leading term would be ${N(a)}x${pw(deg)} (leading coefficient ${N(a)}).`],
+   `Degree = ${deg}`,
+   `Multiplying ${cnt} factors with highest terms x${ms.map(m=>m>1?pw(m):"").join(" · x")} gives x${pw(deg)||""} (powers add: ${ms.join("+")} = ${deg}) ✓.`),
+   undefined,`Counting the number of factors (${cnt}) instead of adding the exponents. A squared factor counts twice, a cubed factor three times.`)},
+()=>{const cnt=3;const rs=shuffle([-5,-4,-3,-2,-1,1,2,3,4,5]).slice(0,cnt),ms=rs.map(()=>ri(1,3)),a=pick([-3,-2,2,3]);const touch=ms.filter(m=>m%2===0).length;const E=facsStr(a,rs,ms);
+  return num(`For f(x) = ${E}, at how many of its x-intercepts does the graph touch the x-axis and turn around instead of crossing it?`,touch,sol(
+   `the number of zeros of f(x) = ${E} where the graph bounces off the x-axis rather than passing through it.`,
+   `Each factor (x − r)ᵐ gives a zero at x = r with multiplicity m. ODD multiplicity: the graph CROSSES the axis (for m = 3 or more it also flattens). EVEN multiplicity: the graph TOUCHES the axis and turns around.`,
+   [`Read the zeros and multiplicities: ${rs.map((r,i)=>`x = ${N(r)} has multiplicity ${ms[i]}`).join("; ")}.`,
+    `Classify each: ${rs.map((r,i)=>`x = ${N(r)}: multiplicity ${ms[i]} is ${ms[i]%2===0?"even → touches":"odd → crosses"}`).join("; ")}.`,
+    `Count the "touches" zeros: ${touch}.`],
+   `${touch}`,
+   `Sum of multiplicities = ${ms.join(" + ")} = ${ms.reduce((s,m)=>s+m,0)} = degree; ${touch} of the ${cnt} zeros have even multiplicity ✓.`),
+   undefined,`Counting zeros with multiplicity larger than 1 (e.g. multiplicity 3 is odd, so the graph still crosses there). Only EVEN multiplicities bounce.`)},
+()=>{const n=ri(3,7),a=pick([-3,-2,-1,1,2,3]),b=rnz(-5,5),c=ri(-9,9);const E=polyU([[a,n],[b,1],[c,0]].filter(t=>t[0]));
+  return num(`What is the greatest possible number of turning points of the graph of f(x) = ${E}?`,n-1,sol(
+   `the maximum number of turning points (peaks and valleys) of the polynomial f(x) = ${E}.`,
+   `A polynomial of degree n has at most n − 1 turning points. (It may have fewer, but never more.)`,
+   [`Find the degree: the highest power of x is ${n}, so n = ${n}.`,
+    `Apply the rule: maximum turning points = n − 1.`,
+    `Compute: ${n} − 1 = ${n-1}.`],
+   `At most ${n-1} turning points`,
+   `Parity check: a degree-${n} graph has ${n%2===0?"ends in the same direction, so an ODD number of turning points (1, 3, …)":"ends in opposite directions, so an EVEN number of turning points (0, 2, …)"}; ${n-1} is ${(n-1)%2===1?"odd":"even"}, consistent ✓.`),
+   undefined,`Answering with the degree ${n}. The maximum number of turning points is ONE LESS than the degree.`)},
+()=>{const cnt=ri(2,3);const rs=shuffle([-4,-3,-2,-1,1,2,3,4]).slice(0,cnt),ms=rs.map(()=>ri(1,2)),a=pick([-3,-2,-1,1,2,3]);const parts=rs.map((r,i)=>(-r)**ms[i]);const v=parts.reduce((s,x)=>s*x,a);const E=facsStr(a,rs,ms);
+  return num(`Find the y-intercept of f(x) = ${E}.`,v,sol(
+   `the y-intercept (the value f(0)) of f(x) = ${E}.`,
+   `The y-intercept is the output when x = 0. Substitute 0 into each factor, apply the exponents, then multiply everything including the leading constant.`,
+   [`Substitute x = 0 in each factor: ${rs.map((r,i)=>`(0 ${r<0?"+ "+(-r):"− "+r})${ms[i]>1?pw(ms[i]):""} = ${P(-r)}${ms[i]>1?pw(ms[i]):""}`).join(", ")}.`,
+    `Evaluate each factor: ${rs.map((r,i)=>`${P(-r)}${ms[i]>1?pw(ms[i]):""} = ${N(parts[i])}`).join(", ")}.`,
+    `Multiply with the constant ${N(a)}: f(0) = ${N(a)} · ${parts.map(P).join(" · ")}.`,
+    `Compute the product: ${N(v)}.`],
+   `f(0) = ${N(v)}, so the y-intercept is (0, ${N(v)})`,
+   `Sign check: ${a<0?"the constant is negative":"the constant is positive"}, ${parts.filter(x=>x<0).length} of the factors are negative, so the product is ${v<0?"negative":v>0?"positive":"zero"} ✓.`),
+   undefined,`Using the roots (the x-intercepts) instead of substituting 0, or mishandling signs: (0 − r) = ${N(-rs[0])} for the first factor, not ${N(rs[0])}.`)},
+()=>{const lo=ri(-3,1),hi=lo+ri(1,3);let cs,fl,fh;do{cs=[1,ri(-5,5),ri(-6,6),ri(-8,8)];fl=evP(cs,lo);fh=evP(cs,hi)}while(fl===0||fh===0);
+  const yes=fl*fh<0;const yesS=`Yes — there must be a zero between x = ${N(lo)} and x = ${N(hi)}`,noS=`No — the Intermediate Value Theorem guarantees no zero here`;const E=polyS(cs);
+  const ans=yes?yesS:noS;
+  return mc(`Let f(x) = ${E}. Does the Intermediate Value Theorem guarantee a zero of f between x = ${lo} and x = ${hi}?`,ans,[yes?noS:yesS,`Yes — every polynomial has a zero between any two inputs`,`No — polynomials are not continuous`],sol(
+   `whether the Intermediate Value Theorem (IVT) guarantees that f(x) = ${E} equals 0 somewhere between x = ${lo} and x = ${hi}.`,
+   `IVT: if f is continuous on [a, b] and f(a) and f(b) have OPPOSITE signs, then f(c) = 0 for at least one c between a and b. Polynomials are continuous everywhere, so we only need to compare the signs of f(a) and f(b).`,
+   [`f is a polynomial, so it is continuous on [${N(lo)}, ${N(hi)}].`,
+    `Evaluate at the left end: ${evLine("f",cs,lo)}.`,
+    `Evaluate at the right end: ${evLine("f",cs,hi)}.`,
+    `Compare signs: f(${N(lo)}) = ${N(fl)} is ${fl>0?"positive":"negative"} and f(${N(hi)}) = ${N(fh)} is ${fh>0?"positive":"negative"}.`,
+    yes?`The signs are OPPOSITE, so by the IVT the graph must cross the x-axis between ${N(lo)} and ${N(hi)}.`:`The signs are the SAME, so the theorem gives no guarantee (the graph might still dip below and back, crossing twice, but the IVT cannot promise it).`],
+   ans,
+   yes?`Intuition: the graph goes from ${fl>0?"above":"below"} the x-axis to ${fh>0?"above":"below"} it with no breaks, so it must cross y = 0 ✓.`:`Both endpoint values have the same sign, which is exactly the situation where the IVT is silent ✓.`),
+   [yes?`Wrong — the endpoint values have opposite signs, so the theorem DOES guarantee a zero.`:`Wrong — f(${N(lo)}) and f(${N(hi)}) have the same sign, so the IVT does not apply. A guarantee needs opposite signs.`,`Wrong — it is not true for every interval; the IVT needs opposite signs at the ends.`,`Wrong — polynomials are continuous everywhere (no breaks or jumps), which is why the IVT can be used.`],
+   yes?undefined:`Concluding "no zero exists" when the signs match. The IVT only guarantees a zero when the signs are opposite; it never proves there is none.`)},
+()=>{const rs=shuffle([-4,-3,-2,-1,1,2,3,4]).slice(0,3).sort((x,y)=>x-y),a=pick([-3,-2,-1,1,2,3]);let k=ri(-5,5);while(rs.includes(k))k=ri(-5,5);const parts=rs.map(r=>k-r);const v=a*parts[0]*parts[1]*parts[2];
+  return num(`A cubic polynomial f has zeros at x = ${rs.join(", ")} and leading coefficient ${a}. Find f(${k}).`,v,sol(
+   `the value f(${N(k)}) of the cubic with zeros ${rs.map(N).join(", ")} and leading coefficient ${N(a)}.`,
+   `If r is a zero, then (x − r) is a factor. A cubic with zeros r₁, r₂, r₃ and leading coefficient a is f(x) = a(x − r₁)(x − r₂)(x − r₃).`,
+   [`Build the factored form: f(x) = ${facsStr(a,rs,[1,1,1])}.`,
+    `Substitute x = ${N(k)}: f(${N(k)}) = ${N(a)}(${N(k)} − ${P(rs[0])})(${N(k)} − ${P(rs[1])})(${N(k)} − ${P(rs[2])}).`,
+    `Evaluate each factor: ${N(k)} − ${P(rs[0])} = ${N(parts[0])}; ${N(k)} − ${P(rs[1])} = ${N(parts[1])}; ${N(k)} − ${P(rs[2])} = ${N(parts[2])}.`,
+    `Multiply: ${N(a)} · ${P(parts[0])} · ${P(parts[1])} · ${P(parts[2])} = ${N(v)}.`],
+   `f(${N(k)}) = ${N(v)}`,
+   `The degree is 3 (three linear factors) and the zeros are right: f(${N(rs[0])}) has a factor ${N(rs[0])} − ${P(rs[0])} = 0, so it is 0 ✓.`),
+   undefined,`Writing factors as (x + r) for a zero at x = r. A zero at x = ${N(rs[0])} gives the factor ${facS(rs[0])}.`)},
+()=>{const es=shuffle([0,1,2,3,4,5,6]).slice(0,ri(3,4));const mx=Math.max(...es);const terms=es.map(e=>[rnz(-9,9),e]);const lc=terms.find(t=>t[1]===mx)[0];
+  let shown=shuffle(terms);if(shown[0][1]===mx&&terms.length>1)shown=shuffle(terms);const E=polyU(shown);
+  const sorted=terms.slice().sort((p,q)=>q[1]-p[1]);
+  return num(`What is the leading coefficient of f(x) = ${E}?`,lc,sol(
+   `the leading coefficient (the coefficient of the highest-power term) of f(x) = ${E}.`,
+   `Write the polynomial in standard form: descending powers of x. The leading term is the one with the highest exponent (the degree); its coefficient, including its sign, is the leading coefficient.`,
+   [`List each term with its exponent: ${shown.map(([c,e])=>`${polyU([[c,e]])} (power ${e})`).join(", ")}.`,
+    `The highest exponent is ${mx}, so the degree is ${mx}.`,
+    `Rewrite in descending order: f(x) = ${polyU(sorted)}.`,
+    `The leading term is ${polyU([[lc,mx]])}, so the leading coefficient is ${N(lc)} (keep the sign).`],
+   `Leading coefficient = ${N(lc)} (degree ${mx})`,
+   `For large |x| the term ${polyU([[lc,mx]])} dominates, so its sign decides the right-hand end behavior (${lc>0?"rising":"falling"}) ✓.`),
+   undefined,`Taking the coefficient of the term written first. A polynomial need not be written in order; the leading term is the one with the highest power.`)},
+fixed("Which statement describes a power function?","which description matches the definition of a power function.","f(x) = k·xᵖ, where k and p are constants",["f(x) = k·pˣ, where k and p are constants","Any function with more than one term","Any function whose graph is a straight line"],
+  ["Wrong — a variable in the exponent is an exponential function.","Wrong — a power function is a single term; more terms make a general polynomial.","Wrong — only power functions with p = 1 are lines; others like x² and x³ curve."],
+  `Power function: a constant multiple of the variable raised to a constant power.`,
+  [`The variable x is the BASE, not the exponent.`,`The exponent p is a fixed number, such as 2, 3, or ½.`,`The coefficient k is a fixed number too.`,`So the form is f(x) = k·xᵖ.`],
+  `f(x) = 3x⁴ fits (k = 3, p = 4); f(x) = 3·4ˣ does not (variable exponent) ✓.`),
+fixed("As x → ±∞, the graph of f(x) = x⁴ does what?","the end behavior of f(x) = x⁴.","Rises to the left and rises to the right",["Falls to the left and rises to the right","Falls to the left and falls to the right","Rises to the left and falls to the right"],
+  ["Wrong — that is odd-degree behavior; x⁴ has an even exponent.","Wrong — a positive coefficient on an even power makes both ends rise.","Wrong — that is odd-degree with a negative coefficient."],
+  `Even powers make negative inputs positive (x⁴ = (−x)⁴), so both ends behave alike; a positive coefficient makes them rise.`,
+  [`Test large positive x: f(10) = 10,000 (large positive).`,`Test large negative x: f(−10) = (−10)⁴ = 10,000 (also positive).`,`Both ends go up.`,`Even degree + positive leading coefficient → both ends rise.`],
+  `The graph looks like a wide "U" like x² ✓.`),
+fixed("The end behavior of f(x) = −x³ is:","how the graph of f(x) = −x³ behaves at the far left and far right.","Rises to the left and falls to the right",["Falls to the left and rises to the right","Rises on both ends","Falls on both ends"],
+  ["Wrong — that is x³ (positive coefficient).","Wrong — an odd degree makes the ends go opposite ways.","Wrong — an odd degree makes the ends go opposite ways."],
+  `Odd degree: the ends go in opposite directions. Negative leading coefficient: the right end falls.`,
+  [`Degree 3 is odd, so the ends are opposite.`,`Leading coefficient −1 is negative, so the right end falls.`,`Then the left end must rise.`,`Test: f(10) = −1000 (right falls); f(−10) = −(−1000) = 1000 (left rises).`],
+  `x³ falls on the left and rises on the right; the negative flips it ✓.`),
+fixed("Which of these is NOT a polynomial function?","which function is not a polynomial.","f(x) = 3x^(1/2) + 1",["f(x) = 7","f(x) = x⁵ − 3x","f(x) = 2x² + x + 9"],
+  ["Wrong — a constant function is a polynomial of degree 0.","Wrong — non-negative whole-number exponents with constant coefficients make a polynomial.","Wrong — it is a quadratic polynomial."],
+  `A polynomial is a sum of terms k·xⁿ where every exponent n is a non-negative WHOLE number (0, 1, 2, …).`,
+  [`7 = 7x⁰: exponent 0 → polynomial.`,`x⁵ − 3x: exponents 5 and 1 → polynomial.`,`2x² + x + 9: exponents 2, 1, 0 → polynomial.`,`3x^(1/2) has exponent ½, which is not a whole number, so it is not a polynomial.`],
+  `x^(1/2) is √x, which is defined only for x ≥ 0, unlike a polynomial ✓.`),
+fixed("If x = 2 is a zero of multiplicity 2 of a polynomial, the graph at x = 2:","how the graph behaves at a zero of even multiplicity 2.","Touches the x-axis and turns around",["Crosses the x-axis","Has a vertical asymptote","Crosses the axis and flattens"],
+  ["Wrong — crossing requires an odd multiplicity.","Wrong — polynomials never have asymptotes.","Wrong — crossing with flattening is odd multiplicity 3 or more."],
+  `Near a zero of multiplicity m the graph looks like (x − r)ᵐ. For even m this does not change sign.`,
+  [`Near x = 2 the graph looks like (x − 2)².`,`(x − 2)² is ≥ 0 on both sides of 2 (never negative).`,`So the graph comes down to the axis, touches at x = 2, and goes back up (or down).`,`Even multiplicity → touches and turns around.`],
+  `Compare y = (x − 2)²: a parabola whose vertex sits on the x-axis at x = 2 ✓.`),
+fixed("If x = −1 is a zero of multiplicity 3, the graph at x = −1:","how the graph behaves at a zero of odd multiplicity 3.","Crosses the x-axis and flattens near the zero",["Touches the axis and turns around","Does not cross the axis","Crosses the axis with a sharp corner"],
+  ["Wrong — turning around happens with even multiplicity.","Wrong — a zero means the graph reaches the axis, and odd multiplicity means it passes through.","Wrong — polynomials are smooth, with no corners."],
+  `Near a zero of multiplicity m the graph looks like (x − r)ᵐ. For odd m the sign changes across the zero.`,
+  [`Near x = −1 the graph looks like (x + 1)³.`,`(x + 1)³ is negative for x &lt; −1 and positive for x &gt; −1: it crosses.`,`Cubes are very flat near 0 (for example 0.1³ = 0.001), so it flattens.`,`Odd multiplicity ≥ 3 → crosses with a flat spot.`],
+  `Compare y = x³ at the origin: it crosses with a flat inflection ✓.`),
+fixed("A polynomial of degree 6 has at most how many turning points?","the maximum number of turning points of a degree-6 polynomial.","5",["6","7","3"],
+  ["Wrong — the maximum is one LESS than the degree.","Wrong — more turning points than the degree is impossible.","Wrong — 3 is possible, but it isn't the greatest possible number."],
+  `A polynomial of degree n has at most n − 1 turning points.`,
+  [`Degree n = 6.`,`Maximum turning points = n − 1.`,`6 − 1 = 5.`,`The actual number may be smaller, but 5 is the most.`],
+  `Check with a lower degree: a parabola (degree 2) has 1 turning point = 2 − 1 ✓.`),
+fixed("If f is a polynomial with f(1) = −3 and f(4) = 5, the Intermediate Value Theorem says:","what the IVT guarantees when f(1) = −3 and f(4) = 5 for a polynomial f.","f has at least one zero between x = 1 and x = 4",["f has no zeros between 1 and 4","f has exactly one zero between 1 and 4","f(2.5) = 1"],
+  ["Wrong — the sign change guarantees a zero, not the absence of one.","Wrong — the IVT only guarantees at least one; there could be three (or more).","Wrong — the IVT says nothing about the exact value of f(2.5)."],
+  `IVT: for a continuous f, every value between f(a) and f(b) is attained. Since 0 lies between −3 and 5, f must hit 0.`,
+  [`Polynomials are continuous on all of ℝ.`,`f(1) = −3 is below 0 and f(4) = 5 is above 0.`,`To get from below the axis to above it without a break, the graph must cross y = 0.`,`So there is at least one zero between 1 and 4.`],
+  `The signs are opposite (−3 &lt; 0 &lt; 5) ✓.`),
+fixed("For very large |x|, a polynomial's graph behaves like:","which part of a polynomial controls the graph for very large |x|.","Its leading term",["Its constant term","Its middle term","Its linear term"],
+  ["Wrong — the constant term is fixed and becomes negligible.","Wrong — middle terms grow more slowly than the leading term.","Wrong — a linear term is dwarfed by higher powers."],
+  `As |x| gets big, higher powers grow much faster than lower powers.`,
+  [`Compare terms of x⁴ + 5x² + 7 at x = 100: x⁴ = 100,000,000, 5x² = 50,000, 7.`,`The x⁴ term is about 2000 times bigger than the next one.`,`So the leading term decides the size and the sign.`,`That is why end behavior depends only on the leading term.`],
+  `At x = 1000 the leading term is a million times the next one in size ✓.`),
 ]}
 ];
 
@@ -1092,17 +1715,19 @@ const $=id=>document.getElementById(id);
 const unlocked=i=>i===0||S.mastered[SECTIONS[i-1].id];
 function isMastered(h){if(h.length<10)return false;const l=h.slice(-10);if(l.filter(Boolean).length<8)return false;return l.slice(-3).every(Boolean)}
 let curQ=null,curSec=null,isReview=false,answered=false,lastIdx={};
-function renderMap(){$("map").innerHTML=SECTIONS.map((s,i)=>{const h=S.hist[s.id]||[],l=h.slice(-10),c=l.filter(Boolean).length;
+function renderSum(){const s=SECTIONS.find(x=>x.id===S.cur)||SECTIONS[0];const n=SECTIONS.filter(x=>S.mastered[x.id]).length;
+ $("secSum").innerHTML=`<span class="stxt">📚 Sections: ${s.id} ${s.title}<br><span class="small" style="font-weight:500;color:#556">${n} of ${SECTIONS.length} mastered</span></span><span class="hint"><span class="show">tap to choose ▾</span><span class="hide">tap to close ▴</span></span>`}
+function renderMap(){renderSum();$("map").innerHTML=SECTIONS.map((s,i)=>{const h=S.hist[s.id]||[],l=h.slice(-10),c=l.filter(Boolean).length;
  const st=S.mastered[s.id]?"done":unlocked(i)?"open":"locked";const sk=S.skipped&&S.skipped[s.id];
  return `<div class="nwrap"><button class="node ${st} ${S.cur===s.id?"cur":""}" ${st==="locked"?"disabled":""} onclick="go('${s.id}')"><span class="sid">${st==="done"?"✓":st==="locked"?"🔒":s.id}</span><span class="st">${s.id} ${s.title}${sk?' <em class="skp">(skipped)</em>':""}</span><span class="bar"><i style="width:${S.mastered[s.id]?100:c*10}%"></i></span></button>`+
   (S.mastered[s.id]?`<button class="mini" onclick="undoMaster('${s.id}')">↩︎ Undo mastered</button>`:`<button class="mini" onclick="skipTo('${s.id}')">⏭ Mark as mastered</button>`)+`</div>`}).join("")}
 function skipTo(id){const ix=SECTIONS.findIndex(s=>s.id===id);const earlier=SECTIONS.slice(0,ix).filter(s=>!S.mastered[s.id]).map(s=>s.id);
  if(!confirm(`Mark ${id} as mastered${earlier.length?" (and "+earlier.join(", ")+")":""}? It will unlock the next section. Skipped sections still appear in spaced review.`))return;
- S=markMastered(S,id);save();go(S.cur)}
+ S=markMastered(S,id);save();go(S.cur);$("sections").open=true}
 function undoMaster(id){const later=SECTIONS.slice(SECTIONS.findIndex(s=>s.id===id)+1).filter(s=>S.mastered[s.id]).map(s=>s.id);
  if(!confirm(`Unmark ${id} as mastered${later.length?" (later sections "+later.join(", ")+" will be unmarked too, to keep the order)":""}?`))return;
- S=unmarkMastered(S,id);save();go(S.cur)}
-function go(id){S.cur=id;save();renderMap();showRecap();next()}
+ S=unmarkMastered(S,id);save();go(S.cur);$("sections").open=true}
+function go(id){S.cur=id;save();$("sections").open=false;renderMap();showRecap();next()}
 function showRecap(){const s=SECTIONS.find(x=>x.id===S.cur);$("recap").open=false;$("recap").innerHTML=`<summary>📘 Concept recap: ${s.id} ${s.title} <span class="hint"><span class="show">tap to show ▸</span><span class="hide">tap to hide ▾</span></span></summary><ul>${s.recap.map(r=>"<li>"+r+"</li>").join("")}</ul>`}
 function pickQ(sec){const n=sec.gens.length;let i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===lastIdx[sec.id]);lastIdx[sec.id]=i;return sec.gens[i]()}
 function next(){answered=false;S.count++;const done=SECTIONS.filter(s=>S.mastered[s.id]&&s.id!==S.cur);
