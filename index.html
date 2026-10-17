@@ -1727,7 +1727,7 @@ let pushTimer=null;
 function save(touch=true){if(touch)S.updatedAt=Date.now();localStorage.setItem(KEY,JSON.stringify(S));
   if(window.CLOUD&&CLOUD.user){clearTimeout(pushTimer);pushTimer=setTimeout(()=>CLOUD.push(S),800)}}
 const $=id=>document.getElementById(id);
-const unlocked=i=>i===0||S.mastered[SECTIONS[i-1].id];
+const unlocked=i=>true;
 function isMastered(h){if(h.length<10)return false;const l=h.slice(-10);if(l.filter(Boolean).length<8)return false;return l.slice(-3).every(Boolean)}
 let curQ=null,curSec=null,isReview=false,answered=false,lastIdx={};
 function renderSum(){const s=SECTIONS.find(x=>x.id===S.cur)||SECTIONS[0];const n=SECTIONS.filter(x=>S.mastered[x.id]).length;
@@ -1758,7 +1758,7 @@ function submit(i){if(answered)return;const ans=curQ.type==="mc"?i:$("ans").valu
  if(curQ.type==="mc")document.querySelectorAll(".ch").forEach((b,j)=>{b.disabled=true;if(j===curQ.answer)b.classList.add("good");else if(j===i)b.classList.add("bad")});else $("ans").disabled=true;
  let msg="";if(isReview){const h=S.hist[curSec.id]=S.hist[curSec.id]||[];h.push(ok);}
  else{const h=S.hist[S.cur]=S.hist[S.cur]||[];h.push(ok);if(h.length>50)h.shift();
-  if(!S.mastered[S.cur]&&isMastered(h)){S.mastered[S.cur]=true;const ix=SECTIONS.findIndex(s=>s.id===S.cur);msg=ix<SECTIONS.length-1?`<div class="win">🎉 ${S.cur} mastered! ${SECTIONS[ix+1].id} unlocked.</div>`:`<div class="win">🏆 Chapter 1 complete! Keep practicing for review.</div>`}}
+  if(!S.mastered[S.cur]&&isMastered(h)){S.mastered[S.cur]=true;const ix=SECTIONS.findIndex(s=>s.id===S.cur);msg=ix<SECTIONS.length-1?`<div class="win">🎉 ${S.cur} mastered! Next up: ${SECTIONS[ix+1].id}.</div>`:`<div class="win">🏆 Chapter 1 complete! Keep practicing for review.</div>`}}
  const esc=t=>String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
  const mine=curQ.type==="mc"?curQ.choices[i]:String(ans).trim();
  const why=curQ.why||[];const myWhy=!ok&&curQ.type==="mc"?why.find(w=>w.c===mine):null;
