@@ -1709,11 +1709,11 @@ function decodeProgress(code){try{const t=String(code).replace(/\s+/g,"");if(!/^
 // ===== Manual mastery (skip) / undo =====
 function markMastered(st,id){const ix=SECTIONS.findIndex(s=>s.id===id);if(ix<0)return st;
   const n={...st,mastered:{...st.mastered},skipped:{...(st.skipped||{})}};
-  for(let i=0;i<=ix;i++){const k=SECTIONS[i].id;if(!n.mastered[k]){n.mastered[k]=true;n.skipped[k]=true}}
+  {const k=SECTIONS[ix].id;if(!n.mastered[k]){n.mastered[k]=true;n.skipped[k]=true}}
   if(ix<SECTIONS.length-1&&n.cur===id)n.cur=SECTIONS[ix+1].id;return n}
 function unmarkMastered(st,id){const ix=SECTIONS.findIndex(s=>s.id===id);if(ix<0)return st;
   const n={...st,mastered:{...st.mastered},skipped:{...(st.skipped||{})}};
-  for(let i=ix;i<SECTIONS.length;i++){const k=SECTIONS[i].id;delete n.mastered[k];delete n.skipped[k]}
+  {const k=SECTIONS[ix].id;delete n.mastered[k];delete n.skipped[k]}
   const ci=SECTIONS.findIndex(s=>s.id===n.cur);if(ci>ix)n.cur=id;return n}
 // ===== Sync conflict rule: last-write-wins by updatedAt (ms) =====
 function pickNewer(local,remote){const lv=local&&validState(local),rv=remote&&validState(remote);
@@ -1736,10 +1736,10 @@ function renderMap(){renderSum();$("map").innerHTML=SECTIONS.map((s,i)=>{const h
  const st=S.mastered[s.id]?"done":unlocked(i)?"open":"locked";const sk=S.skipped&&S.skipped[s.id];
  return `<div class="nwrap"><button class="node ${st} ${S.cur===s.id?"cur":""}" ${st==="locked"?"disabled":""} onclick="go('${s.id}')"><span class="sid">${st==="done"?"✓":st==="locked"?"🔒":s.id}</span><span class="st">${s.id} ${s.title}${sk?' <em class="skp">(skipped)</em>':""}</span><span class="bar"><i style="width:${S.mastered[s.id]?100:c*10}%"></i></span></button>`+
   (S.mastered[s.id]?`<button class="mini" onclick="undoMaster('${s.id}')">↩︎ Undo mastered</button>`:`<button class="mini" onclick="skipTo('${s.id}')">⏭ Mark as mastered</button>`)+`</div>`}).join("")}
-function skipTo(id){const ix=SECTIONS.findIndex(s=>s.id===id);const earlier=SECTIONS.slice(0,ix).filter(s=>!S.mastered[s.id]).map(s=>s.id);
- if(!confirm(`Mark ${id} as mastered${earlier.length?" (and "+earlier.join(", ")+")":""}? It will unlock the next section. Skipped sections still appear in spaced review.`))return;
+function skipTo(id){const ix=SECTIONS.findIndex(s=>s.id===id);const earlier=[];
+ if(!confirm(`Mark ${id} as mastered${earlier.length?" (and "+earlier.join(", ")+")":""}? Skipped sections still appear in spaced review.`))return;
  S=markMastered(S,id);save();go(S.cur);$("sections").open=true}
-function undoMaster(id){const later=SECTIONS.slice(SECTIONS.findIndex(s=>s.id===id)+1).filter(s=>S.mastered[s.id]).map(s=>s.id);
+function undoMaster(id){const later=[];
  if(!confirm(`Unmark ${id} as mastered${later.length?" (later sections "+later.join(", ")+" will be unmarked too, to keep the order)":""}?`))return;
  S=unmarkMastered(S,id);save();go(S.cur);$("sections").open=true}
 function go(id){S.cur=id;save();$("sections").open=false;renderMap();showRecap();next()}
